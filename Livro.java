@@ -1,4 +1,4 @@
-//vinicius souza Dias
+//vinicius souza Dias 2564599
 
 public abstract class Livro extends Objetos {
     private int id;
@@ -31,7 +31,14 @@ public abstract class Livro extends Objetos {
     public Localizacao getLocalizacao() { return localizacao; }
     public Editora getEditora() { return editora; }    
 
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public void setTitulo(String titulo)throws LivroExecption {
+        titulo = titulo.trim().replaceAll("\\s+"," ");
+        
+        if(titulo.length() <= 3){
+            throw new LivroExecption("TinyTitleExecption");
+        }
+        this.titulo = titulo;
+    }
     public void setAutor(Autor autor) { this.autor = autor; }
     public void setLocalizacao(Localizacao localizacao) { this.localizacao = localizacao; }
     public void setEditora(Editora editora) { this.editora = editora; }

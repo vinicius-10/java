@@ -1,5 +1,5 @@
-//vinicius souza Dias
-public class Infantil extends Livro {
+//vinicius souza Dias 2564599
+public final class Infantil extends Livro {
     private int faixaEtaria;
     private String material;
     private boolean interativo;

@@ -33,15 +33,15 @@ public class Leitura {
 		return ret; 
 	}
         
-        private static int entInt(Leitura leitura, String mensagem) {
-        int valor;
-        
-        try {
-            valor = Integer.parseInt(entString(mensagem));
-            return valor;
-        } catch (NumberFormatException e) {
-            System.out.println("Valor inválido! Digite um número inteiro.");
-            return entInt(leitura, mensagem);
-        }
-    }
+	public static int entInt( String mensagem) {
+		int valor;
+		
+		try {
+			valor = Integer.parseInt(entString(mensagem));
+			return valor;
+		} catch (NumberFormatException e) {
+			System.out.println("Valor inválido! Digite um número inteiro.");
+			return entInt(mensagem);
+		}
+	}
 }

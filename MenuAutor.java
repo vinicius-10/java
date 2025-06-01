@@ -1,17 +1,29 @@
-//vinicius souza Dias
+//vinicius souza Dias 2564599
+
 public class MenuAutor implements Menus{
     private Autor autor;
     private Armazenamento armazen;
+    
    
-    public MenuAutor() {
+    private static MenuAutor unicMenuAutor; //singleton 1 passo
+
+
+    private MenuAutor() { // contrutores privados 2 passo 
         autor = new Autor();
         armazen = Armazenamento.geraArmazen();
     }
 
     //polimorfismo por sobrecarga
-    public MenuAutor(Autor autor, Armazenamento armazen) {
+    private MenuAutor(Autor autor, Armazenamento armazen) {
         this.autor = autor;
         this.armazen = armazen;
+    }
+
+    public static MenuAutor gerarMenuAutor() { //passo 3
+        if(unicMenuAutor == null) {
+            unicMenuAutor = new MenuAutor();
+        }
+        return unicMenuAutor;
     }
 
     public Autor getAutor() { return autor; }
@@ -27,14 +39,18 @@ public class MenuAutor implements Menus{
     }
     
 
-    //polimorfismo por coesão
+    //polimorfismo por sobrescrita
+    @Override
     public void Menu(){
+
         boolean condition = true;
 
         do{
             autor = new Autor();
 
-            System.out.println("\n\n\n\nDigite um numero para escolher uma opção");
+            System.out.println("\n\nBem-vindo ao menu de autores!");
+            System.out.println("Por favor, escolha uma opção do menu para continuar.");
+            System.out.println("\nDigite um numero para escolher uma Opcao");
             System.out.println("-----------------------------------------------------------");
             System.out.println("|0-Voltar ao menu anterior                                 |");
             System.out.println("|1-Cadastrar autor                                         |");
@@ -43,7 +59,7 @@ public class MenuAutor implements Menus{
             System.out.println("|4-Reativar autor                                          |");
             System.out.println("-----------------------------------------------------------");
 
-            String opcaoGeral = Leitura.entString("Opção: ");
+            String opcaoGeral = Leitura.entString("Opcao: ");
             
             switch (opcaoGeral) {
                 case "0":
@@ -51,62 +67,34 @@ public class MenuAutor implements Menus{
                     break;
                 case "1":
                     
-                    cadAutor();        
+                    cadastrar();        
 
                     break;
                 case "2":
                 
-                    exibirAutor();
+                    exibir();
                     
                     break;
                 case "3":
-
-                    String optionExcluir = Leitura.entString("Deseja listar os autores?(Y/N) : ");
                     
-                    switch (optionExcluir.toUpperCase()) {
-                        case "Y":
-                            exibirAutor();
-                            break;
-                        case "N":
-                            System.out.println("Continuando.");
-                            break;
-                        default:
-                            System.out.println("Opção inválida, será exibido, precione 0 casso queira pular.");
-                            exibirAutor();
-                    }
-                    
-                    excluirAutor();
+                    excluir();
                     break;
 
                 case "4":
-
-                    String optionReativar = Leitura.entString("Deseja listar os autores?(Y/N) : ");
-                    switch (optionReativar.toUpperCase()) {
-                        case "Y":
-                            exibirAutor();
-                            break;
-                        case "N":
-                            System.out.println("Continuando.");
-                            break;
-                        default:
-                            System.out.println("Opção inválida, será exibido, precione 0 casso queira pular.");
-                            exibirAutor();
-                    }
                     
-                    reativarAutor();
+                    reativar();
                 default:
-                    System.out.println("Opção inválida, tente novamente.");                    
+                    System.out.println("Opcao invalida, tente novamente.");                    
             }
         }while(condition);
         System.gc();
     }
 
-    public static void  main(String[] algo) {
-        MenuAutor menuAutor = new MenuAutor();
-        menuAutor.Menu();
-    }
+    
 
-    public void exibirAutor() {
+    //polimorfismo por sobrescrita
+    @Override
+    public void exibir() {
         System.out.println("Buscar Autores por:");
         System.out.println("-----------------------------------------------------------");
         System.out.println("|0-Voltar para menu anterior                              |");
@@ -115,7 +103,7 @@ public class MenuAutor implements Menus{
         System.out.println("|3-Listar todos                                           |");
         System.out.println("-----------------------------------------------------------");
 
-        String opcaoBusca = Leitura.entString("Opção: ");
+        String opcaoBusca = Leitura.entString("Opcao: ");
         boolean findBusca = true;
         switch (opcaoBusca) {
             case "0":
@@ -159,16 +147,28 @@ public class MenuAutor implements Menus{
                 System.out.println("Continuando.");
                 return;
             default:
-                System.out.println("Opção inválida, tente novamente.");
-                exibirAutor();
+                System.out.println("Opcao invalida, tente novamente.");
+                exibir();
         }
         System.gc();
     }
 
-    public void cadAutor(){
-        autor.setNome(Leitura.entString("Digite o nome do autor: "));
+    //polimorfismo por sobrescrita
+    @Override
+    public void cadastrar(){
+        try{
+            autor.setNome(Leitura.entString("Digite o nome do autor: "));
+        }catch(AutorExecption e) {
+            e.menExecption();
+            autor = e.corTinyNameExecption(autor);
+        }
 
-        autor.setCpf(Leitura.entString("Digite o CPF do autor: "));
+        try{
+            autor.setCpf(Leitura.entString("Digite o CPF do autor: "));
+        }catch(AutorExecption e) {
+            e.menExecption();
+            autor = e.corTinyCpfExecption(autor);
+        }
 
         boolean foundCadastro = true;
 
@@ -182,11 +182,27 @@ public class MenuAutor implements Menus{
 
         if(foundCadastro) {
             armazen.getBdAutores().add(autor);
-            System.out.println("Autor cadastrado com sucesso.");
+            System.out.println("\n\nAutor cadastrado com sucesso.");
         }
     }
 
-    public void excluirAutor() {
+    //polimorfismo por sobrescrita
+    @Override
+    public void excluir() {
+        System.out.println("Será preciso digitar o CPF!!");
+        String optionExcluir = Leitura.entString("Deseja listar os autores?(S/N) : ");
+                    
+        switch (optionExcluir.toUpperCase()) {
+            case "S":
+                exibir();
+                break;
+            case "N":
+                System.out.println("Continuando.");
+                break;
+            default:
+                System.out.println("Opcao invalida, será exibido, precione 0 casso queira pular.");
+                exibir();
+        }
 
         String cpfBuscado = Leitura.entString("Digite o CPF do autor a ser excluído: ");
         boolean foundExcluir = true;
@@ -194,18 +210,34 @@ public class MenuAutor implements Menus{
         for(Autor temp : armazen.getBdAutores()) {
             if(temp.getCpf().equals(cpfBuscado)) {
                 temp.setbloqueado(true);
-                System.out.println("Autor excluído com sucesso.");
+                System.out.println("\n\nAutor excluído com sucesso.");
                 foundExcluir = false;
                 break;
             }
         }
 
         if(foundExcluir) {
-            System.out.println("Autor não encontrado.");
+            System.out.println("\n\nAutor não encontrado.");
         }
     }
 
-    public void reativarAutor() {
+    //polimorfismo por sobrescrita
+    @Override
+    public void reativar() {
+        System.out.println("Será preciso digitar o CPF!!");
+        String optionExcluir = Leitura.entString("Deseja listar os autores?(S/N) : ");
+                    
+        switch (optionExcluir.toUpperCase()) {
+            case "S":
+                exibir();
+                break;
+            case "N":
+                System.out.println("Continuando.");
+                break;
+            default:
+                System.out.println("Opcao invalida, será exibido, precione 0 casso queira pular.");
+                exibir();
+        }
 
         String cpfBuscado = Leitura.entString("Digite o CPF do autor a ser reativado: ");
         boolean foundReativar = true;
@@ -213,16 +245,19 @@ public class MenuAutor implements Menus{
         for(Autor temp : armazen.getBdAutores()) {
             if(temp.getCpf().equals(cpfBuscado)) {
                 temp.setbloqueado(false);
-                System.out.println("Autor reativado com sucesso.");
+                System.out.println(" \n\nAutor reativado com sucesso.");
                 foundReativar = false;
                 break;
             }
         }
 
         if(foundReativar) {
-            System.out.println("Autor não encontrado.");
+            System.out.println("\n\nAutor não encontrado.");
         }
     }
 
-
+    public static void  main(String[] algo) {
+        MenuAutor menuAutor = new MenuAutor();
+        menuAutor.Menu();
+    }
 }

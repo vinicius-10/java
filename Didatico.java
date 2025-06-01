@@ -1,5 +1,5 @@
-//vinicius souza Dias
-public class Didatico extends Livro {
+//vinicius souza Dias 2564599
+public final class Didatico extends Livro {
     private String materia;
     private String nivel;
     private String complexidade;

@@ -1,6 +1,7 @@
-//vinicius souza Dias
+//vinicius souza Dias 2564599
 
-public class Autor extends Objetos {
+
+public final class Autor extends Objetos {
     private String nome;
     private String cpf;
 
@@ -20,7 +21,22 @@ public class Autor extends Objetos {
     public String getNome() { return nome; }
     public String getCpf() { return cpf; }
 
-    public void setNome(String nome) { this.nome = nome; }
-    public void setCpf(String cpf) { this.cpf = cpf; }
+    public void setNome(String nome) throws AutorExecption {
+        nome = nome.trim().replaceAll("\\s+", " ");
+
+        if (nome.length() <= 3) {
+            throw new AutorExecption("TinyNameExecption");
+        }
+        
+        this.nome = nome; 
+    }
+    public void setCpf(String cpf)throws AutorExecption {
+        cpf = cpf.trim().replaceAll("\\s+", " ");
+        if (cpf.length() <= 3) {
+            throw new AutorExecption("TinyCpfExecption");
+        }
+        
+        this.cpf = cpf; 
+    }
 
 }

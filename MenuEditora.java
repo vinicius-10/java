@@ -1,7 +1,34 @@
-//vinicius souza Dias
+//vinicius souza Dias 2564599
+
+
+
 public class MenuEditora implements Menus{
     private Editora editora;
     private Armazenamento armazen;
+
+    private static MenuEditora unicMenuEditora; //singleton 1 passo 
+
+
+    private MenuEditora() { // contrutores privados 2 passo
+        editora = new Editora();
+        armazen = Armazenamento.geraArmazen();
+    }
+
+    //polimorfismo por sobrecarga
+    private MenuEditora(Editora editora, Armazenamento armazen) {
+        this.editora = editora;
+        this.armazen = armazen;
+    }
+
+    public static MenuEditora gerarMenuEditora() { //passo 3
+        if(unicMenuEditora == null) {
+            unicMenuEditora = new MenuEditora();
+        }
+        return unicMenuEditora;
+    }
+
+    public Editora getEditora() { return editora; }
+    public void setEditora(Editora editora) { this.editora = editora; }
 
     public Armazenamento getArmaze() {
         return armazen;
@@ -10,28 +37,17 @@ public class MenuEditora implements Menus{
     public void setArmaze(Armazenamento armazen) {
         this.armazen = armazen;
     }
-
-    public MenuEditora() {
-        editora = new Editora();
-        armazen = Armazenamento.geraArmazen();
-    }
-
-    //polimorfismo por sobrecarga
-    public MenuEditora(Editora editora, Armazenamento armazen) {
-        this.editora = editora;
-        this.armazen = armazen;
-    }
-
-    public Editora getEditora() { return editora; }
-    public void setEditora(Editora editora) { this.editora = editora; }
-
+    //polimorfismo por sobrescrita
+    @Override
     public void Menu(){
         boolean condition = true;
 
         do{
             editora = new Editora();
 
-            System.out.println("\n\n\n\nDigite um numero para escolher uma opção");
+            System.out.println("\n\nBem-vindo ao menu de editoras!");
+            System.out.println("Por favor, escolha uma opção do menu para continuar.");
+            System.out.println("\nDigite um numero para escolher uma Opcao");
             System.out.println("-----------------------------------------------------------");
             System.out.println("|0-Voltar ao menu anterior                                  |");
             System.out.println("|1-Cadastrar editora                                        |");
@@ -40,7 +56,7 @@ public class MenuEditora implements Menus{
             System.out.println("|4-Reativar editora                                         |");
             System.out.println("-----------------------------------------------------------");
 
-            String opcaoGeral = Leitura.entString("Opção: ");
+            String opcaoGeral = Leitura.entString("Opcao: ");
             
             switch (opcaoGeral) {
                 case "0":
@@ -48,51 +64,25 @@ public class MenuEditora implements Menus{
                     break;
                 case "1":
                     
-                    cadEditora();        
+                    cadastrar();        
 
                     break;
                 case "2":
                 
-                    exibirEditora();
+                    exibir();
                     
                     break;
                 case "3":
-                    String optionExcluir = Leitura.entString("Deseja lsitar as editora? (S/N): ");
-
-                    switch (optionExcluir.toUpperCase()) {
-                        case "S":
-                            exibirEditora();
-                            break;
-                        case "N":
-                            System.out.println("Continuando.");
-                            break;
-                        default:
-                            System.out.println("Opção inválida, será exibido, precione 0 casso queira pular..");
-                            exibirEditora();
-                            break;
-                    }
-                    excluirEditora();
+        
+                    excluir();
                     
                     break;
                 case "4":
-                    String optionReativar = Leitura.entString("Deseja lsitar as editora? (S/N): ");
-
-                    switch (optionReativar.toUpperCase()) {
-                        case "S":
-                            exibirEditora();
-                            break;
-                        case "N":
-                            System.out.println("Continuando.");
-                            break;
-                        default:
-                            System.out.println("Opção inválida, será exibido, precione 0 casso queira pular..");
-                            exibirEditora();
-                            break;
-                    }
-                    reativarEditora();
+                    
+                    reativar();
                     break;
                 default:
-                    System.out.println("Opção inválida, tente novamente.");
+                    System.out.println("Opcao invalida, tente novamente.");
                     break;
             }
             System.gc();
@@ -100,8 +90,44 @@ public class MenuEditora implements Menus{
         
     }
 
+    //polimorfismo por sobrescrita
+    @Override
+    public void cadastrar(){
+        try{
+            editora.setNome(Leitura.entString("Digite o nome da editora: "));
+        }catch(EditoraExecption e) {
+            e.menExecption();
+            editora = e.corTinyNameExecption(editora);
+        }
 
-    public void exibirEditora(){
+        try{
+            editora.setCnpj(Leitura.entString("Digite o CNPJ da editora: "));
+        }catch(EditoraExecption e) {
+            e.menExecption();
+            editora = e.corTinyCnpjExecption(editora);
+        }
+        
+
+        boolean foundCadastro = true;
+
+        for(Editora temp : armazen.getBdEditoras()) {
+            if(temp.getCnpj().equals(editora.getCnpj())) {
+                System.out.println("CNPJ já cadastrado.");
+                foundCadastro = false;
+                break;
+            }
+        }      
+
+        if(foundCadastro) {
+            armazen.getBdEditoras().add(editora);
+            System.out.println("\n\nEditora cadastrada com sucesso.");
+        }
+    }
+
+    
+    //polimorfismo por sobrescrita
+    @Override
+    public void exibir(){
         boolean conditionExibir = false;
         do{
             conditionExibir = false;
@@ -113,7 +139,7 @@ public class MenuEditora implements Menus{
             System.out.println("|3-Listar todos                                           |");
             System.out.println("-----------------------------------------------------------");
 
-            String opcaoBusca = Leitura.entString("Opção: ");
+            String opcaoBusca = Leitura.entString("Opcao: ");
             boolean findBusca = true;
             switch (opcaoBusca) {
                 case "0":
@@ -153,35 +179,31 @@ public class MenuEditora implements Menus{
                     }
                     break;
                 default:
-                    System.out.println("Opção inválida, tente novamente.");
+                    System.out.println("Opcao invalida, tente novamente.");
                     conditionExibir = true;
             }
             System.gc();
         }while(conditionExibir);
     }
 
-    public void cadEditora(){
-        editora.setNome(Leitura.entString("Digite o nome da editora: "));
+    //polimorfismo por sobrescrita
+    @Override
+    public void excluir() {
+        System.out.println("Será preciso digitar o CNPJ!!");
+        String optionReativar = Leitura.entString("Deseja lsitar as editora? (S/N): ");
 
-        editora.setCnpj(Leitura.entString("Digite o CNPJ da editora: "));
-
-        boolean foundCadastro = true;
-
-        for(Editora temp : armazen.getBdEditoras()) {
-            if(temp.getCnpj().equals(editora.getCnpj())) {
-                System.out.println("CNPJ já cadastrado.");
-                foundCadastro = false;
+        switch (optionReativar.toUpperCase()) {
+            case "S":
+                exibir();
                 break;
-            }
-        }      
-
-        if(foundCadastro) {
-            armazen.getBdEditoras().add(editora);
-            System.out.println("Editora cadastrada com sucesso.");
+            case "N":
+                System.out.println("Continuando.");
+                break;
+            default:
+                System.out.println("Opcao invalida, será exibido, precione 0 casso queira pular..");
+                exibir();
+                break;
         }
-    }
-
-    public void excluirEditora() {
 
         String cnpjBuscado = Leitura.entString("Digite o CNPJ da editora a ser excluída: ");
         boolean foundExcluir = true;
@@ -189,34 +211,54 @@ public class MenuEditora implements Menus{
         for(Editora temp : armazen.getBdEditoras()) {
             if(temp.getCnpj().equals(cnpjBuscado)) {
                 temp.setbloqueado(true);
-                System.out.println("Editora excluída com sucesso.");
+                System.out.println("\n\nEditora excluída com sucesso.");
                 foundExcluir = false;
                 break;
             }
         }
 
         if(foundExcluir) {
-            System.out.println("Editora não encontrada.");
+            System.out.println("\n\nEditora não encontrada.");
         }
     }
 
-    public void reativarEditora() {
+    //polimorfismo por sobrescrita
+    @Override
+    public void reativar() {
+        System.out.println("Será preciso digitar o CNPJ!!");
+        String optionReativar = Leitura.entString("Deseja lsitar as editora? (S/N): ");
+
+        switch (optionReativar.toUpperCase()) {
+            case "S":
+                exibir();
+                break;
+            case "N":
+                System.out.println("Continuando.");
+                break;
+            default:
+                System.out.println("Opcao invalida, será exibido, precione 0 casso queira pular..");
+                exibir();
+                break;
+        }
         String cnpjBuscado = Leitura.entString("Digite o CNPJ da editora a ser reativada: ");
         boolean foundReativar = true;
 
         for(Editora temp : armazen.getBdEditoras()) {
             if(temp.getCnpj().equals(cnpjBuscado)) {
                 temp.setbloqueado(false);
-                System.out.println("Editora reativada com sucesso.");
+                System.out.println("\n\nEditora reativada com sucesso.");
                 foundReativar = false;
                 break;
             }
         }
 
         if(foundReativar) {
-            System.out.println("Editora não encontrada.");
+            System.out.println("\n\nEditora não encontrada.");
         }
     }
+
+    
+    
     public static void main(String[] args) {
         MenuEditora menu = new MenuEditora();
         menu.Menu();

@@ -1,5 +1,5 @@
-//vinicius souza Dias
-public class Colecionavel extends Livro {
+//vinicius souza Dias 2564599
+public final class Colecionavel extends Livro {
     private String edicaoEspecial;
     private boolean numerado;
     private String adicional;
