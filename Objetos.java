@@ -1,7 +1,7 @@
 //Vinicius Souza Dias 2564599
 
 public abstract class Objetos {
-    boolean bloqueado;
+    private boolean bloqueado;
 
     public Objetos() {
         bloqueado = false;

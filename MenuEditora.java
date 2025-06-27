@@ -37,6 +37,7 @@ public class MenuEditora implements Menus{
     public void setArmaze(Armazenamento armazen) {
         this.armazen = armazen;
     }
+
     //polimorfismo por sobrescrita
     @Override
     public void Menu(){
@@ -136,7 +137,7 @@ public class MenuEditora implements Menus{
             System.out.println("|0-Voltar ao menu anterior                                |");
             System.out.println("|1-Nome                                                   |");
             System.out.println("|2-CNPJ                                                   |");
-            System.out.println("|3-Listar todos                                           |");
+            System.out.println("                                           |");
             System.out.println("-----------------------------------------------------------");
 
             String opcaoBusca = Leitura.entString("Opcao: ");
@@ -164,7 +165,10 @@ public class MenuEditora implements Menus{
                     String cnpj = Leitura.entString("Digite o CNPJ da editora: ");
                     for(Editora temp : armazen.getBdEditoras()) {
                         if(temp.getCnpj().equals(cnpj)) {
-                            System.out.println("\nNome: " + temp.getNome() + " - CNPJ: " + temp.getCnpj() + " - Bloqueado: " + (temp.getbloqueado()? "Sim" : "Não"));
+                            System.out.println(
+                                "\nNome: " + temp.getNome() +
+                             " - CNPJ: " + temp.getCnpj() + 
+                             " - Bloqueado: " + (temp.getbloqueado()? "Sim" : "Não"));
                             findBusca = false;
                         }
                     }
