@@ -40,7 +40,7 @@ public class MenuAutor implements Menus{
     
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void Menu(){
 
         boolean condition = true;
@@ -93,7 +93,7 @@ public class MenuAutor implements Menus{
     
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void exibir() {
         System.out.println("Buscar Autores por:");
         System.out.println("-----------------------------------------------------------");
@@ -154,7 +154,7 @@ public class MenuAutor implements Menus{
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void cadastrar(){
         try{
             autor.setNome(Leitura.entString("Digite o nome do autor: "));
@@ -187,7 +187,7 @@ public class MenuAutor implements Menus{
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void excluir() {
         System.out.println("Será preciso digitar o CPF!!");
         String optionExcluir = Leitura.entString("Deseja listar os autores?(S/N) : ");
@@ -222,7 +222,7 @@ public class MenuAutor implements Menus{
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void reativar() {
         System.out.println("Será preciso digitar o CPF!!");
         String optionExcluir = Leitura.entString("Deseja listar os autores?(S/N) : ");

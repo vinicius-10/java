@@ -39,7 +39,7 @@ public class MenuEditora implements Menus{
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void Menu(){
         boolean condition = true;
 
@@ -92,7 +92,7 @@ public class MenuEditora implements Menus{
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void cadastrar(){
         try{
             editora.setNome(Leitura.entString("Digite o nome da editora: "));
@@ -127,7 +127,7 @@ public class MenuEditora implements Menus{
 
     
     //polimorfismo por sobrescrita
-    @Override
+   
     public void exibir(){
         boolean conditionExibir = false;
         do{
@@ -191,7 +191,7 @@ public class MenuEditora implements Menus{
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void excluir() {
         System.out.println("Será preciso digitar o CNPJ!!");
         String optionReativar = Leitura.entString("Deseja lsitar as editora? (S/N): ");
@@ -227,7 +227,7 @@ public class MenuEditora implements Menus{
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void reativar() {
         System.out.println("Será preciso digitar o CNPJ!!");
         String optionReativar = Leitura.entString("Deseja lsitar as editora? (S/N): ");

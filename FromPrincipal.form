@@ -95,6 +95,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastar..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itMnCadEditoraActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itMnAtuEditora">
               <Properties>
@@ -102,6 +105,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itMnAtuEditoraActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itMnConsultar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consulta.."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itMnConsultarActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -122,6 +133,11 @@
             <MenuItem class="javax.swing.JMenuItem" name="itMnAtuAutor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar..."/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itMnConsultar1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consulta.."/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -184,7 +200,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="rtBusca" min="-2" max="-2" attributes="0"/>
-                      <Component id="cxBuca" min="-2" pref="257" max="-2" attributes="0"/>
+                      <Component id="cxBusca" min="-2" pref="257" max="-2" attributes="0"/>
                       <Component id="rtNome" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rtTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -202,7 +218,7 @@
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="rtBusca" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cxBuca" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="cxBusca" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace pref="45" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -217,12 +233,9 @@
             <Property name="text" type="java.lang.String" value="Bem Vindo "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="cxBuca">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Titulo, autor ou Editora"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="cxBusca">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cxBucaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cxBuscaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="rtNome">

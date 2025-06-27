@@ -108,7 +108,7 @@ public class MenuInfantil  implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void cadastrar() {
         infantil = new Infantil();
 
@@ -266,7 +266,7 @@ public class MenuInfantil  implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void exibir() {
         boolean loopExibir = false;
         do{
@@ -349,7 +349,7 @@ public class MenuInfantil  implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void excluir() {
 
         System.out.println("Será preciso digitar o ID!!");
@@ -386,7 +386,7 @@ public class MenuInfantil  implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void reativar() {
         System.out.println("Sera preciso digitar o ID!!");
         String optionReativar = Leitura.entString("Deseja listar os livros infantis? (S/N): ");

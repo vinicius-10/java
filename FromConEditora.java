@@ -1,3 +1,7 @@
+//netbeans IDe 26
+//Vinicius Souza dias 2564599
+
+
 
 import javax.swing.JOptionPane;
 
@@ -10,29 +14,28 @@ import javax.swing.JOptionPane;
  *
  * @author valuc
  */
-public class FromAtuEditora extends javax.swing.JFrame {
+public class FromConEditora extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromAtuEditora.class.getName());
 
     private Editora editora;
     private Armazenamento armazen;
     
-    private static FromAtuEditora fromAtuEditunic; 
+    private static FromConEditora fromAtuEditunic; 
     
-    private FromAtuEditora() {
+    private FromConEditora() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
     
     //singleton
-    public static FromAtuEditora gerFromAtuEditora(){
+    public static FromConEditora gerFromAtuEditora(){
         if(fromAtuEditunic == null){
-            fromAtuEditunic = new FromAtuEditora();
+            fromAtuEditunic = new FromConEditora();
         }
         
         return fromAtuEditunic;
     }
-    
     
 
     /**
@@ -44,6 +47,8 @@ public class FromAtuEditora extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         rtTitulo = new javax.swing.JLabel();
         rtCpnpj = new javax.swing.JLabel();
         cxCnpj = new javax.swing.JTextField();
@@ -52,7 +57,21 @@ public class FromAtuEditora extends javax.swing.JFrame {
         cxNome = new javax.swing.JTextField();
         ckBloqueado = new javax.swing.JCheckBox();
         btBuscar = new javax.swing.JButton();
-        btAtualizar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,7 +93,10 @@ public class FromAtuEditora extends javax.swing.JFrame {
         rtDisponivel.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rtDisponivel.setText("Disponivel:");
 
+        cxNome.setEnabled(false);
+
         ckBloqueado.setText("Bloqueado");
+        ckBloqueado.setEnabled(false);
 
         btBuscar.setText("Buscar");
         btBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +105,18 @@ public class FromAtuEditora extends javax.swing.JFrame {
             }
         });
 
-        btAtualizar.setText("Atualizar");
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "CNPJ", "Disponivel"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,22 +126,24 @@ public class FromAtuEditora extends javax.swing.JFrame {
                 .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rtTitulo)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btBuscar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btAtualizar))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(rtCpnpj)
-                                .addComponent(rtNome)
-                                .addComponent(rtDisponivel))
-                            .addGap(56, 56, 56)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ckBloqueado)
-                                .addComponent(cxCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                .addComponent(cxNome)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rtCpnpj)
+                            .addComponent(rtNome)
+                            .addComponent(rtDisponivel))
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ckBloqueado)
+                            .addComponent(cxCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                            .addComponent(cxNome)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btBuscar)
+                        .addGap(8, 8, 8)))
                 .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,11 +162,11 @@ public class FromAtuEditora extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtDisponivel)
                     .addComponent(ckBloqueado))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btBuscar)
-                    .addComponent(btAtualizar))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(btBuscar)
+                .addGap(57, 57, 57)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,10 +186,10 @@ public class FromAtuEditora extends javax.swing.JFrame {
         boolean findBusca = true;
         
         
-        for(Editora temp : armazen.getBdEditoras()) {
-            if(temp.getCnpj().equals(cnpj)) {
-                cxNome.setText(temp.getNome());
-                ckBloqueado.setSelected(temp.getbloqueado());
+        for(Editora editora : armazen.getBdEditoras()) {
+            if(editora.getCnpj().equals(cnpj)) {
+                cxNome.setText(editora.getNome());
+                ckBloqueado.setSelected(editora.getbloqueado());
                 findBusca = false;
                 break;                
             }
@@ -165,7 +200,7 @@ public class FromAtuEditora extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(
                 null,
                 "CNPJ não encontrado",
-                "Atualizar editora",
+                "Busca editora",
                 JOptionPane.ERROR_MESSAGE
             );
         }
@@ -193,15 +228,18 @@ public class FromAtuEditora extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromAtuEditora().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FromConEditora().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAtualizar;
     private javax.swing.JButton btBuscar;
     private javax.swing.JCheckBox ckBloqueado;
     private javax.swing.JTextField cxCnpj;
     private javax.swing.JTextField cxNome;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel rtCpnpj;
     private javax.swing.JLabel rtDisponivel;
     private javax.swing.JLabel rtNome;

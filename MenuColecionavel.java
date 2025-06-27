@@ -59,7 +59,7 @@ public class MenuColecionavel implements Menus {
     
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void Menu(){
         
 
@@ -113,7 +113,7 @@ public class MenuColecionavel implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void cadastrar() {
         colecionavel = new Colecionavel();
 
@@ -274,7 +274,7 @@ public class MenuColecionavel implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void exibir() {
         boolean loopExibir = false;
         do{
@@ -356,7 +356,7 @@ public class MenuColecionavel implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void excluir() {
 
         System.out.println("Será preciso digitar o ID!!");
@@ -393,7 +393,7 @@ public class MenuColecionavel implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void reativar() {
         System.out.println("Será preciso digitar o ID!!");
         String optionReativar = Leitura.entString("Deseja listar os colecionaveis? (S/N): ");

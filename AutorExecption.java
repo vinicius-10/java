@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 //vinicius souza Dias 2564599
 public class AutorExecption extends Exception {
 
@@ -19,7 +22,7 @@ public class AutorExecption extends Exception {
     public Autor corTinyNameExecption(Autor autor) {
         
             try{
-                autor.setNome(Leitura.entString("Digite o nome do autor: "));
+                autor.setNome(getCorrecao("Digite o nome do autor: "));
             }catch(AutorExecption e) {
                 e.menExecption();
                 return corTinyNameExecption(autor);
@@ -30,7 +33,7 @@ public class AutorExecption extends Exception {
     public Autor corTinyCpfExecption(Autor autor) {
         
             try{
-                autor.setCpf(Leitura.entString("Digite o CPF do autor: "));
+                autor.setCpf(getCorrecao("Digite o CPF do autor: "));
             }catch(AutorExecption e) {
                 e.menExecption();
                 return corTinyCpfExecption(autor);
@@ -38,4 +41,14 @@ public class AutorExecption extends Exception {
         return autor;
     }
     
+    public String getCorrecao(String men){
+        String corecao = JOptionPane.showInputDialog(
+                null,
+                men,
+                "Valor invalido",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+        
+        return corecao;
+    }
 }

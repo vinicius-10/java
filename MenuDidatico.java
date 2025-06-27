@@ -106,7 +106,7 @@ public class MenuDidatico implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void cadastrar() {
         didatico = new Didatico();
 
@@ -250,7 +250,7 @@ public class MenuDidatico implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void exibir() {
         boolean loopExibir = false;
         do{
@@ -333,7 +333,7 @@ public class MenuDidatico implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void excluir() {
 
         System.out.println("Será preciso digitar o ID!!");
@@ -370,7 +370,7 @@ public class MenuDidatico implements Menus {
     }
 
     //polimorfismo por sobrescrita
-    @Override
+   
     public void reativar() {
         System.out.println("Sera preciso digitar o ID!!");
         String optionReativar = Leitura.entString("Deseja listar os livros didaticos? (S/N): ");
