@@ -7,14 +7,14 @@
  *
  * @author valuc
  */
-public class Principal extends javax.swing.JFrame {
+public class FromPrincipal extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Principal.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromPrincipal.class.getName());
 
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public FromPrincipal() {
         initComponents();
     }
 
@@ -37,28 +37,24 @@ public class Principal extends javax.swing.JFrame {
         pnBusca = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         barMnPrincipal = new javax.swing.JMenuBar();
         mnLivro = new javax.swing.JMenu();
         mnColecionavel = new javax.swing.JMenu();
         itMnCadColecioanvel = new javax.swing.JMenuItem();
-        itMnDelColecionavel = new javax.swing.JMenuItem();
-        itMnReaColecionavel = new javax.swing.JMenuItem();
+        itMnAtuColecionavel = new javax.swing.JMenuItem();
         mnDidatico = new javax.swing.JMenu();
         itMnCadDidatico = new javax.swing.JMenuItem();
-        itMnDelDidatico = new javax.swing.JMenuItem();
-        itMnReaDidatico = new javax.swing.JMenuItem();
+        itMnAtuDidatico = new javax.swing.JMenuItem();
         mnInfantil = new javax.swing.JMenu();
         itMnCadInfantil = new javax.swing.JMenuItem();
-        itMnDelInfantil = new javax.swing.JMenuItem();
-        itMnReaInfantil = new javax.swing.JMenuItem();
+        itMnAtuInfantil = new javax.swing.JMenuItem();
         mnEditora = new javax.swing.JMenu();
-        itMnDelEditora = new javax.swing.JMenuItem();
         itMnCadEditora = new javax.swing.JMenuItem();
-        itMnReaEditora = new javax.swing.JMenuItem();
+        itMnAtuEditora = new javax.swing.JMenuItem();
         mnAutor = new javax.swing.JMenu();
-        itMnDelAutor = new javax.swing.JMenuItem();
-        itMnCadColecioanvel2 = new javax.swing.JMenuItem();
-        itMnReaColecionavel2 = new javax.swing.JMenuItem();
+        itMnCadAutor = new javax.swing.JMenuItem();
+        itMnAtuAutor = new javax.swing.JMenuItem();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,13 +74,18 @@ public class Principal extends javax.swing.JFrame {
         rtTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         rtTitulo.setText("Bem Vindo ");
 
-        cxBuca.setText("Titulo do livro");
+        cxBuca.setText("Titulo, autor ou Editora");
+        cxBuca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxBucaActionPerformed(evt);
+            }
+        });
 
         rtNome.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         rtNome.setText("A Delkv");
 
         rtBusca.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        rtBusca.setText("Digite o titulo do livro buscado");
+        rtBusca.setText("Busque um livro");
 
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
@@ -94,15 +95,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rtBusca)
-                    .addComponent(cxBuca, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rtNome)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rtTitulo)
+                    .addComponent(cxBuca, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rtNome)
+                    .addComponent(rtTitulo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
@@ -132,20 +127,30 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jLabel1.setText("Clique em um livro para ver mais detalhes");
+
         javax.swing.GroupLayout pnBuscaLayout = new javax.swing.GroupLayout(pnBusca);
         pnBusca.setLayout(pnBuscaLayout);
         pnBuscaLayout.setHorizontalGroup(
             pnBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscaLayout.createSequentialGroup()
+            .addGroup(pnBuscaLayout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnBuscaLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         pnBuscaLayout.setVerticalGroup(
             pnBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         mnLivro.setText("Livro");
@@ -155,16 +160,13 @@ public class Principal extends javax.swing.JFrame {
         itMnCadColecioanvel.setText("Cadastar...");
         mnColecionavel.add(itMnCadColecioanvel);
 
-        itMnDelColecionavel.setText("Excluir...");
-        itMnDelColecionavel.addActionListener(new java.awt.event.ActionListener() {
+        itMnAtuColecionavel.setText("Atualizar...");
+        itMnAtuColecionavel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itMnDelColecionavelActionPerformed(evt);
+                itMnAtuColecionavelActionPerformed(evt);
             }
         });
-        mnColecionavel.add(itMnDelColecionavel);
-
-        itMnReaColecionavel.setText("Reativar...");
-        mnColecionavel.add(itMnReaColecionavel);
+        mnColecionavel.add(itMnAtuColecionavel);
 
         mnLivro.add(mnColecionavel);
 
@@ -173,11 +175,8 @@ public class Principal extends javax.swing.JFrame {
         itMnCadDidatico.setText("Cadastar...");
         mnDidatico.add(itMnCadDidatico);
 
-        itMnDelDidatico.setText("Excluir...");
-        mnDidatico.add(itMnDelDidatico);
-
-        itMnReaDidatico.setText("Reativar...");
-        mnDidatico.add(itMnReaDidatico);
+        itMnAtuDidatico.setText("Atualizar...");
+        mnDidatico.add(itMnAtuDidatico);
 
         mnLivro.add(mnDidatico);
 
@@ -186,11 +185,8 @@ public class Principal extends javax.swing.JFrame {
         itMnCadInfantil.setText("Cadastar...");
         mnInfantil.add(itMnCadInfantil);
 
-        itMnDelInfantil.setText("Excluir...");
-        mnInfantil.add(itMnDelInfantil);
-
-        itMnReaInfantil.setText("Reativar...");
-        mnInfantil.add(itMnReaInfantil);
+        itMnAtuInfantil.setText("Atualizar...");
+        mnInfantil.add(itMnAtuInfantil);
 
         mnLivro.add(mnInfantil);
 
@@ -198,37 +194,31 @@ public class Principal extends javax.swing.JFrame {
 
         mnEditora.setText("Editora");
 
-        itMnDelEditora.setText("Excluir...");
-        itMnDelEditora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itMnDelEditoraActionPerformed(evt);
-            }
-        });
-        mnEditora.add(itMnDelEditora);
-
         itMnCadEditora.setText("Cadastar...");
         mnEditora.add(itMnCadEditora);
 
-        itMnReaEditora.setText("Reativar...");
-        mnEditora.add(itMnReaEditora);
+        itMnAtuEditora.setText("Atualizar...");
+        itMnAtuEditora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itMnAtuEditoraActionPerformed(evt);
+            }
+        });
+        mnEditora.add(itMnAtuEditora);
 
         barMnPrincipal.add(mnEditora);
 
         mnAutor.setText("Autor");
 
-        itMnDelAutor.setText("Excluir...");
-        itMnDelAutor.addActionListener(new java.awt.event.ActionListener() {
+        itMnCadAutor.setText("Cadastrar...");
+        itMnCadAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itMnDelAutorActionPerformed(evt);
+                itMnCadAutorActionPerformed(evt);
             }
         });
-        mnAutor.add(itMnDelAutor);
+        mnAutor.add(itMnCadAutor);
 
-        itMnCadColecioanvel2.setText("Cadastar...");
-        mnAutor.add(itMnCadColecioanvel2);
-
-        itMnReaColecionavel2.setText("Reativar...");
-        mnAutor.add(itMnReaColecionavel2);
+        itMnAtuAutor.setText("Atualizar...");
+        mnAutor.add(itMnAtuAutor);
 
         barMnPrincipal.add(mnAutor);
 
@@ -252,23 +242,27 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itMnDelColecionavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnDelColecionavelActionPerformed
+    private void itMnAtuColecionavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuColecionavelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itMnDelColecionavelActionPerformed
+    }//GEN-LAST:event_itMnAtuColecionavelActionPerformed
 
-    private void itMnDelEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnDelEditoraActionPerformed
+    private void itMnAtuEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuEditoraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itMnDelEditoraActionPerformed
+    }//GEN-LAST:event_itMnAtuEditoraActionPerformed
 
-    private void itMnDelAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnDelAutorActionPerformed
+    private void itMnCadAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadAutorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itMnDelAutorActionPerformed
+    }//GEN-LAST:event_itMnCadAutorActionPerformed
+
+    private void cxBucaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxBucaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxBucaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,27 +286,23 @@ public class Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Principal().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FromPrincipal().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMnPrincipal;
     private javax.swing.JTextField cxBuca;
+    private javax.swing.JMenuItem itMnAtuAutor;
+    private javax.swing.JMenuItem itMnAtuColecionavel;
+    private javax.swing.JMenuItem itMnAtuDidatico;
+    private javax.swing.JMenuItem itMnAtuEditora;
+    private javax.swing.JMenuItem itMnAtuInfantil;
+    private javax.swing.JMenuItem itMnCadAutor;
     private javax.swing.JMenuItem itMnCadColecioanvel;
-    private javax.swing.JMenuItem itMnCadColecioanvel2;
     private javax.swing.JMenuItem itMnCadDidatico;
     private javax.swing.JMenuItem itMnCadEditora;
     private javax.swing.JMenuItem itMnCadInfantil;
-    private javax.swing.JMenuItem itMnDelAutor;
-    private javax.swing.JMenuItem itMnDelColecionavel;
-    private javax.swing.JMenuItem itMnDelDidatico;
-    private javax.swing.JMenuItem itMnDelEditora;
-    private javax.swing.JMenuItem itMnDelInfantil;
-    private javax.swing.JMenuItem itMnReaColecionavel;
-    private javax.swing.JMenuItem itMnReaColecionavel2;
-    private javax.swing.JMenuItem itMnReaDidatico;
-    private javax.swing.JMenuItem itMnReaEditora;
-    private javax.swing.JMenuItem itMnReaInfantil;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
