@@ -10,26 +10,26 @@ import javax.swing.JOptionPane;
 
 
 
-public class FromCadEditora extends javax.swing.JFrame implements Menus {
+public class FromCadAutor extends javax.swing.JFrame implements Menus {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromCadEditora.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromCadAutor.class.getName());
 
-    private Editora editora;
+    private Autor editora;
     private Armazenamento armazen;
     
-    private static FromCadEditora fromCadEditoraUnic;
+    private static FromCadAutor fromCadAutorUnic;
     
-    private FromCadEditora() {
+    private FromCadAutor() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
     
     //singleton
-    public static FromCadEditora gerarFromCadEditora(){
-        if(fromCadEditoraUnic == null){
-            fromCadEditoraUnic = new FromCadEditora();
+    public static FromCadAutor gerarFromCadAutor(){
+        if(fromCadAutorUnic == null){
+            fromCadAutorUnic = new FromCadAutor();
         }
-        return fromCadEditoraUnic;       
+        return fromCadAutorUnic;       
     }
 
     /**
@@ -43,8 +43,8 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
 
         cxNome = new javax.swing.JTextField();
         rtTitulo = new javax.swing.JLabel();
-        rtCpnpj = new javax.swing.JLabel();
-        cxCnpj = new javax.swing.JTextField();
+        rtCpf = new javax.swing.JLabel();
+        cxCpf = new javax.swing.JTextField();
         btLimpar = new javax.swing.JButton();
         rtNome = new javax.swing.JLabel();
         btCadastar = new javax.swing.JButton();
@@ -52,14 +52,14 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         rtTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        rtTitulo.setText("Cadastrar Editora");
+        rtTitulo.setText("Cadastrar autor");
 
-        rtCpnpj.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        rtCpnpj.setText("Digite o CNPJ:");
+        rtCpf.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rtCpf.setText("Digite o CPF:");
 
-        cxCnpj.addActionListener(new java.awt.event.ActionListener() {
+        cxCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cxCnpjActionPerformed(evt);
+                cxCpfActionPerformed(evt);
             }
         });
 
@@ -85,7 +85,7 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rtTitulo)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -95,13 +95,13 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
                             .addComponent(btCadastar))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(rtCpnpj)
+                                .addComponent(rtCpf)
                                 .addComponent(rtNome))
                             .addGap(56, 56, 56)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cxCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                .addComponent(cxCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                                 .addComponent(cxNome)))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,8 +110,8 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
                 .addComponent(rtTitulo)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rtCpnpj)
-                    .addComponent(cxCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rtCpf)
+                    .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtNome)
@@ -126,9 +126,9 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cxCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxCnpjActionPerformed
+    private void cxCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cxCnpjActionPerformed
+    }//GEN-LAST:event_cxCpfActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         clear();
@@ -141,30 +141,30 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
     //polimorfismo por sobrescrita
     @Override
     public void cadastrar(){
-        editora = new Editora();
+        editora = new Autor();
         
        try{
             editora.setNome(cxNome.getText());
-        }catch(EditoraExecption e) {
+        }catch(AutorExecption e) {
  
             editora = e.corTinyNameExecption(editora);
         }
 
         try{
-            editora.setCnpj(cxCnpj.getText());
-        }catch(EditoraExecption e) {
+            editora.setCpf(cxCpf.getText());
+        }catch(AutorExecption e) {
  
-            editora = e.corTinyCnpjExecption(editora);
+            editora = e.corTinyCpfExecption(editora);
         }
         
         
         boolean foundCadastro = true;
 
-        for(Editora temp : armazen.getBdEditoras()) {
-            if(temp.getCnpj().equals(editora.getCnpj())) {
+        for(Autor temp : armazen.getBdAutores()) {
+            if(temp.getCpf().equals(editora.getCpf())) {
                 JOptionPane.showMessageDialog(
                         null,
-                        "Editora já cadastrada",
+                        "Autor já cadastrada",
                         "Cadastro de editora",
                         JOptionPane.ERROR_MESSAGE
                 );
@@ -174,23 +174,23 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
         }      
 
         if(foundCadastro) {            
-            armazen.getBdEditoras().add(editora);
+            armazen.getBdAutores().add(editora);
             JOptionPane.showMessageDialog(
                 null,
-                "Editora cadastrada com sucesso",
+                "Autor cadastrada com sucesso",
                 "Cadastro de editora",
                 JOptionPane.INFORMATION_MESSAGE
             );
             
-            FromConEditora.gerFromAtuEditora().listaEditora();
+            FromConAutor.gerFromAtuAutor().listaAutor();
             clear();
         }
     }
     
     public void clear(){
-        cxCnpj.setText("");
+        cxCpf.setText("");
         cxNome.setText("");
-        cxCnpj.requestFocus();
+        cxCpf.requestFocus();
     }
     
     /**
@@ -215,15 +215,15 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromCadEditora().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FromCadAutor().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastar;
     private javax.swing.JButton btLimpar;
-    private javax.swing.JTextField cxCnpj;
+    private javax.swing.JTextField cxCpf;
     private javax.swing.JTextField cxNome;
-    private javax.swing.JLabel rtCpnpj;
+    private javax.swing.JLabel rtCpf;
     private javax.swing.JLabel rtNome;
     private javax.swing.JLabel rtTitulo;
     // End of variables declaration//GEN-END:variables

@@ -97,14 +97,14 @@ public class MenuEditora implements Menus{
         try{
             editora.setNome(Leitura.entString("Digite o nome da editora: "));
         }catch(EditoraExecption e) {
-            e.menExecption();
+ 
             editora = e.corTinyNameExecption(editora);
         }
 
         try{
             editora.setCnpj(Leitura.entString("Digite o CNPJ da editora: "));
         }catch(EditoraExecption e) {
-            e.menExecption();
+ 
             editora = e.corTinyCnpjExecption(editora);
         }
         

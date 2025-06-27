@@ -32,19 +32,19 @@
                           <Component id="btBuscar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="btLimpar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="50" max="32767" attributes="0"/>
+                          <EmptySpace pref="52" max="32767" attributes="0"/>
                           <Component id="btAtualizar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rtCpnpj" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rtCpf" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="rtNome" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="rtDisponivel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="ckBloqueado" min="-2" max="-2" attributes="0"/>
-                              <Component id="cxCnpj" pref="173" max="32767" attributes="0"/>
+                              <Component id="cxCpf" pref="173" max="32767" attributes="0"/>
                               <Component id="cxNome" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -61,8 +61,8 @@
               <Component id="rtTitulo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rtCpnpj" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cxCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cxCpf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -91,20 +91,20 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Trebuchet MS" size="24" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Atualizar Editora"/>
+        <Property name="text" type="java.lang.String" value="Atualizar autor"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="rtCpnpj">
+    <Component class="javax.swing.JLabel" name="rtCpf">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Trebuchet MS" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Digite o CNPJ:"/>
+        <Property name="text" type="java.lang.String" value="Digite o CPF:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="cxCnpj">
+    <Component class="javax.swing.JTextField" name="cxCpf">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cxCnpjActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cxCpfActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="rtNome">

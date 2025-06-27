@@ -3,8 +3,9 @@
 
 
 
+
+
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,27 +16,27 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author valuc
  */
-public class FromConEditora extends javax.swing.JFrame {
+public class FromAtuAutor extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromAtuEditora.class.getName());
 
-    private Editora editora;
+    private Autor autor;
     private Armazenamento armazen;
     
-    private static FromConEditora fromAtuEditunic; 
+    private static FromAtuAutor fromAtuAutorUnic; 
     
-    private FromConEditora() {
+    private FromAtuAutor() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
     
     //singleton
-    public static FromConEditora gerFromAtuEditora(){
-        if(fromAtuEditunic == null){
-            fromAtuEditunic = new FromConEditora();
+    public static FromAtuAutor gerFromAtuAutor(){
+        if(fromAtuAutorUnic == null){
+            fromAtuAutorUnic = new FromAtuAutor();
         }
         
-        return fromAtuEditunic;
+        return fromAtuAutorUnic;
     }
     
 
@@ -48,49 +49,28 @@ public class FromConEditora extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         rtTitulo = new javax.swing.JLabel();
-        rtCpnpj = new javax.swing.JLabel();
-        cxCnpj = new javax.swing.JTextField();
+        rtCpf = new javax.swing.JLabel();
+        cxCpf = new javax.swing.JTextField();
         rtNome = new javax.swing.JLabel();
         rtDisponivel = new javax.swing.JLabel();
         cxNome = new javax.swing.JTextField();
         ckBloqueado = new javax.swing.JCheckBox();
         btBuscar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbEditora = new javax.swing.JTable();
+        btAtualizar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
         rtTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        rtTitulo.setText("Consultar Editora");
+        rtTitulo.setText("Atualizar autor");
 
-        rtCpnpj.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        rtCpnpj.setText("Digite o CNPJ:");
+        rtCpf.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rtCpf.setText("Digite o CPF:");
 
-        cxCnpj.addActionListener(new java.awt.event.ActionListener() {
+        cxCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cxCnpjActionPerformed(evt);
+                cxCpfActionPerformed(evt);
             }
         });
 
@@ -100,7 +80,6 @@ public class FromConEditora extends javax.swing.JFrame {
         rtDisponivel.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rtDisponivel.setText("Disponivel:");
 
-        ckBloqueado.setBackground(new java.awt.Color(70, 73, 75));
         ckBloqueado.setText("Bloqueado");
 
         btBuscar.setText("Buscar");
@@ -110,18 +89,12 @@ public class FromConEditora extends javax.swing.JFrame {
             }
         });
 
-        tbEditora.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nome", "CNPJ", "Disponivel"
+        btAtualizar.setText("Atualizar");
+        btAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizarActionPerformed(evt);
             }
-        ));
-        jScrollPane2.setViewportView(tbEditora);
+        });
 
         btLimpar.setText("Limpar");
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,28 +109,26 @@ public class FromConEditora extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(64, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rtTitulo)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rtCpnpj)
-                            .addComponent(rtNome)
-                            .addComponent(rtDisponivel))
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ckBloqueado)
-                            .addComponent(cxCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addComponent(cxNome)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btBuscar)
-                        .addGap(8, 8, 8)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btBuscar)
+                            .addGap(50, 50, 50)
+                            .addComponent(btLimpar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                            .addComponent(btAtualizar))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(rtCpf)
+                                .addComponent(rtNome)
+                                .addComponent(rtDisponivel))
+                            .addGap(67, 67, 67)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ckBloqueado)
+                                .addComponent(cxCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                .addComponent(cxNome)))))
                 .addContainerGap(64, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,8 +137,8 @@ public class FromConEditora extends javax.swing.JFrame {
                 .addComponent(rtTitulo)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rtCpnpj)
-                    .addComponent(cxCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rtCpf)
+                    .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtNome)
@@ -176,76 +147,101 @@ public class FromConEditora extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtDisponivel)
                     .addComponent(ckBloqueado))
-                .addGap(37, 37, 37)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btBuscar)
+                    .addComponent(btAtualizar)
                     .addComponent(btLimpar))
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cxCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxCnpjActionPerformed
+    private void cxCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cxCnpjActionPerformed
+    }//GEN-LAST:event_cxCpfActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        getEditora();
+        getAutor();
     }//GEN-LAST:event_btBuscarActionPerformed
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-       listaEditora();
-    }//GEN-LAST:event_formWindowActivated
+    private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
+        atuAutor();
+    }//GEN-LAST:event_btAtualizarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         clear();
     }//GEN-LAST:event_btLimparActionPerformed
 
-    public void clear(){
-        cxCnpj.setText("");
-        cxNome.setText("");
-        ckBloqueado.setSelected(false);
-        cxCnpj.requestFocus();
-    }
-    
-    public void listaEditora(){
-        DefaultTableModel modTab = (DefaultTableModel)tbEditora.getModel();
-        int posLin = 0;
-        modTab.setRowCount(posLin);
+    public void atuAutor(){
+        autor = new Autor();
         
-        for(Editora p : armazen.getBdEditoras()){
-            modTab.insertRow(posLin,new Object[]{p.getNome(),p.getCnpj(),p.getbloqueado()? "Não":"Sim"});
-            posLin++;
-
+        try{
+            autor.setCpf(cxCpf.getText());
+        }catch(AutorExecption e) {
+ 
+            autor = e.corTinyCpfExecption(autor);
         }
+        
+        for(Autor temp : armazen.getBdAutores()) {
+            if(temp.getCpf().equals(autor.getCpf())) {
+                try{
+                    temp.setNome(cxNome.getText());
+                }catch(AutorExecption e) {
+         
+                    temp = e.corTinyNameExecption(autor);
+                }
+                
+                temp.setbloqueado(ckBloqueado.isSelected());
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Autor atualizada",
+                    "Atualizar autor",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                FromConAutor.gerFromAtuAutor().listaAutor();
+                clear();
+                return;
+            }
+        }   
+        
+        JOptionPane.showMessageDialog(
+            null,
+            "CNPJ não encontrado",
+            "Atualizar autor",
+            JOptionPane.ERROR_MESSAGE
+        );
     }
     
-    public void getEditora(){
-        String cnpj = cxCnpj.getText();
-        boolean findBusca = true;
+    public void getAutor(){
+        String cpf = cxCpf.getText();
         
         
-        for(Editora editora : armazen.getBdEditoras()) {
-            if(editora.getCnpj().equals(cnpj)) {
-                cxNome.setText(editora.getNome());
-                ckBloqueado.setSelected(editora.getbloqueado());
-                findBusca = false;
-                break;                
+        for(Autor autor : armazen.getBdAutores()) {
+            if(autor.getCpf().equals(cpf)) {
+                cxNome.setText(autor.getNome());
+                ckBloqueado.setSelected(autor.getbloqueado());
+                cxCpf.setEnabled(false);
+                return;                
             }
             System.gc();
         }
-        
-        if(findBusca) {
-            JOptionPane.showMessageDialog(
-                null,
-                "CNPJ não encontrado",
-                "Busca editora",
-                JOptionPane.ERROR_MESSAGE
-            );
-        }
+      
+        JOptionPane.showMessageDialog(
+            null,
+            "Cpf não encontrado",
+            "Atualizar autor",
+            JOptionPane.ERROR_MESSAGE
+        ); 
+    }
+    
+    public void clear(){
+        cxCpf.setText("");
+        cxNome.setText("");
+        ckBloqueado.setSelected(false);
+        cxCpf.setEnabled(true);
+        cxCpf.requestFocus();
     }
      
     /**
@@ -270,22 +266,19 @@ public class FromConEditora extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromConEditora().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FromAtuAutor().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAtualizar;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btLimpar;
     private javax.swing.JCheckBox ckBloqueado;
-    private javax.swing.JTextField cxCnpj;
+    private javax.swing.JTextField cxCpf;
     private javax.swing.JTextField cxNome;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel rtCpnpj;
+    private javax.swing.JLabel rtCpf;
     private javax.swing.JLabel rtDisponivel;
     private javax.swing.JLabel rtNome;
     private javax.swing.JLabel rtTitulo;
-    private javax.swing.JTable tbEditora;
     // End of variables declaration//GEN-END:variables
 }

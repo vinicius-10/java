@@ -22,9 +22,9 @@ public class AutorExecption extends Exception {
     public Autor corTinyNameExecption(Autor autor) {
         
             try{
-                autor.setNome(getCorrecao("Digite o nome do autor: "));
+                autor.setNome(getCorrecao("Nome muito curto. Digite novamente: "));
             }catch(AutorExecption e) {
-                e.menExecption();
+     
                 return corTinyNameExecption(autor);
             }
         return autor;
@@ -33,9 +33,9 @@ public class AutorExecption extends Exception {
     public Autor corTinyCpfExecption(Autor autor) {
         
             try{
-                autor.setCpf(getCorrecao("Digite o CPF do autor: "));
+                autor.setCpf(getCorrecao("CPF muito curto. Digite novamente: "));
             }catch(AutorExecption e) {
-                e.menExecption();
+     
                 return corTinyCpfExecption(autor);
             }
         return autor;

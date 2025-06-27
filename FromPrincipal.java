@@ -51,6 +51,7 @@ public class FromPrincipal extends javax.swing.JFrame {
         cxBusca = new javax.swing.JTextField();
         rtNome = new javax.swing.JLabel();
         rtBusca = new javax.swing.JLabel();
+        rtMeioBusca = new javax.swing.JLabel();
         pnBusca = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -105,6 +106,9 @@ public class FromPrincipal extends javax.swing.JFrame {
         rtBusca.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         rtBusca.setText("Busque um livro");
 
+        rtMeioBusca.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        rtMeioBusca.setText("Digite o titulo, Autor ou Editora");
+
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
@@ -112,6 +116,7 @@ public class FromPrincipal extends javax.swing.JFrame {
             .addGroup(pnPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rtMeioBusca)
                     .addComponent(rtBusca)
                     .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rtNome)
@@ -123,13 +128,15 @@ public class FromPrincipal extends javax.swing.JFrame {
             .addGroup(pnPrincipalLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(rtTitulo)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rtNome)
-                .addGap(29, 29, 29)
+                .addGap(41, 41, 41)
                 .addComponent(rtBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rtMeioBusca)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -166,9 +173,9 @@ public class FromPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscaLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         mnLivro.setText("Livro");
@@ -249,9 +256,19 @@ public class FromPrincipal extends javax.swing.JFrame {
         mnAutor.add(itMnCadAutor);
 
         itMnAtuAutor.setText("Atualizar...");
+        itMnAtuAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itMnAtuAutorActionPerformed(evt);
+            }
+        });
         mnAutor.add(itMnAtuAutor);
 
         itMnConsultar1.setText("Consulta..");
+        itMnConsultar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itMnConsultar1ActionPerformed(evt);
+            }
+        });
         mnAutor.add(itMnConsultar1);
 
         barMnPrincipal.add(mnAutor);
@@ -276,7 +293,7 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -291,7 +308,7 @@ public class FromPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itMnAtuEditoraActionPerformed
 
     private void itMnCadAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadAutorActionPerformed
-        // TODO add your handling code here:
+       FromCadAutor.gerarFromCadAutor().setVisible(true);
     }//GEN-LAST:event_itMnCadAutorActionPerformed
 
     private void cxBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxBuscaActionPerformed
@@ -305,6 +322,14 @@ public class FromPrincipal extends javax.swing.JFrame {
     private void itMnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnConsultarActionPerformed
         FromConEditora.gerFromAtuEditora().setVisible(true);
     }//GEN-LAST:event_itMnConsultarActionPerformed
+
+    private void itMnAtuAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuAutorActionPerformed
+        FromAtuAutor.gerFromAtuAutor().setVisible(true);
+    }//GEN-LAST:event_itMnAtuAutorActionPerformed
+
+    private void itMnConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnConsultar1ActionPerformed
+        FromConAutor.gerFromAtuAutor().setVisible(true);
+    }//GEN-LAST:event_itMnConsultar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,6 +385,7 @@ public class FromPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnBusca;
     private javax.swing.JPanel pnPrincipal;
     private javax.swing.JLabel rtBusca;
+    private javax.swing.JLabel rtMeioBusca;
     private javax.swing.JLabel rtNome;
     private javax.swing.JLabel rtTitulo;
     // End of variables declaration//GEN-END:variables

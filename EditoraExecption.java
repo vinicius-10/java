@@ -23,9 +23,9 @@ public class EditoraExecption  extends Exception {
     public Editora corTinyNameExecption(Editora editora) {
         
             try{
-                editora.setNome(getCorrecao("Digite o nome da editora: "));
+                editora.setNome(getCorrecao("Nome muito curto. Digite novamente: "));
             }catch(EditoraExecption e) {
-                e.menExecption();
+     
                 return corTinyNameExecption(editora);
             }
         return editora;
@@ -34,9 +34,9 @@ public class EditoraExecption  extends Exception {
     public Editora corTinyCnpjExecption(Editora editora) {
         
             try{
-                editora.setCnpj(getCorrecao("Digite o CNPJ da editora: "));
+                editora.setCnpj(getCorrecao("CNPJ muito curto. Digite novamente: "));
             }catch(EditoraExecption e) {
-                e.menExecption();
+     
                 return corTinyCnpjExecption(editora);
             }
         return editora;

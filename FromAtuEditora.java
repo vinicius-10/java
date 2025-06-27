@@ -58,6 +58,7 @@ public class FromAtuEditora extends javax.swing.JFrame {
         ckBloqueado = new javax.swing.JCheckBox();
         btBuscar = new javax.swing.JButton();
         btAtualizar = new javax.swing.JButton();
+        btLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -89,6 +90,18 @@ public class FromAtuEditora extends javax.swing.JFrame {
         });
 
         btAtualizar.setText("Atualizar");
+        btAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizarActionPerformed(evt);
+            }
+        });
+
+        btLimpar.setText("Limpar");
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,7 +114,9 @@ public class FromAtuEditora extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btBuscar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(50, 50, 50)
+                            .addComponent(btLimpar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                             .addComponent(btAtualizar))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +150,8 @@ public class FromAtuEditora extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btBuscar)
-                    .addComponent(btAtualizar))
+                    .addComponent(btAtualizar)
+                    .addComponent(btLimpar))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
 
@@ -150,6 +166,53 @@ public class FromAtuEditora extends javax.swing.JFrame {
         getEditora();
     }//GEN-LAST:event_btBuscarActionPerformed
 
+    private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
+        atuEditora();
+    }//GEN-LAST:event_btAtualizarActionPerformed
+
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        clear();
+    }//GEN-LAST:event_btLimparActionPerformed
+
+    public void atuEditora(){
+        editora = new Editora();
+        
+        try{
+            editora.setCnpj(cxCnpj.getText());
+        }catch(EditoraExecption e) {
+ 
+            editora = e.corTinyCnpjExecption(editora);
+        }
+        
+        for(Editora temp : armazen.getBdEditoras()) {
+            if(temp.getCnpj().equals(editora.getCnpj())) {
+                try{
+                    temp.setNome(cxNome.getText());
+                }catch(EditoraExecption e) {
+         
+                    temp = e.corTinyNameExecption(editora);
+                }
+                
+                temp.setbloqueado(ckBloqueado.isSelected());
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Editora atualizada",
+                    "Atualizar editora",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                FromConEditora.gerFromAtuEditora().listaEditora();
+                clear();
+                return;
+            }
+        }   
+        
+        JOptionPane.showMessageDialog(
+            null,
+            "CNPJ não encontrado",
+            "Atualizar editora",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
     
     public void getEditora(){
         String cnpj = cxCnpj.getText();
@@ -173,7 +236,19 @@ public class FromAtuEditora extends javax.swing.JFrame {
                 "Atualizar editora",
                 JOptionPane.ERROR_MESSAGE
             );
+        }else{
+            cxCnpj.setEnabled(false);
         }
+        
+        
+    }
+    
+    public void clear(){
+        cxCnpj.setText("");
+        cxNome.setText("");
+        ckBloqueado.setSelected(false);
+        cxCnpj.setEnabled(true);
+        cxCnpj.requestFocus();
     }
      
     /**
@@ -204,6 +279,7 @@ public class FromAtuEditora extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAtualizar;
     private javax.swing.JButton btBuscar;
+    private javax.swing.JButton btLimpar;
     private javax.swing.JCheckBox ckBloqueado;
     private javax.swing.JTextField cxCnpj;
     private javax.swing.JTextField cxNome;
