@@ -14,7 +14,7 @@ public class FromCadAutor extends javax.swing.JFrame implements Menus {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromCadAutor.class.getName());
 
-    private Autor editora;
+    private Autor autor;
     private Armazenamento armazen;
     
     private static FromCadAutor fromCadAutorUnic;
@@ -141,50 +141,43 @@ public class FromCadAutor extends javax.swing.JFrame implements Menus {
     //polimorfismo por sobrescrita
     @Override
     public void cadastrar(){
-        editora = new Autor();
+        autor = new Autor();
         
        try{
-            editora.setNome(cxNome.getText());
+            autor.setNome(cxNome.getText());
         }catch(AutorExecption e) {
  
-            editora = e.corTinyNameExecption(editora);
+            autor = e.corTinyNameExecption(autor);
         }
 
         try{
-            editora.setCpf(cxCpf.getText());
+            autor.setCpf(cxCpf.getText());
         }catch(AutorExecption e) {
  
-            editora = e.corTinyCpfExecption(editora);
+            autor = e.corTinyCpfExecption(autor);
         }
-        
-        
-        boolean foundCadastro = true;
 
-        for(Autor temp : armazen.getBdAutores()) {
-            if(temp.getCpf().equals(editora.getCpf())) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Autor já cadastrada",
-                        "Cadastro de editora",
-                        JOptionPane.ERROR_MESSAGE
-                );
-                foundCadastro = false;
-                break;
-            }
-        }      
-
-        if(foundCadastro) {            
-            armazen.getBdAutores().add(editora);
+        if(armazen.getAutorByCpf(autor.getCpf()) != null){
             JOptionPane.showMessageDialog(
-                null,
-                "Autor cadastrada com sucesso",
-                "Cadastro de editora",
-                JOptionPane.INFORMATION_MESSAGE
+                    null,
+                    "Autor já cadastrada",
+                    "Cadastro de autor",
+                    JOptionPane.ERROR_MESSAGE
             );
-            
-            FromConAutor.gerFromAtuAutor().listaAutor();
-            clear();
-        }
+            return;
+        }  
+          
+        armazen.getBdAutores().add(autor);
+        JOptionPane.showMessageDialog(
+            null,
+            "Autor cadastrada com sucesso",
+            "Cadastro de autor",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+        
+        FromConAutor.gerFromAtuAutor().listaAutor();
+        clear();
+        
     }
     
     public void clear(){

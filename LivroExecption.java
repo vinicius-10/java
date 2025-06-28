@@ -1,5 +1,7 @@
 //Vinicius Souza Dias 2564599
 
+import javax.swing.JOptionPane;
+
 public class LivroExecption  extends Exception {
     
     private String execption = "";
@@ -10,9 +12,19 @@ public class LivroExecption  extends Exception {
 
     public void menExecption() {
         if("TinyTitleExecption".equals(execption)){
-            System.out.println("Nome muito pequeno");
+            JOptionPane.showMessageDialog(
+                null,
+                "O nome do livro deve ter mais de 3 caracteres",
+                "Erro",
+                JOptionPane.ERROR_MESSAGE
+            );
         }else if("TinySecaoExecption".equals(execption)){
-            System.out.println("Secao muito curta");
+            JOptionPane.showMessageDialog(
+                null,
+                "A seção deve ter mais de 3 caracteres",
+                "Erro",
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
     

@@ -60,5 +60,51 @@ public class Armazenamento {
     public  void setBdAutores(List<Autor> bdAutores) {
         this.bdAutores = bdAutores;
     }
+
+
+    public Autor getAutorByCpf(String cpf) {
+        for (Autor autor : bdAutores) {
+            if (autor.getCpf().equals(cpf)) {
+                return autor;
+            }
+        }
+        return null; 
+    }
+
+    public Editora getEditoraByCnpj(String cnpj) {
+        for (Editora editora : bdEditoras) {
+            if (editora.getCnpj().equals(cnpj)) {
+                return editora;
+            }
+        }
+        return null; 
+    }
+
+    public Didatico getDidaticoById(int id) {
+        for (Didatico didatico : bdDidatico) {
+            if (didatico.getId() == id) {
+                return didatico;
+            }
+        }
+        return null; 
+    }
+
+    public Infantil getInfantilById(int id) {
+        for (Infantil infantil : bdInfantil) {
+            if (infantil.getId() == id) {
+                return infantil;
+            }
+        }
+        return null; 
+    }
+
+    public Colecionavel getColecionavelById(int id) {
+        for (Colecionavel colecionavel : bdColecionavel) {
+            if (colecionavel.getId() == id) {
+                return colecionavel;
+            }
+        }
+        return null; 
+    }
     
 }

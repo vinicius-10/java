@@ -193,7 +193,7 @@ public class FromAtuEditora extends javax.swing.JFrame {
                     temp = e.corTinyNameExecption(editora);
                 }
                 
-                temp.setbloqueado(ckBloqueado.isSelected());
+                temp.setBloqueado(ckBloqueado.isSelected());
                 JOptionPane.showMessageDialog(
                     null,
                     "Editora atualizada",
@@ -222,7 +222,7 @@ public class FromAtuEditora extends javax.swing.JFrame {
         for(Editora editora : armazen.getBdEditoras()) {
             if(editora.getCnpj().equals(cnpj)) {
                 cxNome.setText(editora.getNome());
-                ckBloqueado.setSelected(editora.getbloqueado());
+                ckBloqueado.setSelected(editora.getBloqueado());
                 findBusca = false;
                 break;                
             }

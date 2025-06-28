@@ -46,5 +46,13 @@ public abstract class Livro extends Objetos {
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
+
+    public void setLivroGenerico(Livro livro) {
+        this.id = livro.getId();
+        this.titulo = livro.getTitulo();
+        this.autor = livro.getAutor();
+        this.localizacao = livro.getLocalizacao();
+        this.editora = livro.getEditora();
+    }
     
 }

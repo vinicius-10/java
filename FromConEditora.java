@@ -216,8 +216,8 @@ public class FromConEditora extends javax.swing.JFrame {
         int posLin = 0;
         modTab.setRowCount(posLin);
         
-        for(Editora p : armazen.getBdEditoras()){
-            modTab.insertRow(posLin,new Object[]{p.getNome(),p.getCnpj(),p.getbloqueado()? "Não":"Sim"});
+        for(Editora editora : armazen.getBdEditoras()){
+            modTab.insertRow(posLin,new Object[]{editora.getNome(),editora.getCnpj(),editora.getBloqueado()? "Não":"Sim"});
             posLin++;
 
         }
@@ -231,7 +231,7 @@ public class FromConEditora extends javax.swing.JFrame {
         for(Editora editora : armazen.getBdEditoras()) {
             if(editora.getCnpj().equals(cnpj)) {
                 cxNome.setText(editora.getNome());
-                ckBloqueado.setSelected(editora.getbloqueado());
+                ckBloqueado.setSelected(editora.getBloqueado());
                 findBusca = false;
                 break;                
             }

@@ -219,36 +219,30 @@ public class FromConAutor extends javax.swing.JFrame {
         int posLin = 0;
         modTab.setRowCount(posLin);
         
-        for(Autor p : armazen.getBdAutores()){
-            modTab.insertRow(posLin,new Object[]{p.getNome(),p.getCpf(),p.getbloqueado()? "Não":"Sim"});
+        for(Autor autor : armazen.getBdAutores()){
+            modTab.insertRow(posLin,new Object[]{autor.getNome(),autor.getCpf(),autor.getBloqueado()? "Não":"Sim"});
             posLin++;
 
         }
     }
     
     public void getAutor(){
-        String cnpj = cxCpf.getText();
-        boolean findBusca = true;
+        String cpf = cxCpf.getText();
         
-        
-        for(Autor autor : armazen.getBdAutores()) {
-            if(autor.getCpf().equals(cnpj)) {
-                cxNome.setText(autor.getNome());
-                ckBloqueado.setSelected(autor.getbloqueado());
-                findBusca = false;
-                break;                
-            }
-            System.gc();
-        }
-        
-        if(findBusca) {
+        autor = armazen.getAutorByCpf(cpf);
+
+        if(autor == null) {
             JOptionPane.showMessageDialog(
                 null,
-                "CPF não encontrado",
-                "Busca autor",
+                "Cpf não encontrado",
+                "Atualizar autor",
                 JOptionPane.ERROR_MESSAGE
             );
+            return;
         }
+      
+        cxNome.setText(autor.getNome());
+        ckBloqueado.setSelected(autor.getBloqueado());
     }
      
     /**

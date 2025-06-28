@@ -58,15 +58,8 @@ public class FromPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         barMnPrincipal = new javax.swing.JMenuBar();
         mnLivro = new javax.swing.JMenu();
-        mnColecionavel = new javax.swing.JMenu();
-        itMnCadColecioanvel = new javax.swing.JMenuItem();
-        itMnAtuColecionavel = new javax.swing.JMenuItem();
-        mnDidatico = new javax.swing.JMenu();
-        itMnCadDidatico = new javax.swing.JMenuItem();
-        itMnAtuDidatico = new javax.swing.JMenuItem();
-        mnInfantil = new javax.swing.JMenu();
-        itMnCadInfantil = new javax.swing.JMenuItem();
-        itMnAtuInfantil = new javax.swing.JMenuItem();
+        itCadLivro = new javax.swing.JMenuItem();
+        itAtuLivro = new javax.swing.JMenuItem();
         mnEditora = new javax.swing.JMenu();
         itMnCadEditora = new javax.swing.JMenuItem();
         itMnAtuEditora = new javax.swing.JMenuItem();
@@ -180,40 +173,11 @@ public class FromPrincipal extends javax.swing.JFrame {
 
         mnLivro.setText("Livro");
 
-        mnColecionavel.setText("Colecionavel");
+        itCadLivro.setText("Cadastrar...");
+        mnLivro.add(itCadLivro);
 
-        itMnCadColecioanvel.setText("Cadastar...");
-        mnColecionavel.add(itMnCadColecioanvel);
-
-        itMnAtuColecionavel.setText("Atualizar...");
-        itMnAtuColecionavel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itMnAtuColecionavelActionPerformed(evt);
-            }
-        });
-        mnColecionavel.add(itMnAtuColecionavel);
-
-        mnLivro.add(mnColecionavel);
-
-        mnDidatico.setText("Didatico");
-
-        itMnCadDidatico.setText("Cadastar...");
-        mnDidatico.add(itMnCadDidatico);
-
-        itMnAtuDidatico.setText("Atualizar...");
-        mnDidatico.add(itMnAtuDidatico);
-
-        mnLivro.add(mnDidatico);
-
-        mnInfantil.setText("Infantil");
-
-        itMnCadInfantil.setText("Cadastar...");
-        mnInfantil.add(itMnCadInfantil);
-
-        itMnAtuInfantil.setText("Atualizar...");
-        mnInfantil.add(itMnAtuInfantil);
-
-        mnLivro.add(mnInfantil);
+        itAtuLivro.setText("Atualizar...");
+        mnLivro.add(itAtuLivro);
 
         barMnPrincipal.add(mnLivro);
 
@@ -299,37 +263,33 @@ public class FromPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itMnAtuColecionavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuColecionavelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_itMnAtuColecionavelActionPerformed
-
-    private void itMnAtuEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuEditoraActionPerformed
-        FromAtuEditora.gerFromAtuEditora().setVisible(true);
-    }//GEN-LAST:event_itMnAtuEditoraActionPerformed
-
-    private void itMnCadAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadAutorActionPerformed
-       FromCadAutor.gerarFromCadAutor().setVisible(true);
-    }//GEN-LAST:event_itMnCadAutorActionPerformed
-
     private void cxBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxBuscaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cxBuscaActionPerformed
 
-    private void itMnCadEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadEditoraActionPerformed
-        FromCadEditora.gerarFromCadEditora().setVisible(true);
-    }//GEN-LAST:event_itMnCadEditoraActionPerformed
-
-    private void itMnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnConsultarActionPerformed
-        FromConEditora.gerFromAtuEditora().setVisible(true);
-    }//GEN-LAST:event_itMnConsultarActionPerformed
+    private void itMnConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnConsultar1ActionPerformed
+        FromConAutor.gerFromAtuAutor().setVisible(true);
+    }//GEN-LAST:event_itMnConsultar1ActionPerformed
 
     private void itMnAtuAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuAutorActionPerformed
         FromAtuAutor.gerFromAtuAutor().setVisible(true);
     }//GEN-LAST:event_itMnAtuAutorActionPerformed
 
-    private void itMnConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnConsultar1ActionPerformed
-        FromConAutor.gerFromAtuAutor().setVisible(true);
-    }//GEN-LAST:event_itMnConsultar1ActionPerformed
+    private void itMnCadAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadAutorActionPerformed
+        FromCadAutor.gerarFromCadAutor().setVisible(true);
+    }//GEN-LAST:event_itMnCadAutorActionPerformed
+
+    private void itMnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnConsultarActionPerformed
+        FromConEditora.gerFromAtuEditora().setVisible(true);
+    }//GEN-LAST:event_itMnConsultarActionPerformed
+
+    private void itMnAtuEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuEditoraActionPerformed
+        FromAtuEditora.gerFromAtuEditora().setVisible(true);
+    }//GEN-LAST:event_itMnAtuEditoraActionPerformed
+
+    private void itMnCadEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadEditoraActionPerformed
+        FromCadEditora.gerarFromCadEditora().setVisible(true);
+    }//GEN-LAST:event_itMnCadEditoraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,16 +319,12 @@ public class FromPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMnPrincipal;
     private javax.swing.JTextField cxBusca;
+    private javax.swing.JMenuItem itAtuLivro;
+    private javax.swing.JMenuItem itCadLivro;
     private javax.swing.JMenuItem itMnAtuAutor;
-    private javax.swing.JMenuItem itMnAtuColecionavel;
-    private javax.swing.JMenuItem itMnAtuDidatico;
     private javax.swing.JMenuItem itMnAtuEditora;
-    private javax.swing.JMenuItem itMnAtuInfantil;
     private javax.swing.JMenuItem itMnCadAutor;
-    private javax.swing.JMenuItem itMnCadColecioanvel;
-    private javax.swing.JMenuItem itMnCadDidatico;
     private javax.swing.JMenuItem itMnCadEditora;
-    private javax.swing.JMenuItem itMnCadInfantil;
     private javax.swing.JMenuItem itMnConsultar;
     private javax.swing.JMenuItem itMnConsultar1;
     private javax.swing.JLabel jLabel1;
@@ -377,10 +333,7 @@ public class FromPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JMenu mnAutor;
-    private javax.swing.JMenu mnColecionavel;
-    private javax.swing.JMenu mnDidatico;
     private javax.swing.JMenu mnEditora;
-    private javax.swing.JMenu mnInfantil;
     private javax.swing.JMenu mnLivro;
     private javax.swing.JPanel pnBusca;
     private javax.swing.JPanel pnPrincipal;

@@ -30,60 +30,16 @@
             <Property name="text" type="java.lang.String" value="Livro"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="mnColecionavel">
+            <MenuItem class="javax.swing.JMenuItem" name="itCadLivro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Colecionavel"/>
+                <Property name="text" type="java.lang.String" value="Cadastrar..."/>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="itMnCadColecioanvel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Cadastar..."/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="itMnAtuColecionavel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Atualizar..."/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itMnAtuColecionavelActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mnDidatico">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itAtuLivro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Didatico"/>
+                <Property name="text" type="java.lang.String" value="Atualizar..."/>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="itMnCadDidatico">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Cadastar..."/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="itMnAtuDidatico">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Atualizar..."/>
-                  </Properties>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mnInfantil">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Infantil"/>
-              </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="itMnCadInfantil">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Cadastar..."/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="itMnAtuInfantil">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Atualizar..."/>
-                  </Properties>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnEditora">

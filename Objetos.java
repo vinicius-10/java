@@ -13,11 +13,11 @@ public abstract class Objetos {
     }
     
 
-    public boolean getbloqueado() {
+    public boolean getBloqueado() {
         return bloqueado;
     }
 
-    public void setbloqueado(boolean bloqueado) {
+    public void setBloqueado(boolean bloqueado) {
         this.bloqueado = bloqueado;
     }
 

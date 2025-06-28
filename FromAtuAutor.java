@@ -184,56 +184,55 @@ public class FromAtuAutor extends javax.swing.JFrame {
             autor = e.corTinyCpfExecption(autor);
         }
         
-        for(Autor temp : armazen.getBdAutores()) {
-            if(temp.getCpf().equals(autor.getCpf())) {
-                try{
-                    temp.setNome(cxNome.getText());
-                }catch(AutorExecption e) {
-         
-                    temp = e.corTinyNameExecption(autor);
-                }
-                
-                temp.setbloqueado(ckBloqueado.isSelected());
-                JOptionPane.showMessageDialog(
-                    null,
-                    "Autor atualizada",
-                    "Atualizar autor",
-                    JOptionPane.INFORMATION_MESSAGE
-                );
-                FromConAutor.gerFromAtuAutor().listaAutor();
-                clear();
-                return;
-            }
-        }   
-        
+        autor = armazen.getAutorByCpf(autor.getCpf());
+
+        if(autor == null) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Cpf não encontrado",
+                "Atualizar autor",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        try{
+            autor.setNome(cxNome.getText());
+        }catch(AutorExecption e) {
+    
+            autor = e.corTinyNameExecption(autor);
+        }
+
+        autor.setBloqueado(ckBloqueado.isSelected());
         JOptionPane.showMessageDialog(
             null,
-            "CNPJ não encontrado",
+            "Autor atualizada",
             "Atualizar autor",
-            JOptionPane.ERROR_MESSAGE
+            JOptionPane.INFORMATION_MESSAGE
         );
+        FromConAutor.gerFromAtuAutor().listaAutor();
+        clear();
+        return;
     }
     
     public void getAutor(){
         String cpf = cxCpf.getText();
         
-        
-        for(Autor autor : armazen.getBdAutores()) {
-            if(autor.getCpf().equals(cpf)) {
-                cxNome.setText(autor.getNome());
-                ckBloqueado.setSelected(autor.getbloqueado());
-                cxCpf.setEnabled(false);
-                return;                
-            }
-            System.gc();
+        autor = armazen.getAutorByCpf(cpf);
+
+        if(autor == null) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Cpf não encontrado",
+                "Atualizar autor",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
         }
       
-        JOptionPane.showMessageDialog(
-            null,
-            "Cpf não encontrado",
-            "Atualizar autor",
-            JOptionPane.ERROR_MESSAGE
-        ); 
+        cxNome.setText(autor.getNome());
+        ckBloqueado.setSelected(autor.getBloqueado());
+        cxCpf.setEnabled(false);
     }
     
     public void clear(){
