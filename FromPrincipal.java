@@ -1,4 +1,8 @@
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 
 
 //netbeans IDe 26
@@ -25,15 +29,25 @@ public class FromPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromPrincipal.class.getName());
     
+    public Armazenamento armazen;
     
     /**
      * Creates new form Principal
      */
-    public FromPrincipal() {
+    private static FromPrincipal fromPrincipalUnic;
+    
+    private FromPrincipal() {
         initComponents();
+        armazen = Armazenamento.geraArmazen();
     }
 
-    
+    //singleton
+    public static FromPrincipal gerarFromPrincipal(){
+        if(fromPrincipalUnic == null){
+            fromPrincipalUnic = new FromPrincipal();
+        }
+        return fromPrincipalUnic;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,8 +68,9 @@ public class FromPrincipal extends javax.swing.JFrame {
         rtMeioBusca = new javax.swing.JLabel();
         pnBusca = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        tbLivros = new javax.swing.JTable();
+        rtDetalhes = new javax.swing.JLabel();
+        btTeste = new javax.swing.JButton();
         barMnPrincipal = new javax.swing.JMenuBar();
         mnLivro = new javax.swing.JMenu();
         itCadLivro = new javax.swing.JMenuItem();
@@ -83,6 +98,11 @@ public class FromPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         rtTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         rtTitulo.setText("Bem Vindo ");
@@ -132,7 +152,7 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -143,10 +163,10 @@ public class FromPrincipal extends javax.swing.JFrame {
                 "Nome", "Tipo", "Autor", "Editora"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbLivros);
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jLabel1.setText("Clique em um livro para ver mais detalhes");
+        rtDetalhes.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        rtDetalhes.setText("Clique em um livro para ver mais detalhes");
 
         javax.swing.GroupLayout pnBuscaLayout = new javax.swing.GroupLayout(pnBusca);
         pnBusca.setLayout(pnBuscaLayout);
@@ -157,7 +177,7 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addGroup(pnBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnBuscaLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel1))
+                        .addComponent(rtDetalhes))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -167,9 +187,16 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(rtDetalhes)
                 .addGap(12, 12, 12))
         );
+
+        btTeste.setText("Inserir dados para teste");
+        btTeste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTesteActionPerformed(evt);
+            }
+        });
 
         mnLivro.setText("Livro");
 
@@ -254,6 +281,10 @@ public class FromPrincipal extends javax.swing.JFrame {
                     .addComponent(pnBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(55, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(266, 266, 266)
+                .addComponent(btTeste)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +293,9 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(btTeste)
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -300,6 +333,118 @@ public class FromPrincipal extends javax.swing.JFrame {
         FromCadLivro.gerarFromCadLivro().setVisible(true);
     }//GEN-LAST:event_itCadLivroActionPerformed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        listarLivros();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void btTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTesteActionPerformed
+        cadTestes();
+    }//GEN-LAST:event_btTesteActionPerformed
+
+    public void listarLivros(){
+        DefaultTableModel modTab = (DefaultTableModel)tbLivros.getModel();
+        int posLin = 0;
+        modTab.setRowCount(posLin);
+        
+        for(Colecionavel colecionavel : armazen.getBdColecionavel()){//reflexividade para autor e editora
+            modTab.insertRow(posLin, new Object[]{colecionavel.getTitulo(),"Colecionavel",colecionavel.getAutor().getNome(),colecionavel.getEditora().getNome()});
+            posLin++;
+        }
+
+        for(Didatico didatico : armazen.getBdDidatico()){//reflexividade para autor e editora
+            modTab.insertRow(posLin, new Object[]{didatico.getTitulo(),"Didatico",didatico.getAutor().getNome(),didatico.getEditora().getNome()});
+            posLin++;
+        }
+
+        for(Infantil infantil : armazen.getBdInfantil()){//reflexividade para autor e editora
+            modTab.insertRow(posLin, new Object[]{infantil.getTitulo(),"infantil",infantil.getAutor().getNome(),infantil.getEditora().getNome()});
+            posLin++;
+        }
+    }
+    public void cadTestes(){
+        // Autores
+        armazen.getBdAutores().add(new Autor(false, "Machado de Assis", "12345"));
+        armazen.getBdAutores().add(new Autor(false, "Clarice Lispector", "23456"));
+        armazen.getBdAutores().add(new Autor(false, "Carlos Drummond", "34567"));
+        armazen.getBdAutores().add(new Autor(false, "Monteiro Lobato", "45678"));
+        armazen.getBdAutores().add(new Autor(false, "Cecília Meireles", "56789"));
+
+        // Editoras
+        armazen.getBdEditoras().add(new Editora(false, "Companhia das Letras", "11111"));
+        armazen.getBdEditoras().add(new Editora(false, "Globo", "22222"));
+        armazen.getBdEditoras().add(new Editora(false, "Record", "33333"));
+        armazen.getBdEditoras().add(new Editora(false, "Ática", "44444"));
+        armazen.getBdEditoras().add(new Editora(false, "Saraiva", "55555"));
+
+        /* 
+        // Livros - Didático
+        armazen.getBdDidatico().add(new Didatico(1, "Matemática I", armazen.getBdAutores().get(0),
+                new Localizacao("A", 1, 1), armazen.getBdEditoras().get(0), false,
+                "Matemática", "Fundamental", "Baixa"));
+
+        armazen.getBdDidatico().add(new Didatico(2, "Português II", armazen.getBdAutores().get(1),
+                new Localizacao("B", 2, 2), armazen.getBdEditoras().get(1), false,
+                "Português", "Médio", "Média"));
+
+        armazen.getBdDidatico().add(new Didatico(3, "História III", armazen.getBdAutores().get(2),
+                new Localizacao("C", 3, 3), armazen.getBdEditoras().get(2), false,
+                "História", "Fundamental", "Alta"));
+
+        armazen.getBdDidatico().add(new Didatico(4, "Ciências IV", armazen.getBdAutores().get(3),
+                new Localizacao("D", 4, 4), armazen.getBdEditoras().get(3), false,
+                "Ciências", "Médio", "Alta"));
+
+        armazen.getBdDidatico().add(new Didatico(5, "Geografia V", armazen.getBdAutores().get(4),
+                new Localizacao("E", 5, 5), armazen.getBdEditoras().get(4), false,
+                "Geografia", "Fundamental", "Baixa"));
+        
+        // Colecionáveis
+        armazen.getBdColecionavel().add(new Colecionavel(6, "Coleção Rara A", armazen.getBdAutores().get(0),
+                new Localizacao("F", 1, 2), armazen.getBdEditoras().get(0), false,
+                "Primeira edição", true, "Capa dura"));
+
+        armazen.getBdColecionavel().add(new Colecionavel(7, "Coleção Rara B", armazen.getBdAutores().get(1),
+                new Localizacao("F", 2, 2), armazen.getBdEditoras().get(1), false,
+                "Edição de luxo", false, "Com encarte"));
+
+        armazen.getBdColecionavel().add(new Colecionavel(8, "Coleção Rara C", armazen.getBdAutores().get(2),
+                new Localizacao("F", 3, 2), armazen.getBdEditoras().get(2), false,
+                "Edição especial", true, "Numerada"));
+
+        armazen.getBdColecionavel().add(new Colecionavel(9, "Coleção Rara D", armazen.getBdAutores().get(3),
+                new Localizacao("F", 4, 2), armazen.getBdEditoras().get(3), false,
+                "Limitada", true, "Com pôster"));
+
+        armazen.getBdColecionavel().add(new Colecionavel(10, "Coleção Rara E", armazen.getBdAutores().get(4),
+                new Localizacao("F", 5, 2), armazen.getBdEditoras().get(4), false,
+                "Comemorativa", false, "Numerada"));
+
+        // Infantis
+        armazen.getBdInfantil().add(new Infantil(11, "Livro Infantil A", armazen.getBdAutores().get(0),
+                new Localizacao("G", 1, 3), armazen.getBdEditoras().get(0), false,
+                5, "Papel reciclado", true));
+
+        armazen.getBdInfantil().add(new Infantil(12, "Livro Infantil B", armazen.getBdAutores().get(1),
+                new Localizacao("G", 2, 3), armazen.getBdEditoras().get(1), false,
+                6, "Papel couchê", false));
+
+        armazen.getBdInfantil().add(new Infantil(13, "Livro Infantil C", armazen.getBdAutores().get(2),
+                new Localizacao("G", 3, 3), armazen.getBdEditoras().get(2), false,
+                4, "Cartonado", true));
+
+        armazen.getBdInfantil().add(new Infantil(14, "Livro Infantil D", armazen.getBdAutores().get(3),
+                new Localizacao("G", 4, 3), armazen.getBdEditoras().get(3), false,
+                7, "EVA", false));
+
+        armazen.getBdInfantil().add(new Infantil(15, "Livro Infantil E", armazen.getBdAutores().get(4),
+                new Localizacao("G", 5, 3), armazen.getBdEditoras().get(4), false,
+                3, "Tecido", true));
+        
+        
+        */ 
+        listarLivros();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -327,6 +472,7 @@ public class FromPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMnPrincipal;
+    private javax.swing.JButton btTeste;
     private javax.swing.JTextField cxBusca;
     private javax.swing.JMenuItem itAtuLivro;
     private javax.swing.JMenuItem itCadLivro;
@@ -336,19 +482,19 @@ public class FromPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itMnCadEditora;
     private javax.swing.JMenuItem itMnConsultar;
     private javax.swing.JMenuItem itMnConsultar1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JMenu mnAutor;
     private javax.swing.JMenu mnEditora;
     private javax.swing.JMenu mnLivro;
     private javax.swing.JPanel pnBusca;
     private javax.swing.JPanel pnPrincipal;
     private javax.swing.JLabel rtBusca;
+    private javax.swing.JLabel rtDetalhes;
     private javax.swing.JLabel rtMeioBusca;
     private javax.swing.JLabel rtNome;
     private javax.swing.JLabel rtTitulo;
+    private javax.swing.JTable tbLivros;
     // End of variables declaration//GEN-END:variables
 }

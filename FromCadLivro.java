@@ -29,12 +29,13 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     
     private static FromCadLivro fromCadLivroUnic;
           
-    //singleton
+    
     private FromCadLivro() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
 
+    //singleton
     public static FromCadLivro gerarFromCadLivro(){
         if(fromCadLivroUnic == null){
             fromCadLivroUnic = new FromCadLivro();
@@ -45,36 +46,34 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
     //campos para colecioanvel 
 
-    JLabel rtEspeEdit = new JLabel("Edição especial:");
-    JTextField cxEspeEdit = new JTextField();
+    JLabel rtEspeEdit;
+    JTextField cxEspeEdit;
 
-    JLabel rtAdicional = new JLabel("Adicional:");
-    JTextField cxAdicional = new JTextField();
+    JLabel rtAdicional;
+    JTextField cxAdicional;
 
-    JLabel rtNumerado = new JLabel("Numerado:");
-    JCheckBox ckNumerado = new JCheckBox("Sim");
+    JLabel rtNumerado;
+    JCheckBox ckNumerado;
 
-    //campos para didatico 
-    
-    JLabel rtNivel = new JLabel("Nível de Ensino:");
-    JTextField cxNivel = new JTextField();
+    // Didático
+    JLabel rtNivel;
+    JTextField cxNivel;
 
-    JLabel rtMateria = new JLabel("Matéria:");
-    JTextField cxMateria = new JTextField();
+    JLabel rtMateria;
+    JTextField cxMateria;
 
-    JLabel rtComplexidade = new JLabel("Complexidade:");
-    JTextField cxComplexidade = new JTextField();
-        
-    //campos para Infnatil 
-    
-    JLabel rtFaixaEtaria = new JLabel("Faixa Etária:");
-    JTextField cxFaixaEtaria = new JTextField();
+    JLabel rtComplexidade;
+    JTextField cxComplexidade;
 
-    JLabel rtMaterial = new JLabel("Material:");
-    JTextField cxMaterial = new JTextField();
+    // Infantil
+    JLabel rtFaixaEtaria;
+    JTextField cxFaixaEtaria;
 
-    JLabel rtInterativo = new JLabel("Interativo:");
-    JCheckBox ckInterativo = new JCheckBox("Sim");
+    JLabel rtMaterial;
+    JTextField cxMaterial;
+
+    JLabel rtInterativo;
+    JCheckBox ckInterativo;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,7 +108,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         btLimpar = new javax.swing.JButton();
         btCadastar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         rtTituloPagina.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
         rtTituloPagina.setText("Cadastrar Livro");
@@ -235,11 +234,9 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
                 .addComponent(rtNome))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rtTituloPagina)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rtTituloPagina)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -266,6 +263,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
     private void btCadastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastarActionPerformed
         cadastrar();
+        FromPrincipal.gerarFromPrincipal().listarLivros();
     }//GEN-LAST:event_btCadastarActionPerformed
 
     private void cxIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxIdActionPerformed
@@ -303,10 +301,19 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         
         pnCampos.revalidate(); // redesenha o painel
         pnCampos.repaint();
+        System.gc();
     }
     
     public void colecionavel(){
+        rtEspeEdit = new JLabel("Edição especial:");
+        cxEspeEdit = new JTextField();
 
+        rtAdicional = new JLabel("Adicional:");
+        cxAdicional = new JTextField();
+
+        rtNumerado = new JLabel("Numerado:");
+        ckNumerado = new JCheckBox("Sim");
+        
         pnCampos.add(rtEspeEdit);
         pnCampos.add(cxEspeEdit);
 
@@ -318,7 +325,15 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     }
     
     public void didatico(){
+        rtNivel = new JLabel("Nível de Ensino:");
+        cxNivel = new JTextField();
 
+        rtMateria = new JLabel("Matéria:");
+        cxMateria = new JTextField();
+
+        rtComplexidade = new JLabel("Complexidade:");
+        cxComplexidade = new JTextField();
+        
         pnCampos.add(rtNivel);
         pnCampos.add(cxNivel);
 
@@ -330,6 +345,14 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     }
     
     public void infantil(){
+        rtFaixaEtaria = new JLabel("Faixa Etária:");
+        cxFaixaEtaria = new JTextField();
+
+        rtMaterial = new JLabel("Material:");
+        cxMaterial = new JTextField();
+
+        rtInterativo = new JLabel("Interativo:");
+        ckInterativo = new JCheckBox("Sim");
 
         pnCampos.add(rtFaixaEtaria);
         pnCampos.add(cxFaixaEtaria);
@@ -358,18 +381,19 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     public void cadastrar(){
         
         String tipo = (String) slTipo.getSelectedItem();
-        
+        boolean cadastado;
+
         switch (tipo) {
         case "Colecioanvel":
-            cadColecionavel();
+            cadastado = cadColecionavel();
             
             break;
         case "Didatico":
-            caDdidatico();
+            cadastado = caDdidatico();
             
             break;
         case "Infantil":
-            cadInfantil();
+            cadastado = cadInfantil();
             
             break;
         default:
@@ -381,15 +405,16 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             );
             return;
         }
-        clear();
-        JOptionPane.showMessageDialog(
-            null,
-            "Cadastro realizado com sucesso!",
-            "Cadastro de livro",
-            JOptionPane.INFORMATION_MESSAGE
-        );
 
-
+        if(cadastado){
+            clear();
+            JOptionPane.showMessageDialog(
+                null,
+                "Cadastro realizado com sucesso!",
+                "Cadastro de livro",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }
     }
     
     public Livro cadLivro(){
@@ -485,12 +510,12 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     } 
 
 
-    public void cadColecionavel(){
+    public boolean cadColecionavel(){
         colecionavel = new Colecionavel();
 
         //polimorfismo por coesãao
         Livro livro = cadLivro();
-        if(livro == null) return;
+        if(livro == null) return false;
         colecionavel.setLivroGenerico(livro);
 
         colecionavel.setNumerado(ckNumerado.isSelected());
@@ -498,14 +523,15 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         colecionavel.setEdicaoEspecial(cxEspeEdit.getText());
 
         armazen.getBdColecionavel().add(colecionavel);  
+        return true;
     }
 
-    public void caDdidatico(){
+    public boolean caDdidatico(){
         didatico = new Didatico();
 
         //polimorfismo por coesão
         Livro livro = cadLivro();
-        if(livro == null) return;
+        if(livro == null) return false;
         didatico.setLivroGenerico(livro);
 
         didatico.setNivel(cxNivel.getText());
@@ -513,21 +539,25 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         didatico.setComplexidade(cxComplexidade.getText());
 
         armazen.getBdDidatico().add(didatico);
+        return true;
     }
 
-    public void cadInfantil(){
+    public boolean cadInfantil(){
         infantil = new Infantil();
 
         //polimorfismo por coesão
         Livro livro = cadLivro();
-        if(livro == null) return;
+        if(livro == null) return false;
         infantil.setLivroGenerico(livro);
 
         int intTemp = getInt(cxFaixaEtaria.getText(),rtFaixaEtaria.getText());
-        if(intTemp == -1) return;
+        if(intTemp == -1) return false;
         infantil.setFaixaEtaria(intTemp);
         infantil.setMaterial(cxMateria.getText());
         infantil.setInterativo(ckInterativo.isSelected());
+
+        armazen.getBdInfantil().add(infantil);
+        return true;
     }
 
     public int getInt(String campo, String label){
