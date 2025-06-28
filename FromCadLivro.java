@@ -8,9 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import main.java.LivroExecption;
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -27,7 +24,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     private Autor editora;
     private Armazenamento armazen;
     private Colecionavel colecionavel;
-    private Didatico ditatico;
+    private Didatico didatico;
     private Infantil infantil;
     
     private static FromCadLivro fromCadLivroUnic;
@@ -38,6 +35,47 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         armazen = Armazenamento.geraArmazen();
     }
 
+    public static FromCadLivro gerarFromCadLivro(){
+        if(fromCadLivroUnic == null){
+            fromCadLivroUnic = new FromCadLivro();
+        }
+
+        return fromCadLivroUnic;
+    }
+
+    //campos para colecioanvel 
+
+    JLabel rtEspeEdit = new JLabel("Edição especial:");
+    JTextField cxEspeEdit = new JTextField();
+
+    JLabel rtAdicional = new JLabel("Adicional:");
+    JTextField cxAdicional = new JTextField();
+
+    JLabel rtNumerado = new JLabel("Numerado:");
+    JCheckBox ckNumerado = new JCheckBox("Sim");
+
+    //campos para didatico 
+    
+    JLabel rtNivel = new JLabel("Nível de Ensino:");
+    JTextField cxNivel = new JTextField();
+
+    JLabel rtMateria = new JLabel("Matéria:");
+    JTextField cxMateria = new JTextField();
+
+    JLabel rtComplexidade = new JLabel("Complexidade:");
+    JTextField cxComplexidade = new JTextField();
+        
+    //campos para Infnatil 
+    
+    JLabel rtFaixaEtaria = new JLabel("Faixa Etária:");
+    JTextField cxFaixaEtaria = new JTextField();
+
+    JLabel rtMaterial = new JLabel("Material:");
+    JTextField cxMaterial = new JTextField();
+
+    JLabel rtInterativo = new JLabel("Interativo:");
+    JCheckBox ckInterativo = new JCheckBox("Sim");
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -268,14 +306,6 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     }
     
     public void colecionavel(){
-        JLabel rtEspeEdit = new JLabel("Edição especial:");
-        JTextField cxEspeEdit = new JTextField();
-
-        JLabel rtAdicional = new JLabel("Adicional:");
-        JTextField cxAdicional = new JTextField();
-
-        JLabel rtNumerado = new JLabel("Numerado:");
-        JCheckBox ckNumerado = new JCheckBox("Sim");
 
         pnCampos.add(rtEspeEdit);
         pnCampos.add(cxEspeEdit);
@@ -288,14 +318,6 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     }
     
     public void didatico(){
-        JLabel rtNivel = new JLabel("Nível de Ensino:");
-        JTextField cxNivel = new JTextField();
-
-        JLabel rtMateria = new JLabel("Matéria:");
-        JTextField cxMateria = new JTextField();
-
-        JLabel rtComplexidade = new JLabel("Complexidade:");
-        JTextField cxComplexidade = new JTextField();
 
         pnCampos.add(rtNivel);
         pnCampos.add(cxNivel);
@@ -308,14 +330,6 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     }
     
     public void infantil(){
-        JLabel rtFaixaEtaria = new JLabel("Faixa Etária:");
-        JTextField cxFaixaEtaria = new JTextField();
-
-        JLabel rtMaterial = new JLabel("Material:");
-        JTextField cxMaterial = new JTextField();
-
-        JLabel rtInterativo = new JLabel("Interativo:");
-        JCheckBox ckInterativo = new JCheckBox("Sim");
 
         pnCampos.add(rtFaixaEtaria);
         pnCampos.add(cxFaixaEtaria);
@@ -365,8 +379,17 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
                 "Cadastro de livro",
                 JOptionPane.ERROR_MESSAGE
             );
-            break;
+            return;
         }
+        clear();
+        JOptionPane.showMessageDialog(
+            null,
+            "Cadastro realizado com sucesso!",
+            "Cadastro de livro",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+
+
     }
     
     public Livro cadLivro(){
@@ -391,18 +414,18 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         }
         
         try{
-            livro.setTitulo(cxTitulo.getText());
-            break;
+            livro.setTitulo(cxTitulo.getText());            
         }catch (LivroExecption exp) {
             exp.menExecption();
+            return null;
         }
 
         try{
             //reflexividade
             livro.getLocalizacao().setSecao(cxSecao.getText());
-            break;
         }catch(LivroExecption exp){
             exp.menExecption();
+            return null;
         }
 
         intTempo = getInt(cxPrateleira.getText(),rtPrateleira.getText());
@@ -418,7 +441,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
         Autor autor = armazen.getAutorByCpf(cxAutor.getText());
         if(autor == null) {
-            JOptionPane(
+            JOptionPane.showMessageDialog(
                 null,
                 "Autor não encontrado.",
                 "Cadastro de livro",
@@ -440,7 +463,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
         Editora editora = armazen.getEditoraByCnpj(cxEditora.getText());
         if(editora == null){
-            JOptionPane(
+            JOptionPane.showMessageDialog(
                 null,
                 "Editora não encontrado.",
                 "Cadastro de livro",
@@ -449,8 +472,8 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             return null;
         }
     
-        if(editora.getBloqueado){
-            JOptionPane(
+        if(editora.getBloqueado()){
+            JOptionPane.showMessageDialog(
                 null,
                 "Editora bloqueada.",
                 "Cadastro de livro",
@@ -458,30 +481,53 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             );
         }
         livro.setEditora(editora);
-
-
         return livro;
     } 
 
 
     public void cadColecionavel(){
         colecionavel = new Colecionavel();
-        JOptionPane.showMessageDialog(
-            null,
-            "Selecione o tipo de livro como Colecionavel.",
-            "Cadastro de livro",
-            JOptionPane.INFORMATION_MESSAGE
-        );
-        colecionavel.setLivroGenerico(cadLivro());
 
+        //polimorfismo por coesãao
+        Livro livro = cadLivro();
+        if(livro == null) return;
+        colecionavel.setLivroGenerico(livro);
+
+        colecionavel.setNumerado(ckNumerado.isSelected());
+        colecionavel.setAdicional(cxAdicional.getText());
+        colecionavel.setEdicaoEspecial(cxEspeEdit.getText());
+
+        armazen.getBdColecionavel().add(colecionavel);  
     }
 
     public void caDdidatico(){
+        didatico = new Didatico();
 
+        //polimorfismo por coesão
+        Livro livro = cadLivro();
+        if(livro == null) return;
+        didatico.setLivroGenerico(livro);
+
+        didatico.setNivel(cxNivel.getText());
+        didatico.setMateria(cxMateria.getText());
+        didatico.setComplexidade(cxComplexidade.getText());
+
+        armazen.getBdDidatico().add(didatico);
     }
 
     public void cadInfantil(){
+        infantil = new Infantil();
 
+        //polimorfismo por coesão
+        Livro livro = cadLivro();
+        if(livro == null) return;
+        infantil.setLivroGenerico(livro);
+
+        int intTemp = getInt(cxFaixaEtaria.getText(),rtFaixaEtaria.getText());
+        if(intTemp == -1) return;
+        infantil.setFaixaEtaria(intTemp);
+        infantil.setMaterial(cxMateria.getText());
+        infantil.setInterativo(ckInterativo.isSelected());
     }
 
     public int getInt(String campo, String label){
@@ -506,7 +552,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
                 "Erro",
                 JOptionPane.ERROR_MESSAGE
             );
-            return null; 
+            return -1; 
         }
     }
 

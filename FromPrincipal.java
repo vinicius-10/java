@@ -174,6 +174,11 @@ public class FromPrincipal extends javax.swing.JFrame {
         mnLivro.setText("Livro");
 
         itCadLivro.setText("Cadastrar...");
+        itCadLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itCadLivroActionPerformed(evt);
+            }
+        });
         mnLivro.add(itCadLivro);
 
         itAtuLivro.setText("Atualizar...");
@@ -290,6 +295,10 @@ public class FromPrincipal extends javax.swing.JFrame {
     private void itMnCadEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadEditoraActionPerformed
         FromCadEditora.gerarFromCadEditora().setVisible(true);
     }//GEN-LAST:event_itMnCadEditoraActionPerformed
+
+    private void itCadLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itCadLivroActionPerformed
+        FromCadLivro.gerarFromCadLivro().setVisible(true);
+    }//GEN-LAST:event_itCadLivroActionPerformed
 
     /**
      * @param args the command line arguments
