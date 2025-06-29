@@ -15,24 +15,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author valuc
  */
-public class FromConEditora extends javax.swing.JFrame {
+public class FormConEditora extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromAtuEditora.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormAtuEditora.class.getName());
 
     private Editora editora;
     private Armazenamento armazen;
     
-    private static FromConEditora fromAtuEditunic; 
+    private static FormConEditora fromAtuEditunic; 
     
-    private FromConEditora() {
+    private FormConEditora() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
     
     //singleton
-    public static FromConEditora gerFromAtuEditora(){
+    public static FormConEditora gerFormAtuEditora(){
         if(fromAtuEditunic == null){
-            fromAtuEditunic = new FromConEditora();
+            fromAtuEditunic = new FormConEditora();
         }
         
         return fromAtuEditunic;
@@ -270,7 +270,7 @@ public class FromConEditora extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromConEditora().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormConEditora().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

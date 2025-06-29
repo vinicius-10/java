@@ -22,9 +22,9 @@ import java.text.Normalizer;
  *
  * @author valuc
  */
-public class FromPrincipal extends javax.swing.JFrame {
+public class FormPrincipal extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromPrincipal.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormPrincipal.class.getName());
     
     public Armazenamento armazen;
     public boolean buscaDetalhada = false;
@@ -32,17 +32,17 @@ public class FromPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    private static FromPrincipal fromPrincipalUnic;
+    private static FormPrincipal fromPrincipalUnic;
     
-    private FromPrincipal() {
+    private FormPrincipal() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
 
     //singleton
-    public static FromPrincipal gerarFromPrincipal(){
+    public static FormPrincipal gerarFormPrincipal(){
         if(fromPrincipalUnic == null){
-            fromPrincipalUnic = new FromPrincipal();
+            fromPrincipalUnic = new FormPrincipal();
         }
         return fromPrincipalUnic;
     }
@@ -319,31 +319,31 @@ public class FromPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cxBuscaActionPerformed
 
     private void itMnConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnConsultar1ActionPerformed
-        FromConAutor.gerFromAtuAutor().setVisible(true);
+        FormConAutor.gerFormAtuAutor().setVisible(true);
     }//GEN-LAST:event_itMnConsultar1ActionPerformed
 
     private void itMnAtuAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuAutorActionPerformed
-        FromAtuAutor.gerFromAtuAutor().setVisible(true);
+        FormAtuAutor.gerFormAtuAutor().setVisible(true);
     }//GEN-LAST:event_itMnAtuAutorActionPerformed
 
     private void itMnCadAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadAutorActionPerformed
-        FromCadAutor.gerarFromCadAutor().setVisible(true);
+        FormCadAutor.gerarFormCadAutor().setVisible(true);
     }//GEN-LAST:event_itMnCadAutorActionPerformed
 
     private void itMnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnConsultarActionPerformed
-        FromConEditora.gerFromAtuEditora().setVisible(true);
+        FormConEditora.gerFormAtuEditora().setVisible(true);
     }//GEN-LAST:event_itMnConsultarActionPerformed
 
     private void itMnAtuEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnAtuEditoraActionPerformed
-        FromAtuEditora.gerFromAtuEditora().setVisible(true);
+        FormAtuEditora.gerFormAtuEditora().setVisible(true);
     }//GEN-LAST:event_itMnAtuEditoraActionPerformed
 
     private void itMnCadEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMnCadEditoraActionPerformed
-        FromCadEditora.gerarFromCadEditora().setVisible(true);
+        FormCadEditora.gerarFormCadEditora().setVisible(true);
     }//GEN-LAST:event_itMnCadEditoraActionPerformed
 
     private void itCadLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itCadLivroActionPerformed
-        FromCadLivro.gerarFromCadLivro().setVisible(true);
+        FormCadLivro.gerarFormCadLivro().setVisible(true);
     }//GEN-LAST:event_itCadLivroActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -352,7 +352,7 @@ public class FromPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void itAtuLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itAtuLivroActionPerformed
-       FromAtuLivro.gerarFromAtuLivro().setVisible(true);
+       FormAtuLivro.gerarFormAtuLivro().setVisible(true);
     }//GEN-LAST:event_itAtuLivroActionPerformed
 
     private void tbLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLivrosMouseClicked
@@ -688,7 +688,7 @@ public class FromPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromPrincipal().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormPrincipal().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

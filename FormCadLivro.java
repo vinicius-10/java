@@ -19,9 +19,9 @@ import javax.swing.JTextField;
  *
  * @author valuc
  */
-public class FromCadLivro extends javax.swing.JFrame implements Menus{
+public class FormCadLivro extends javax.swing.JFrame implements Menus{
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromCadLivro.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormCadLivro.class.getName());
 
     private Autor editora;
     private Armazenamento armazen;
@@ -29,18 +29,18 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     private Didatico didatico;
     private Infantil infantil;
     
-    private static FromCadLivro fromCadLivroUnic;
+    private static FormCadLivro fromCadLivroUnic;
           
     
-    private FromCadLivro() {
+    private FormCadLivro() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
 
     //singleton
-    public static FromCadLivro gerarFromCadLivro(){
+    public static FormCadLivro gerarFormCadLivro(){
         if(fromCadLivroUnic == null){
-            fromCadLivroUnic = new FromCadLivro();
+            fromCadLivroUnic = new FormCadLivro();
         }
 
         return fromCadLivroUnic;
@@ -428,7 +428,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
                 "Cadastro de livro",
                 JOptionPane.INFORMATION_MESSAGE
             );
-            FromPrincipal.gerarFromPrincipal().listarLivros();
+            FormPrincipal.gerarFormPrincipal().listarLivros();
         }
     }
     
@@ -706,7 +706,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromCadLivro().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormCadLivro().setVisible(true));
     }
 
 

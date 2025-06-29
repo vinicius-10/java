@@ -10,24 +10,24 @@ import javax.swing.JOptionPane;
 
 
 
-public class FromCadEditora extends javax.swing.JFrame implements Menus {
+public class FormCadEditora extends javax.swing.JFrame implements Menus {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromCadEditora.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormCadEditora.class.getName());
 
     private Editora editora;
     private Armazenamento armazen;
     
-    private static FromCadEditora fromCadEditoraUnic;
+    private static FormCadEditora fromCadEditoraUnic;
     
-    private FromCadEditora() {
+    private FormCadEditora() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
     
     //singleton
-    public static FromCadEditora gerarFromCadEditora(){
+    public static FormCadEditora gerarFormCadEditora(){
         if(fromCadEditoraUnic == null){
-            fromCadEditoraUnic = new FromCadEditora();
+            fromCadEditoraUnic = new FormCadEditora();
         }
         return fromCadEditoraUnic;       
     }
@@ -184,7 +184,7 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
                 JOptionPane.INFORMATION_MESSAGE
             );
             
-            FromConEditora.gerFromAtuEditora().listaEditora();
+            FormConEditora.gerFormAtuEditora().listaEditora();
             clear();
         }
     }
@@ -217,7 +217,7 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromCadEditora().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormCadEditora().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

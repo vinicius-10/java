@@ -16,24 +16,24 @@ import javax.swing.JOptionPane;
  *
  * @author valuc
  */
-public class FromAtuAutor extends javax.swing.JFrame {
+public class FormAtuAutor extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromAtuEditora.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormAtuEditora.class.getName());
 
     private Autor autor;
     private Armazenamento armazen;
     
-    private static FromAtuAutor fromAtuAutorUnic; 
+    private static FormAtuAutor fromAtuAutorUnic; 
     
-    private FromAtuAutor() {
+    private FormAtuAutor() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
     
     //singleton
-    public static FromAtuAutor gerFromAtuAutor(){
+    public static FormAtuAutor gerFormAtuAutor(){
         if(fromAtuAutorUnic == null){
-            fromAtuAutorUnic = new FromAtuAutor();
+            fromAtuAutorUnic = new FormAtuAutor();
         }
         
         return fromAtuAutorUnic;
@@ -214,8 +214,8 @@ public class FromAtuAutor extends javax.swing.JFrame {
             "Atualizar autor",
             JOptionPane.INFORMATION_MESSAGE
         );
-        FromConAutor.gerFromAtuAutor().listaAutor();
-        FromPrincipal.gerarFromPrincipal().listarLivros();
+        FormConAutor.gerFormAtuAutor().listaAutor();
+        FormPrincipal.gerarFormPrincipal().listarLivros();
         clear();
         return;
     }
@@ -278,7 +278,7 @@ public class FromAtuAutor extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromAtuAutor().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormAtuAutor().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

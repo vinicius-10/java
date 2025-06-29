@@ -15,24 +15,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author valuc
  */
-public class FromConAutor extends javax.swing.JFrame {
+public class FormConAutor extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromAtuAutor.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormAtuAutor.class.getName());
 
     private Autor autor;
     private Armazenamento armazen;
     
-    private static FromConAutor fromAtuAutorUnic; 
+    private static FormConAutor fromAtuAutorUnic; 
     
-    private FromConAutor() {
+    private FormConAutor() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
     
     //singleton
-    public static FromConAutor gerFromAtuAutor(){
+    public static FormConAutor gerFormAtuAutor(){
         if(fromAtuAutorUnic == null){
-            fromAtuAutorUnic = new FromConAutor();
+            fromAtuAutorUnic = new FormConAutor();
         }
         
         return fromAtuAutorUnic;
@@ -267,7 +267,7 @@ public class FromConAutor extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromConAutor().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormConAutor().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

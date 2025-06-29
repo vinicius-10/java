@@ -16,9 +16,9 @@ import javax.swing.JTextField;
  *
  * @author valuc
  */
-public class FromAtuLivro extends javax.swing.JFrame{
+public class FormAtuLivro extends javax.swing.JFrame{
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromAtuLivro.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormAtuLivro.class.getName());
 
     private Autor editora;
     private Armazenamento armazen;
@@ -27,18 +27,18 @@ public class FromAtuLivro extends javax.swing.JFrame{
     private Infantil infantil;
     boolean cleaning = false;
     
-    private static FromAtuLivro fromAtuLivroUnic;
+    private static FormAtuLivro fromAtuLivroUnic;
           
     
-    private FromAtuLivro() {
+    private FormAtuLivro() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
 
     //singleton
-    public static FromAtuLivro gerarFromAtuLivro(){
+    public static FormAtuLivro gerarFormAtuLivro(){
         if(fromAtuLivroUnic == null){
-            fromAtuLivroUnic = new FromAtuLivro();
+            fromAtuLivroUnic = new FormAtuLivro();
         }
 
         return fromAtuLivroUnic;
@@ -304,7 +304,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
 
     private void btAtuastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtuastarActionPerformed
         atualizar();
-        FromPrincipal.gerarFromPrincipal().listarLivros();
+        FormPrincipal.gerarFormPrincipal().listarLivros();
     }//GEN-LAST:event_btAtuastarActionPerformed
 
     private void cxIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxIdActionPerformed
@@ -647,7 +647,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
                 "Atualizar de livro",
                 JOptionPane.INFORMATION_MESSAGE
             );
-            FromPrincipal.gerarFromPrincipal().listarLivros();
+            FormPrincipal.gerarFormPrincipal().listarLivros();
         }
     }
     
@@ -957,7 +957,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromAtuLivro().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormAtuLivro().setVisible(true));
     }
 
 

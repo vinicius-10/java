@@ -10,24 +10,24 @@ import javax.swing.JOptionPane;
 
 
 
-public class FromCadAutor extends javax.swing.JFrame implements Menus {
+public class FormCadAutor extends javax.swing.JFrame implements Menus {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromCadAutor.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormCadAutor.class.getName());
 
     private Autor autor;
     private Armazenamento armazen;
     
-    private static FromCadAutor fromCadAutorUnic;
+    private static FormCadAutor fromCadAutorUnic;
     
-    private FromCadAutor() {
+    private FormCadAutor() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
     
     //singleton
-    public static FromCadAutor gerarFromCadAutor(){
+    public static FormCadAutor gerarFormCadAutor(){
         if(fromCadAutorUnic == null){
-            fromCadAutorUnic = new FromCadAutor();
+            fromCadAutorUnic = new FormCadAutor();
         }
         return fromCadAutorUnic;       
     }
@@ -177,7 +177,7 @@ public class FromCadAutor extends javax.swing.JFrame implements Menus {
             JOptionPane.INFORMATION_MESSAGE
         );
         
-        FromConAutor.gerFromAtuAutor().listaAutor();
+        FormConAutor.gerFormAtuAutor().listaAutor();
         clear();
         
     }
@@ -210,7 +210,7 @@ public class FromCadAutor extends javax.swing.JFrame implements Menus {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromCadAutor().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormCadAutor().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
