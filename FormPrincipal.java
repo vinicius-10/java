@@ -12,6 +12,9 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import java.util.ArrayList;
 import java.text.Normalizer;
+import java.util.concurrent.*;
+import javax.swing.SwingUtilities;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -64,6 +67,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         rtNome = new javax.swing.JLabel();
         rtBusca = new javax.swing.JLabel();
         rtMeioBusca = new javax.swing.JLabel();
+        btBuscar = new javax.swing.JButton();
         pnBusca = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbLivros = new javax.swing.JTable();
@@ -125,19 +129,29 @@ public class FormPrincipal extends javax.swing.JFrame {
         rtMeioBusca.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         rtMeioBusca.setText("Digite o titulo, Autor ou Editora");
 
+        btBuscar.setText("Buscar");
+        btBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addContainerGap(71, Short.MAX_VALUE)
                 .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rtMeioBusca)
                     .addComponent(rtBusca)
                     .addComponent(rtNome)
                     .addComponent(rtTitulo)
-                    .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(78, Short.MAX_VALUE))
+                    .addGroup(pnPrincipalLayout.createSequentialGroup()
+                        .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btBuscar)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +163,9 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(rtBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rtMeioBusca)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -292,12 +308,11 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addContainerGap(54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btCadastro)
+                        .addGap(116, 116, 116)))
                 .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btCadastro)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,9 +321,9 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(pnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCadastro)
-                .addContainerGap())
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -364,26 +379,47 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadastroActionPerformed
 
     private void cxBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxBuscaKeyReleased
-        buscar();
+        
     }//GEN-LAST:event_cxBuscaKeyReleased
+
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+        buscar();
+    }//GEN-LAST:event_btBuscarActionPerformed
 
     public void buscar(){
         List<Infantil> bdInfantil = new ArrayList<Infantil>();
         List<Didatico> bdDidatico = new ArrayList<Didatico>();
         List<Colecionavel> bdColecionavel = new ArrayList<Colecionavel>();
         
-        String nome = cxBusca.getText();
+        final String nome = limpaString(cxBusca.getText());
         if(nome.length() == 0){
             buscaDetalhada = false;
             listarLivros();
             return;
         }
+        
         buscaDetalhada = true;
 
-        nome = limpaString(nome);
-        buscaColecionavel(bdColecionavel,nome);
-        buscaDidatico(bdDidatico, nome);
-        buscainfantil(bdInfantil, nome);
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        Runnable r1 = () -> buscaColecionavel(bdColecionavel, nome);
+        Runnable r2 = () -> buscaDidatico(bdDidatico, nome);
+        Runnable r3 = () -> buscainfantil(bdInfantil, nome);
+
+        try {
+           
+            Future<?> f1 = executor.submit(r1);
+            Future<?> f2 = executor.submit(r2);
+            Future<?> f3 = executor.submit(r3);
+
+            f1.get();
+            f2.get();
+            f3.get();
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        } finally {
+            executor.shutdown(); 
+        }
 
         DefaultTableModel modTab = (DefaultTableModel)tbLivros.getModel();
         int posLin = 0;
@@ -579,85 +615,215 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     public void cadTeste(){
         // Este cadastro é apenas para teste, por isso utilizo construtores sobrecarregados  
-        // para evitar o tratamento de exceções neste caso. No entanto, o tratamento está  
+        // pNo entanto, o tratamento d exeção e reflexibilidade está  
         // implementado corretamente no cadastro principal de cada item.  
 
         // Como este cadastro é apenas para testes, ele pode duplicar IDs caso seja executado  
-        // múltiplas vezes. Como isso não gera problemas críticos, mantive desta forma para  
+        // múltiplas vezes. Como isso não gera problema, mantive desta forma para  
         // facilitar a visualização e teste das ferramentas de busca.  
         
         armazen.getBdAutores().add(new Autor(false, "Machado de Assis", "12345"));
         armazen.getBdAutores().add(new Autor(false, "Clarice Lispector", "23456"));
-        armazen.getBdAutores().add(new Autor(false, "Carlos Drummond", "34567"));
-        armazen.getBdAutores().add(new Autor(false, "Monteiro Lobato", "45678"));
-        armazen.getBdAutores().add(new Autor(false, "Cecília Meireles", "56789"));
+        armazen.getBdAutores().add(new Autor(false, "Carlos Drummond de Andrade", "34567"));
+        armazen.getBdAutores().add(new Autor(false, "Cecília Meireles", "45678"));
+        armazen.getBdAutores().add(new Autor(false, "Monteiro Lobato", "56789"));
+        armazen.getBdAutores().add(new Autor(false, "Ruth Rocha", "67890"));
+        armazen.getBdAutores().add(new Autor(false, "Ana Maria Machado", "78901"));
+        armazen.getBdAutores().add(new Autor(false, "Jorge Amado", "89012"));
+        armazen.getBdAutores().add(new Autor(false, "Lygia Fagundes Telles", "90123"));
+        armazen.getBdAutores().add(new Autor(false, "José de Alencar", "01234"));
+        armazen.getBdAutores().add(new Autor(false, "Graciliano Ramos", "13579"));
+        armazen.getBdAutores().add(new Autor(false, "Érico Veríssimo", "24680"));
+        armazen.getBdAutores().add(new Autor(false, "Nelson Rodrigues", "11223"));
+        armazen.getBdAutores().add(new Autor(false, "Paulo Coelho", "22334"));
+        armazen.getBdAutores().add(new Autor(false, "Vinicius de Moraes", "33445"));
+
 
         armazen.getBdEditoras().add(new Editora(false, "Companhia das Letras", "11111"));
-        armazen.getBdEditoras().add(new Editora(false, "Globo", "22222"));
+        armazen.getBdEditoras().add(new Editora(false, "Editora Globo", "22222"));
         armazen.getBdEditoras().add(new Editora(false, "Record", "33333"));
         armazen.getBdEditoras().add(new Editora(false, "Ática", "44444"));
         armazen.getBdEditoras().add(new Editora(false, "Saraiva", "55555"));
+        armazen.getBdEditoras().add(new Editora(false, "Moderna", "66666"));
+        armazen.getBdEditoras().add(new Editora(false, "FTD Educação", "77777"));
+        armazen.getBdEditoras().add(new Editora(false, "Rocco", "88888"));
+        armazen.getBdEditoras().add(new Editora(false, "Zahar", "99999"));
+        armazen.getBdEditoras().add(new Editora(false, "Objetiva", "00000"));
+        armazen.getBdEditoras().add(new Editora(false, "Editora Abril", "12121"));
+        armazen.getBdEditoras().add(new Editora(false, "Nova Fronteira", "23232"));
+        armazen.getBdEditoras().add(new Editora(false, "Martins Fontes", "34343"));
+        armazen.getBdEditoras().add(new Editora(false, "Paz e Terra", "45454"));
+        armazen.getBdEditoras().add(new Editora(false, "Scipione", "56565"));
 
-        armazen.getBdInfantil().add(new Infantil(11, "O Pequeno Príncipe", armazen.getBdAutores().get(0),
-        new Localizacao("INF", 1, 1), armazen.getBdEditoras().get(0), false,
-        8, "Papel couché brilhante", true));
+        armazen.getBdInfantil().add(new Infantil(11, "O Pequeno Príncipe", armazen.getBdAutores().get(0), new Localizacao("INF", 1, 1), armazen.getBdEditoras().get(0), false, 8, "Papel couché brilhante", true));
+        armazen.getBdInfantil().add(new Infantil(12, "Marcelo, Marmelo, Martelo", armazen.getBdAutores().get(5), new Localizacao("INF", 1, 2), armazen.getBdEditoras().get(4), false, 7, "Offset", false));
+        armazen.getBdInfantil().add(new Infantil(13, "Reinações de Narizinho", armazen.getBdAutores().get(4), new Localizacao("INF", 1, 3), armazen.getBdEditoras().get(3), false, 9, "Papel jornal", false));
+        armazen.getBdInfantil().add(new Infantil(14, "Menina Bonita do Laço de Fita", armazen.getBdAutores().get(6), new Localizacao("INF", 1, 4), armazen.getBdEditoras().get(2), false, 6, "Couchê fosco", true));
+        armazen.getBdInfantil().add(new Infantil(15, "Histórias da Tia Nastácia", armazen.getBdAutores().get(4), new Localizacao("INF", 1, 5), armazen.getBdEditoras().get(1), false, 10, "Couchê brilhante", false));
+        armazen.getBdInfantil().add(new Infantil(16, "O Menino Maluquinho", armazen.getBdAutores().get(1), new Localizacao("INF", 1, 6), armazen.getBdEditoras().get(7), false, 8, "Offset", false));
+        armazen.getBdInfantil().add(new Infantil(17, "A Bolsa Amarela", armazen.getBdAutores().get(9), new Localizacao("INF", 1, 7), armazen.getBdEditoras().get(6), false, 7, "Papel pólen", true));
+        armazen.getBdInfantil().add(new Infantil(18, "Sítio do Picapau Amarelo", armazen.getBdAutores().get(4), new Localizacao("INF", 1, 8), armazen.getBdEditoras().get(4), false, 11, "Couchê", true));
+        armazen.getBdInfantil().add(new Infantil(19, "Flicts", armazen.getBdAutores().get(1), new Localizacao("INF", 1, 9), armazen.getBdEditoras().get(5), false, 5, "Luxo", true));
+        armazen.getBdInfantil().add(new Infantil(20, "O Patinho Feio", armazen.getBdAutores().get(2), new Localizacao("INF", 1, 10), armazen.getBdEditoras().get(8), false, 6, "Papel reciclado", false));
+        armazen.getBdInfantil().add(new Infantil(21, "A Arca de Noé", armazen.getBdAutores().get(14), new Localizacao("INF", 2, 1), armazen.getBdEditoras().get(12), false, 8, "Couche colorido", true));
+        armazen.getBdInfantil().add(new Infantil(22, "Branca de Neve", armazen.getBdAutores().get(13), new Localizacao("INF", 2, 2), armazen.getBdEditoras().get(11), false, 7, "Cartonado", false));
+        armazen.getBdInfantil().add(new Infantil(23, "Chapeuzinho Vermelho", armazen.getBdAutores().get(10), new Localizacao("INF", 2, 3), armazen.getBdEditoras().get(10), false, 6, "Papel cartão", false));
+        armazen.getBdInfantil().add(new Infantil(24, "A Bela e a Fera", armazen.getBdAutores().get(12), new Localizacao("INF", 2, 4), armazen.getBdEditoras().get(9), false, 9, "Couchê", true));
+        armazen.getBdInfantil().add(new Infantil(25, "Cachorrinho Samba", armazen.getBdAutores().get(5), new Localizacao("INF", 2, 5), armazen.getBdEditoras().get(8), false, 6, "Papel reciclado", true));
 
-        armazen.getBdInfantil().add(new Infantil(12, "Marcelo, Marmelo, Martelo", armazen.getBdAutores().get(1),
-                new Localizacao("INF", 1, 2), armazen.getBdEditoras().get(1), false,
-                6, "Papel reciclado", false));
+        armazen.getBdColecionavel().add(new Colecionavel(6, "Dom Casmurro - Edição Comemorativa", armazen.getBdAutores().get(0), new Localizacao("RAR", 1, 1), armazen.getBdEditoras().get(0), false, "Edição de 120 anos", true, "Capa dura com sobrecapa"));
+        armazen.getBdColecionavel().add(new Colecionavel(7, "Grande Sertão: Veredas - Capa Dura", armazen.getBdAutores().get(7), new Localizacao("RAR", 1, 2), armazen.getBdEditoras().get(1), false, "Edição de colecionador", true, "Capa de tecido"));
+        armazen.getBdColecionavel().add(new Colecionavel(8, "A Hora da Estrela - 40 anos", armazen.getBdAutores().get(1), new Localizacao("RAR", 1, 3), armazen.getBdEditoras().get(2), false, "Aniversário de 40 anos", false, "Encadernação especial"));
+        armazen.getBdColecionavel().add(new Colecionavel(9, "Memórias Póstumas de Brás Cubas - Luxo", armazen.getBdAutores().get(0), new Localizacao("RAR", 1, 4), armazen.getBdEditoras().get(3), false, "Edição de luxo", true, "Capa dura dourada"));
+        armazen.getBdColecionavel().add(new Colecionavel(10, "Auto da Compadecida - Especial", armazen.getBdAutores().get(12), new Localizacao("RAR", 1, 5), armazen.getBdEditoras().get(4), false, "Teatro brasileiro clássico", false, "Edição encadernada"));
+        armazen.getBdColecionavel().add(new Colecionavel(11, "Capitães da Areia - Capa Ilustrada", armazen.getBdAutores().get(7), new Localizacao("RAR", 1, 6), armazen.getBdEditoras().get(5), false, "Ilustrações exclusivas", true, "Capa artística"));
+        armazen.getBdColecionavel().add(new Colecionavel(12, "O Guarani - Edição Histórica", armazen.getBdAutores().get(9), new Localizacao("RAR", 1, 7), armazen.getBdEditoras().get(6), false, "Edição histórica comentada", false, "Sobreposição ilustrada"));
+        armazen.getBdColecionavel().add(new Colecionavel(13, "Macunaíma - Capa Rígida", armazen.getBdAutores().get(11), new Localizacao("RAR", 1, 8), armazen.getBdEditoras().get(7), false, "Capa dura limitada", true, "Acabamento especial"));
+        armazen.getBdColecionavel().add(new Colecionavel(14, "O Cortiço - Versão Centenária", armazen.getBdAutores().get(10), new Localizacao("RAR", 1, 9), armazen.getBdEditoras().get(8), false, "Edição de 100 anos", false, "Encarte comemorativo"));
+        armazen.getBdColecionavel().add(new Colecionavel(15, "Senhora - Capa Especial", armazen.getBdAutores().get(9), new Localizacao("RAR", 1, 10), armazen.getBdEditoras().get(9), false, "Edição para colecionador", true, "Acabamento fosco"));
+        armazen.getBdColecionavel().add(new Colecionavel(16, "Quincas Borba - Ilustrada", armazen.getBdAutores().get(0), new Localizacao("RAR", 2, 1), armazen.getBdEditoras().get(10), false, "Ilustrações de artistas brasileiros", true, "Encadernado"));
+        armazen.getBdColecionavel().add(new Colecionavel(17, "O Alienista - HQ", armazen.getBdAutores().get(0), new Localizacao("RAR", 2, 2), armazen.getBdEditoras().get(11), false, "Versão em quadrinhos", false, "Graphic Novel"));
+        armazen.getBdColecionavel().add(new Colecionavel(18, "A Moreninha - Especial", armazen.getBdAutores().get(8), new Localizacao("RAR", 2, 3), armazen.getBdEditoras().get(12), false, "Edição original", false, "Reimpressão fiel"));
+        armazen.getBdColecionavel().add(new Colecionavel(19, "Lucíola - Versão Comentada", armazen.getBdAutores().get(9), new Localizacao("RAR", 2, 4), armazen.getBdEditoras().get(13), false, "Notas de rodapé inclusas", true, "Capa ilustrada"));
+        armazen.getBdColecionavel().add(new Colecionavel(20, "A Escrava Isaura - Clássico", armazen.getBdAutores().get(10), new Localizacao("RAR", 2, 5), armazen.getBdEditoras().get(14), false, "Clássico da literatura", true, "Edição de biblioteca"));
 
-        armazen.getBdInfantil().add(new Infantil(13, "O Menino Maluquinho", armazen.getBdAutores().get(2),
-                new Localizacao("INF", 1, 3), armazen.getBdEditoras().get(2), false,
-                7, "Cartonado", true));
-
-        armazen.getBdInfantil().add(new Infantil(14, "A Bolsa Amarela", armazen.getBdAutores().get(3),
-                new Localizacao("INF", 1, 4), armazen.getBdEditoras().get(3), false,
-                9, "Papel offset", false));
-
-        armazen.getBdInfantil().add(new Infantil(15, "A Arca de Noé", armazen.getBdAutores().get(4),
-                new Localizacao("INF", 1, 5), armazen.getBdEditoras().get(4), false,
-                5, "Papel resistente", true));
-
-        armazen.getBdColecionavel().add(new Colecionavel(6, "Dom Casmurro - Edição Comemorativa", armazen.getBdAutores().get(0),
-                new Localizacao("RAR", 1, 1), armazen.getBdEditoras().get(0), false,
-                "Edição de 120 anos", true, "Capa dura com sobrecapa"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(7, "A Hora da Estrela - Edição de Luxo", armazen.getBdAutores().get(1),
-                new Localizacao("RAR", 1, 2), armazen.getBdEditoras().get(1), false,
-                "Edição limitada com manuscritos", true, "Encadernação em couro"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(8, "Claro Enigma - Edição Crítica", armazen.getBdAutores().get(2),
-                new Localizacao("RAR", 1, 3), armazen.getBdEditoras().get(2), false,
-                "Com comentários do autor", false, "Capa dura"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(9, "Reinações de Narizinho - Edição Histórica", armazen.getBdAutores().get(3),
-                new Localizacao("RAR", 1, 4), armazen.getBdEditoras().get(3), false,
-                "Fac-símile da primeira edição", true, "Com ilustrações originais"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(10, "Ou Isto ou Aquilo - Edição Especial", armazen.getBdAutores().get(4),
-                new Localizacao("RAR", 1, 5), armazen.getBdEditoras().get(4), false,
-                "Com desenhos da autora", false, "Capa em tecido"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(6, "Dom Casmurro - Edição Comemorativa", armazen.getBdAutores().get(0),
-                new Localizacao("RAR", 1, 1), armazen.getBdEditoras().get(0), false,
-                "Edição de 120 anos", true, "Capa dura com sobrecapa"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(7, "A Hora da Estrela - Edição de Luxo", armazen.getBdAutores().get(1),
-                new Localizacao("RAR", 1, 2), armazen.getBdEditoras().get(1), false,
-                "Edição limitada com manuscritos", true, "Encadernação em couro"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(8, "Claro Enigma - Edição Crítica", armazen.getBdAutores().get(2),
-                new Localizacao("RAR", 1, 3), armazen.getBdEditoras().get(2), false,
-                "Com comentários do autor", false, "Capa dura"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(9, "Reinações de Narizinho - Edição Histórica", armazen.getBdAutores().get(3),
-                new Localizacao("RAR", 1, 4), armazen.getBdEditoras().get(3), false,
-                "Fac-símile da primeira edição", true, "Com ilustrações originais"));
-
-        armazen.getBdColecionavel().add(new Colecionavel(10, "Ou Isto ou Aquilo - Edição Especial", armazen.getBdAutores().get(4),
-                new Localizacao("RAR", 1, 5), armazen.getBdEditoras().get(4), false,
-                "Com desenhos da autora", false, "Capa em tecido"));
-                
+        armazen.getBdDidatico().add(new Didatico(4, "Ciências Naturais", armazen.getBdAutores().get(3), new Localizacao("EDU", 4, 4), armazen.getBdEditoras().get(1), false, "Ciências", "Fundamental", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(5, "História do Brasil", armazen.getBdAutores().get(10), new Localizacao("EDU", 4, 5), armazen.getBdEditoras().get(2), false, "História", "Fundamental", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(6, "Geografia Geral", armazen.getBdAutores().get(6), new Localizacao("EDU", 4, 6), armazen.getBdEditoras().get(3), false, "Geografia", "Médio", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(7, "Matemática Aplicada", armazen.getBdAutores().get(7), new Localizacao("EDU", 4, 7), armazen.getBdEditoras().get(4), false, "Matemática", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(8, "Português Instrumental", armazen.getBdAutores().get(8), new Localizacao("EDU", 4, 8), armazen.getBdEditoras().get(5), false, "Português", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(9, "Física 1", armazen.getBdAutores().get(11), new Localizacao("EDU", 4, 9), armazen.getBdEditoras().get(6), false, "Física", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(10, "Química Orgânica", armazen.getBdAutores().get(12), new Localizacao("EDU", 4, 10), armazen.getBdEditoras().get(7), false, "Química", "Superior", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(11, "Biologia Celular", armazen.getBdAutores().get(13), new Localizacao("EDU", 5, 1), armazen.getBdEditoras().get(8), false, "Biologia", "Superior", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(12, "Educação Moral e Cívica", armazen.getBdAutores().get(14), new Localizacao("EDU", 5, 2), armazen.getBdEditoras().get(9), false, "Sociologia", "Fundamental", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(13, "História Antiga", armazen.getBdAutores().get(2), new Localizacao("EDU", 5, 3), armazen.getBdEditoras().get(10), false, "História", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(14, "Filosofia Moderna", armazen.getBdAutores().get(1), new Localizacao("EDU", 5, 4), armazen.getBdEditoras().get(11), false, "Filosofia", "Superior", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(15, "Gramática Avançada", armazen.getBdAutores().get(0), new Localizacao("EDU", 5, 5), armazen.getBdEditoras().get(12), false, "Português", "Médio", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(16, "Introdução à Economia", armazen.getBdAutores().get(3), new Localizacao("EDU", 5, 6), armazen.getBdEditoras().get(13), false, "Economia", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(17, "Programação em Java", armazen.getBdAutores().get(5), new Localizacao("EDU", 5, 7), armazen.getBdEditoras().get(14), false, "Informática", "Superior", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(18, "Introdução à Psicologia", armazen.getBdAutores().get(6), new Localizacao("EDU", 5, 8), armazen.getBdEditoras().get(13), false, "Psicologia", "Médio", "Básico"));
+        armazen.getBdInfantil().add(new Infantil(100, "As Aventuras do Livro 100", armazen.getBdAutores().get(7), new Localizacao("INF", 4, 4), armazen.getBdEditoras().get(7), false, 5, "Papel couchê", false));
+      
+        //mais 40 de cada
+        armazen.getBdInfantil().add(new Infantil(101, "As Animais do Livro 101", armazen.getBdAutores().get(1), new Localizacao("INF", 2, 10), armazen.getBdEditoras().get(0), false, 7, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(102, "As Sonhos do Livro 102", armazen.getBdAutores().get(9), new Localizacao("INF", 4, 10), armazen.getBdEditoras().get(1), false, 5, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(103, "As Fadas do Livro 103", armazen.getBdAutores().get(13), new Localizacao("INF", 3, 6), armazen.getBdEditoras().get(13), false, 8, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(104, "As Cores do Livro 104", armazen.getBdAutores().get(6), new Localizacao("INF", 5, 4), armazen.getBdEditoras().get(2), false, 9, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(105, "As Animais do Livro 105", armazen.getBdAutores().get(4), new Localizacao("INF", 2, 2), armazen.getBdEditoras().get(4), false, 10, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(106, "As Animais do Livro 106", armazen.getBdAutores().get(8), new Localizacao("INF", 4, 10), armazen.getBdEditoras().get(7), false, 7, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(107, "As Brinquedos do Livro 107", armazen.getBdAutores().get(8), new Localizacao("INF", 3, 6), armazen.getBdEditoras().get(8), false, 6, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(108, "As Escolas do Livro 108", armazen.getBdAutores().get(12), new Localizacao("INF", 2, 1), armazen.getBdEditoras().get(12), false, 8, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(109, "As Fadas do Livro 109", armazen.getBdAutores().get(4), new Localizacao("INF", 1, 4), armazen.getBdEditoras().get(0), false, 6, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(110, "As Cores do Livro 110", armazen.getBdAutores().get(5), new Localizacao("INF", 4, 2), armazen.getBdEditoras().get(3), false, 5, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(111, "As Aventuras do Livro 111", armazen.getBdAutores().get(14), new Localizacao("INF", 4, 9), armazen.getBdEditoras().get(9), false, 5, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(112, "As Animais do Livro 112", armazen.getBdAutores().get(3), new Localizacao("INF", 3, 7), armazen.getBdEditoras().get(8), false, 10, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(113, "As Animais do Livro 113", armazen.getBdAutores().get(12), new Localizacao("INF", 1, 2), armazen.getBdEditoras().get(6), false, 7, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(114, "As Brinquedos do Livro 114", armazen.getBdAutores().get(6), new Localizacao("INF", 3, 10), armazen.getBdEditoras().get(9), false, 10, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(115, "As Sonhos do Livro 115", armazen.getBdAutores().get(14), new Localizacao("INF", 5, 10), armazen.getBdEditoras().get(12), false, 6, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(116, "As Cores do Livro 116", armazen.getBdAutores().get(5), new Localizacao("INF", 1, 7), armazen.getBdEditoras().get(8), false, 5, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(117, "As Animais do Livro 117", armazen.getBdAutores().get(10), new Localizacao("INF", 5, 3), armazen.getBdEditoras().get(4), false, 10, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(118, "As Animais do Livro 118", armazen.getBdAutores().get(11), new Localizacao("INF", 1, 2), armazen.getBdEditoras().get(0), false, 8, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(119, "As Fadas do Livro 119", armazen.getBdAutores().get(3), new Localizacao("INF", 5, 5), armazen.getBdEditoras().get(13), false, 10, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(120, "As Cores do Livro 120", armazen.getBdAutores().get(14), new Localizacao("INF", 3, 10), armazen.getBdEditoras().get(12), false, 8, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(121, "As Cores do Livro 121", armazen.getBdAutores().get(1), new Localizacao("INF", 3, 9), armazen.getBdEditoras().get(11), false, 6, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(122, "As Fadas do Livro 122", armazen.getBdAutores().get(7), new Localizacao("INF", 3, 3), armazen.getBdEditoras().get(7), false, 9, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(123, "As Cores do Livro 123", armazen.getBdAutores().get(3), new Localizacao("INF", 4, 10), armazen.getBdEditoras().get(8), false, 8, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(124, "As Animais do Livro 124", armazen.getBdAutores().get(3), new Localizacao("INF", 4, 1), armazen.getBdEditoras().get(3), false, 10, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(125, "As Aventuras do Livro 125", armazen.getBdAutores().get(0), new Localizacao("INF", 2, 4), armazen.getBdEditoras().get(11), false, 6, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(126, "As Aventuras do Livro 126", armazen.getBdAutores().get(13), new Localizacao("INF", 5, 6), armazen.getBdEditoras().get(0), false, 10, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(127, "As Sonhos do Livro 127", armazen.getBdAutores().get(13), new Localizacao("INF", 3, 5), armazen.getBdEditoras().get(1), false, 7, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(128, "As Aventuras do Livro 128", armazen.getBdAutores().get(4), new Localizacao("INF", 2, 7), armazen.getBdEditoras().get(5), false, 7, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(129, "As Brinquedos do Livro 129", armazen.getBdAutores().get(1), new Localizacao("INF", 2, 8), armazen.getBdEditoras().get(8), false, 8, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(130, "As Animais do Livro 130", armazen.getBdAutores().get(0), new Localizacao("INF", 2, 5), armazen.getBdEditoras().get(9), false, 8, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(131, "As Sonhos do Livro 131", armazen.getBdAutores().get(13), new Localizacao("INF", 2, 8), armazen.getBdEditoras().get(2), false, 5, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(132, "As Família do Livro 132", armazen.getBdAutores().get(9), new Localizacao("INF", 2, 6), armazen.getBdEditoras().get(9), false, 6, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(133, "As Brinquedos do Livro 133", armazen.getBdAutores().get(4), new Localizacao("INF", 5, 5), armazen.getBdEditoras().get(8), false, 7, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(134, "As Sonhos do Livro 134", armazen.getBdAutores().get(14), new Localizacao("INF", 5, 2), armazen.getBdEditoras().get(13), false, 7, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(135, "As Sonhos do Livro 135", armazen.getBdAutores().get(6), new Localizacao("INF", 1, 1), armazen.getBdEditoras().get(7), false, 10, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(136, "As Família do Livro 136", armazen.getBdAutores().get(5), new Localizacao("INF", 5, 1), armazen.getBdEditoras().get(2), false, 10, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(137, "As Sonhos do Livro 137", armazen.getBdAutores().get(5), new Localizacao("INF", 3, 7), armazen.getBdEditoras().get(6), false, 9, "Papel couchê", true));
+        armazen.getBdInfantil().add(new Infantil(138, "As Brinquedos do Livro 138", armazen.getBdAutores().get(0), new Localizacao("INF", 2, 9), armazen.getBdEditoras().get(13), false, 10, "Papel couchê", false));
+        armazen.getBdInfantil().add(new Infantil(139, "As Cores do Livro 139", armazen.getBdAutores().get(8), new Localizacao("INF", 1, 5), armazen.getBdEditoras().get(10), false, 10, "Papel couchê", true));
+        armazen.getBdColecionavel().add(new Colecionavel(200, "Clássico Raro Vol. 200", armazen.getBdAutores().get(13), new Localizacao("COL", 4, 7), armazen.getBdEditoras().get(1), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(201, "Clássico Raro Vol. 201", armazen.getBdAutores().get(0), new Localizacao("COL", 1, 6), armazen.getBdEditoras().get(3), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(202, "Clássico Raro Vol. 202", armazen.getBdAutores().get(8), new Localizacao("COL", 3, 8), armazen.getBdEditoras().get(2), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(203, "Clássico Raro Vol. 203", armazen.getBdAutores().get(9), new Localizacao("COL", 1, 9), armazen.getBdEditoras().get(0), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(204, "Clássico Raro Vol. 204", armazen.getBdAutores().get(3), new Localizacao("COL", 2, 10), armazen.getBdEditoras().get(14), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(205, "Clássico Raro Vol. 205", armazen.getBdAutores().get(2), new Localizacao("COL", 2, 7), armazen.getBdEditoras().get(3), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(206, "Clássico Raro Vol. 206", armazen.getBdAutores().get(4), new Localizacao("COL", 5, 9), armazen.getBdEditoras().get(7), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(207, "Clássico Raro Vol. 207", armazen.getBdAutores().get(11), new Localizacao("COL", 2, 4), armazen.getBdEditoras().get(13), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(208, "Clássico Raro Vol. 208", armazen.getBdAutores().get(7), new Localizacao("COL", 4, 4), armazen.getBdEditoras().get(0), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(209, "Clássico Raro Vol. 209", armazen.getBdAutores().get(3), new Localizacao("COL", 2, 3), armazen.getBdEditoras().get(8), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(210, "Clássico Raro Vol. 210", armazen.getBdAutores().get(10), new Localizacao("COL", 1, 1), armazen.getBdEditoras().get(13), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(211, "Clássico Raro Vol. 211", armazen.getBdAutores().get(1), new Localizacao("COL", 4, 6), armazen.getBdEditoras().get(14), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(212, "Clássico Raro Vol. 212", armazen.getBdAutores().get(9), new Localizacao("COL", 4, 10), armazen.getBdEditoras().get(2), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(213, "Clássico Raro Vol. 213", armazen.getBdAutores().get(5), new Localizacao("COL", 2, 9), armazen.getBdEditoras().get(14), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(214, "Clássico Raro Vol. 214", armazen.getBdAutores().get(3), new Localizacao("COL", 2, 7), armazen.getBdEditoras().get(14), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(215, "Clássico Raro Vol. 215", armazen.getBdAutores().get(11), new Localizacao("COL", 5, 1), armazen.getBdEditoras().get(4), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(216, "Clássico Raro Vol. 216", armazen.getBdAutores().get(14), new Localizacao("COL", 5, 7), armazen.getBdEditoras().get(13), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(217, "Clássico Raro Vol. 217", armazen.getBdAutores().get(6), new Localizacao("COL", 4, 6), armazen.getBdEditoras().get(14), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(218, "Clássico Raro Vol. 218", armazen.getBdAutores().get(9), new Localizacao("COL", 2, 10), armazen.getBdEditoras().get(11), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(219, "Clássico Raro Vol. 219", armazen.getBdAutores().get(2), new Localizacao("COL", 2, 3), armazen.getBdEditoras().get(6), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(220, "Clássico Raro Vol. 220", armazen.getBdAutores().get(8), new Localizacao("COL", 1, 1), armazen.getBdEditoras().get(14), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(221, "Clássico Raro Vol. 221", armazen.getBdAutores().get(9), new Localizacao("COL", 4, 7), armazen.getBdEditoras().get(1), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(222, "Clássico Raro Vol. 222", armazen.getBdAutores().get(4), new Localizacao("COL", 4, 2), armazen.getBdEditoras().get(5), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(223, "Clássico Raro Vol. 223", armazen.getBdAutores().get(7), new Localizacao("COL", 4, 3), armazen.getBdEditoras().get(3), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(224, "Clássico Raro Vol. 224", armazen.getBdAutores().get(10), new Localizacao("COL", 5, 1), armazen.getBdEditoras().get(11), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(225, "Clássico Raro Vol. 225", armazen.getBdAutores().get(5), new Localizacao("COL", 5, 2), armazen.getBdEditoras().get(10), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(226, "Clássico Raro Vol. 226", armazen.getBdAutores().get(1), new Localizacao("COL", 1, 4), armazen.getBdEditoras().get(4), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(227, "Clássico Raro Vol. 227", armazen.getBdAutores().get(1), new Localizacao("COL", 5, 2), armazen.getBdEditoras().get(10), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(228, "Clássico Raro Vol. 228", armazen.getBdAutores().get(13), new Localizacao("COL", 4, 3), armazen.getBdEditoras().get(11), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(229, "Clássico Raro Vol. 229", armazen.getBdAutores().get(13), new Localizacao("COL", 5, 7), armazen.getBdEditoras().get(14), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(230, "Clássico Raro Vol. 230", armazen.getBdAutores().get(4), new Localizacao("COL", 4, 10), armazen.getBdEditoras().get(7), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(231, "Clássico Raro Vol. 231", armazen.getBdAutores().get(11), new Localizacao("COL", 4, 1), armazen.getBdEditoras().get(10), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(232, "Clássico Raro Vol. 232", armazen.getBdAutores().get(3), new Localizacao("COL", 2, 7), armazen.getBdEditoras().get(1), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(233, "Clássico Raro Vol. 233", armazen.getBdAutores().get(9), new Localizacao("COL", 1, 7), armazen.getBdEditoras().get(14), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(234, "Clássico Raro Vol. 234", armazen.getBdAutores().get(4), new Localizacao("COL", 4, 8), armazen.getBdEditoras().get(12), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(235, "Clássico Raro Vol. 235", armazen.getBdAutores().get(10), new Localizacao("COL", 3, 10), armazen.getBdEditoras().get(12), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(236, "Clássico Raro Vol. 236", armazen.getBdAutores().get(2), new Localizacao("COL", 1, 6), armazen.getBdEditoras().get(8), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(237, "Clássico Raro Vol. 237", armazen.getBdAutores().get(4), new Localizacao("COL", 2, 1), armazen.getBdEditoras().get(4), false, "Edição especial", false, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(238, "Clássico Raro Vol. 238", armazen.getBdAutores().get(8), new Localizacao("COL", 2, 9), armazen.getBdEditoras().get(9), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(239, "Clássico Raro Vol. 239", armazen.getBdAutores().get(11), new Localizacao("COL", 4, 1), armazen.getBdEditoras().get(3), false, "Edição especial", true, "Capa dura"));
+        armazen.getBdDidatico().add(new Didatico(300, "História Essencial - Livro 300", armazen.getBdAutores().get(4), new Localizacao("DID", 2, 5), armazen.getBdEditoras().get(4), false, "Matéria", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(301, "Física Essencial - Livro 301", armazen.getBdAutores().get(14), new Localizacao("DID", 1, 1), armazen.getBdEditoras().get(10), false, "Matéria", "Fundamental", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(302, "Matemática Essencial - Livro 302", armazen.getBdAutores().get(8), new Localizacao("DID", 4, 7), armazen.getBdEditoras().get(1), false, "Matéria", "Superior", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(303, "Matemática Essencial - Livro 303", armazen.getBdAutores().get(4), new Localizacao("DID", 1, 1), armazen.getBdEditoras().get(1), false, "Matéria", "Fundamental", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(304, "Biologia Essencial - Livro 304", armazen.getBdAutores().get(12), new Localizacao("DID", 4, 4), armazen.getBdEditoras().get(4), false, "Matéria", "Fundamental", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(305, "Matemática Essencial - Livro 305", armazen.getBdAutores().get(6), new Localizacao("DID", 3, 4), armazen.getBdEditoras().get(11), false, "Matéria", "Fundamental", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(306, "Português Essencial - Livro 306", armazen.getBdAutores().get(13), new Localizacao("DID", 1, 2), armazen.getBdEditoras().get(13), false, "Matéria", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(307, "Geografia Essencial - Livro 307", armazen.getBdAutores().get(11), new Localizacao("DID", 2, 3), armazen.getBdEditoras().get(3), false, "Matéria", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(308, "História Essencial - Livro 308", armazen.getBdAutores().get(1), new Localizacao("DID", 5, 10), armazen.getBdEditoras().get(10), false, "Matéria", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(309, "História Essencial - Livro 309", armazen.getBdAutores().get(8), new Localizacao("DID", 3, 8), armazen.getBdEditoras().get(6), false, "Matéria", "Fundamental", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(310, "Ciências Essencial - Livro 310", armazen.getBdAutores().get(2), new Localizacao("DID", 3, 10), armazen.getBdEditoras().get(10), false, "Matéria", "Fundamental", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(311, "Geografia Essencial - Livro 311", armazen.getBdAutores().get(0), new Localizacao("DID", 5, 5), armazen.getBdEditoras().get(10), false, "Matéria", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(312, "Ciências Essencial - Livro 312", armazen.getBdAutores().get(10), new Localizacao("DID", 4, 1), armazen.getBdEditoras().get(13), false, "Matéria", "Superior", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(313, "Matemática Essencial - Livro 313", armazen.getBdAutores().get(12), new Localizacao("DID", 2, 9), armazen.getBdEditoras().get(13), false, "Matéria", "Médio", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(314, "Português Essencial - Livro 314", armazen.getBdAutores().get(11), new Localizacao("DID", 2, 10), armazen.getBdEditoras().get(6), false, "Matéria", "Médio", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(315, "Matemática Essencial - Livro 315", armazen.getBdAutores().get(3), new Localizacao("DID", 3, 9), armazen.getBdEditoras().get(1), false, "Matéria", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(316, "Geografia Essencial - Livro 316", armazen.getBdAutores().get(10), new Localizacao("DID", 3, 3), armazen.getBdEditoras().get(14), false, "Matéria", "Superior", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(317, "Geografia Essencial - Livro 317", armazen.getBdAutores().get(14), new Localizacao("DID", 1, 8), armazen.getBdEditoras().get(13), false, "Matéria", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(318, "História Essencial - Livro 318", armazen.getBdAutores().get(3), new Localizacao("DID", 3, 5), armazen.getBdEditoras().get(14), false, "Matéria", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(319, "Matemática Essencial - Livro 319", armazen.getBdAutores().get(7), new Localizacao("DID", 4, 6), armazen.getBdEditoras().get(3), false, "Matéria", "Fundamental", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(320, "Matemática Essencial - Livro 320", armazen.getBdAutores().get(4), new Localizacao("DID", 1, 5), armazen.getBdEditoras().get(7), false, "Matéria", "Médio", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(321, "Ciências Essencial - Livro 321", armazen.getBdAutores().get(3), new Localizacao("DID", 5, 3), armazen.getBdEditoras().get(9), false, "Matéria", "Superior", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(322, "Física Essencial - Livro 322", armazen.getBdAutores().get(5), new Localizacao("DID", 1, 4), armazen.getBdEditoras().get(12), false, "Matéria", "Fundamental", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(323, "Geografia Essencial - Livro 323", armazen.getBdAutores().get(6), new Localizacao("DID", 5, 1), armazen.getBdEditoras().get(8), false, "Matéria", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(324, "Português Essencial - Livro 324", armazen.getBdAutores().get(9), new Localizacao("DID", 5, 1), armazen.getBdEditoras().get(9), false, "Matéria", "Fundamental", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(325, "Biologia Essencial - Livro 325", armazen.getBdAutores().get(7), new Localizacao("DID", 3, 7), armazen.getBdEditoras().get(10), false, "Matéria", "Médio", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(326, "Português Essencial - Livro 326", armazen.getBdAutores().get(10), new Localizacao("DID", 2, 7), armazen.getBdEditoras().get(9), false, "Matéria", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(327, "Física Essencial - Livro 327", armazen.getBdAutores().get(12), new Localizacao("DID", 1, 4), armazen.getBdEditoras().get(1), false, "Matéria", "Fundamental", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(328, "Biologia Essencial - Livro 328", armazen.getBdAutores().get(3), new Localizacao("DID", 3, 1), armazen.getBdEditoras().get(8), false, "Matéria", "Médio", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(329, "Biologia Essencial - Livro 329", armazen.getBdAutores().get(10), new Localizacao("DID", 3, 7), armazen.getBdEditoras().get(10), false, "Matéria", "Fundamental", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(330, "Ciências Essencial - Livro 330", armazen.getBdAutores().get(10), new Localizacao("DID", 2, 6), armazen.getBdEditoras().get(10), false, "Matéria", "Superior", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(331, "Geografia Essencial - Livro 331", armazen.getBdAutores().get(4), new Localizacao("DID", 1, 3), armazen.getBdEditoras().get(1), false, "Matéria", "Superior", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(332, "Português Essencial - Livro 332", armazen.getBdAutores().get(8), new Localizacao("DID", 3, 1), armazen.getBdEditoras().get(14), false, "Matéria", "Médio", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(333, "Geografia Essencial - Livro 333", armazen.getBdAutores().get(4), new Localizacao("DID", 5, 4), armazen.getBdEditoras().get(14), false, "Matéria", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(334, "História Essencial - Livro 334", armazen.getBdAutores().get(0), new Localizacao("DID", 1, 9), armazen.getBdEditoras().get(6), false, "Matéria", "Superior", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(335, "História Essencial - Livro 335", armazen.getBdAutores().get(14), new Localizacao("DID", 4, 5), armazen.getBdEditoras().get(2), false, "Matéria", "Médio", "Básico"));
+        armazen.getBdDidatico().add(new Didatico(336, "História Essencial - Livro 336", armazen.getBdAutores().get(11), new Localizacao("DID", 1, 7), armazen.getBdEditoras().get(0), false, "Matéria", "Superior", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(337, "Ciências Essencial - Livro 337", armazen.getBdAutores().get(5), new Localizacao("DID", 2, 7), armazen.getBdEditoras().get(5), false, "Matéria", "Fundamental", "Avançado"));
+        armazen.getBdDidatico().add(new Didatico(338, "História Essencial - Livro 338", armazen.getBdAutores().get(8), new Localizacao("DID", 3, 9), armazen.getBdEditoras().get(1), false, "Matéria", "Médio", "Intermediário"));
+        armazen.getBdDidatico().add(new Didatico(339, "Biologia Essencial - Livro 339", armazen.getBdAutores().get(12), new Localizacao("DID", 4, 9), armazen.getBdEditoras().get(11), false, "Matéria", "Superior", "Avançado"));
         JOptionPane.showMessageDialog(
             null,
             "Cadastro realizado",
@@ -693,6 +859,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMnPrincipal;
+    private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCadastro;
     private javax.swing.JTextField cxBusca;
     private javax.swing.JMenuItem itAtuLivro;

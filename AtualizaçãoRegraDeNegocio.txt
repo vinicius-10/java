@@ -45,3 +45,5 @@ Descição da atualização
     ao cliclar em algum iten da tabela de livros ele irá mostrar as demais informaçoes do livro
 
     Sistema de atualização, agora é posivel atualizar um livro/editra/autor, definindo se está disponivel ou não, e demais dados, não é permitido atualizar do autor/editora CPF/CNPJ e do livro o ID e tipo de livro
+
+    O sistema permite cadastrar ID de livros iguais para tipos diferente, cada tipo só pode ter uma ID, porem diferentes tipos poden ter a mesma ID
