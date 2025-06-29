@@ -147,7 +147,7 @@
               </Group>
               <EmptySpace pref="55" max="32767" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btCadastro" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -161,9 +161,9 @@
               <Component id="pnPrincipal" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="pnBusca" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Component id="btCadastro" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -346,7 +346,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btCadastro">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cadastrar data de teste"/>
+        <Property name="text" type="java.lang.String" value="Cadastrar autores, editores e livros para teste"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastroActionPerformed"/>

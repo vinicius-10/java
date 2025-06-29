@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -546,15 +547,36 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
     public boolean cadColecionavel(){
         colecionavel = new Colecionavel();
-
+        String temp;
         //polimorfismo por coesãao
         Livro livro = cadLivro("colecionavel");
         if(livro == null) return false;
         colecionavel.setLivroGenerico(livro);
 
         colecionavel.setNumerado(ckNumerado.isSelected());
-        colecionavel.setAdicional(cxAdicional.getText());
-        colecionavel.setEdicaoEspecial(cxEspeEdit.getText());
+        temp = cxAdicional.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Adicional não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        colecionavel.setAdicional(temp);
+
+        temp = cxEspeEdit.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Edição especial não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        colecionavel.setEdicaoEspecial(temp);
 
         armazen.getBdColecionavel().add(colecionavel);  
         return true;
@@ -562,15 +584,47 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
     public boolean caDdidatico(){
         didatico = new Didatico();
-
+        String temp;
         //polimorfismo por coerção
         Livro livro = cadLivro("didatico");
         if(livro == null) return false;
         didatico.setLivroGenerico(livro);
 
-        didatico.setNivel(cxNivel.getText());
-        didatico.setMateria(cxMateria.getText());
-        didatico.setComplexidade(cxComplexidade.getText());
+        temp = cxNivel.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Nivel não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        didatico.setNivel(temp);
+
+        temp = cxMateria.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Materia não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        didatico.setMateria(temp);
+
+        temp = cxComplexidade.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Complexidade não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        didatico.setComplexidade(temp);
 
         armazen.getBdDidatico().add(didatico);
         return true;
@@ -578,7 +632,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
     public boolean cadInfantil(){
         infantil = new Infantil();
-
+        String temp;
         //polimorfismo por coerção
         Livro livro = cadLivro("infantil");
         if(livro == null) return false;
@@ -587,7 +641,17 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         int intTemp = getInt(cxFaixaEtaria.getText(),rtFaixaEtaria.getText());
         if(intTemp == -1) return false;
         infantil.setFaixaEtaria(intTemp);
-        infantil.setMaterial(cxMateria.getText());
+        temp = cxMaterial.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Material não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        infantil.setMaterial(temp);
         infantil.setInterativo(ckInterativo.isSelected());
 
         armazen.getBdInfantil().add(infantil);
@@ -596,7 +660,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
     public int getInt(String campo, String label){
         try {
-            int number = Integer.parseInt(campo.trim());
+            int number = Integer.parseInt(campo.trim().replaceAll("\\s+", ""));
             
             if (number <= 0) {
                 JOptionPane.showMessageDialog(

@@ -2,10 +2,6 @@
 //vinicius Souza dias 2564599
 
 
-
-import java.awt.event.ActionEvent;
-
-import javax.print.DocFlavor.STRING;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -230,6 +226,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
         });
 
         btAtualizar.setText("Atualizar");
+        btAtualizar.setEnabled(false);
         btAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAtualizarActionPerformed(evt);
@@ -364,6 +361,8 @@ public class FromAtuLivro extends javax.swing.JFrame{
                 cxTitulo.setText(colecionavel.getTitulo());
                 cxTitulo.setEnabled(true);
                 
+                btAtualizar.setEnabled(true);
+                
                 //reflexibilidade
                 cxAutor.setText(colecionavel.getAutor().getCpf());
                 cxAutor.setEnabled(true);
@@ -404,6 +403,8 @@ public class FromAtuLivro extends javax.swing.JFrame{
 
                 cxTitulo.setText(didatico.getTitulo());
                 cxTitulo.setEnabled(true);
+                
+                btAtualizar.setEnabled(true);
 
                 //reflexibilidade
                 cxAutor.setText(didatico.getAutor().getCpf());
@@ -445,6 +446,8 @@ public class FromAtuLivro extends javax.swing.JFrame{
 
                 cxTitulo.setText(infantil.getTitulo());
                 cxTitulo.setEnabled(true);
+                
+                btAtualizar.setEnabled(true);
 
                 //reflexibilidade
                 cxAutor.setText(infantil.getAutor().getCpf());
@@ -580,6 +583,8 @@ public class FromAtuLivro extends javax.swing.JFrame{
         cxId.setText("");
         cxId.setEnabled(true);
 
+        btAtualizar.setEnabled(false);
+
         cxTitulo.setText("");
         cxTitulo.setEnabled(false);
 
@@ -642,7 +647,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
                 "Atualizar de livro",
                 JOptionPane.INFORMATION_MESSAGE
             );
-            FromConAutor.gerFromAtuAutor().listaAutor();
+            FromPrincipal.gerarFromPrincipal().listarLivros();
         }
     }
     
@@ -678,7 +683,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
         //reflexividade
         livro.getLocalizacao().setLinha(intTempo);
 
-        Autor autor = armazen.getAutorByCpf(cxAutor.getText());
+        Autor autor = armazen.getAutorByCpf(cxAutor.getText().trim());
         if(autor == null) {
             JOptionPane.showMessageDialog(
                 null,
@@ -700,7 +705,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
         }
         livro.setAutor(autor);
 
-        Editora editora = armazen.getEditoraByCnpj(cxEditora.getText());
+        Editora editora = armazen.getEditoraByCnpj(cxEditora.getText().trim());
         if(editora == null){
             JOptionPane.showMessageDialog(
                 null,
@@ -728,6 +733,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
 
     public boolean atuColecionavel(){
         colecionavel = new Colecionavel();
+        String temp;
 
         //polimorfismo por coerção
         Livro livro = atuLivro("colecionavel");
@@ -735,8 +741,30 @@ public class FromAtuLivro extends javax.swing.JFrame{
         colecionavel.setLivroGenerico(livro);
 
         colecionavel.setNumerado(ckNumerado.isSelected());
-        colecionavel.setAdicional(cxAdicional.getText());
-        colecionavel.setEdicaoEspecial(cxEspeEdit.getText());
+
+        temp = cxAdicional.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Adicional não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        colecionavel.setAdicional(temp);
+
+        temp = cxEspeEdit.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Edição especial não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        colecionavel.setEdicaoEspecial(temp);
 
         Colecionavel original = armazen.getColecionavelById(colecionavel.getId());
         if(original != null){
@@ -747,6 +775,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
             original.setEditora(colecionavel.getEditora());
             original.setLocalizacao(colecionavel.getLocalizacao());
 
+            
             original.setEdicaoEspecial(colecionavel.getEdicaoEspecial());
             original.setAdicional(colecionavel.getAdicional());
             original.setNumerado(colecionavel.isNumerado());
@@ -764,15 +793,48 @@ public class FromAtuLivro extends javax.swing.JFrame{
 
     public boolean atuDidatico(){
         didatico = new Didatico();
-
+        String temp;
         //polimorfismo por coerção
         Livro livro = atuLivro("didatico");
         if(livro == null) return false;
         didatico.setLivroGenerico(livro);
 
-        didatico.setNivel(cxNivel.getText());
-        didatico.setMateria(cxMateria.getText());
-        didatico.setComplexidade(cxComplexidade.getText());
+
+        temp = cxNivel.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Nivel não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        didatico.setNivel(temp);
+
+        temp = cxMateria.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Materia não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        didatico.setMateria(temp);
+
+        temp = cxComplexidade.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Complexidade não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        didatico.setComplexidade(temp);
 
         Didatico original = armazen.getDidaticoById(didatico.getId());
         if(original != null){
@@ -800,7 +862,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
 
     public boolean atuInfantil(){
         infantil = new Infantil();
-
+        String temp;
         //polimorfismo por coerção
         Livro livro = atuLivro("infantil");
         if(livro == null) return false;
@@ -809,7 +871,18 @@ public class FromAtuLivro extends javax.swing.JFrame{
         int intTemp = getInt(cxFaixaEtaria.getText(),rtFaixaEtaria.getText());
         if(intTemp == -1) return false;
         infantil.setFaixaEtaria(intTemp);
-        infantil.setMaterial(cxMateria.getText());
+
+        temp = cxMaterial.getText().trim().replaceAll("\\s+", " ");
+        if(temp.length() < 3){
+            JOptionPane.showMessageDialog(
+                null,
+                "Material não pode ser menor que 3.",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        infantil.setMaterial(temp);
         infantil.setInterativo(ckInterativo.isSelected());
 
         Infantil original = armazen.getInfantilById(infantil.getId());
@@ -838,7 +911,7 @@ public class FromAtuLivro extends javax.swing.JFrame{
 
     public int getInt(String campo, String label){
         try {
-            int number = Integer.parseInt(campo.trim());
+            int number = Integer.parseInt(campo.trim().replaceAll("\\s+", " "));
             
             if (number <= 0) {
                 JOptionPane.showMessageDialog(

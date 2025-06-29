@@ -124,10 +124,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="cxNome">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="ckBloqueado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Bloqueado"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btBuscar">
@@ -141,6 +145,7 @@
     <Component class="javax.swing.JButton" name="btAtualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Atualizar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAtualizarActionPerformed"/>

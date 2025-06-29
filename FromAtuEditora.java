@@ -8,6 +8,8 @@
 import javax.swing.JOptionPane;
 
 
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -81,7 +83,10 @@ public class FromAtuEditora extends javax.swing.JFrame {
         rtDisponivel.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rtDisponivel.setText("Disponivel:");
 
+        cxNome.setEnabled(false);
+
         ckBloqueado.setText("Bloqueado");
+        ckBloqueado.setEnabled(false);
 
         btBuscar.setText("Buscar");
         btBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +96,7 @@ public class FromAtuEditora extends javax.swing.JFrame {
         });
 
         btAtualizar.setText("Atualizar");
+        btAtualizar.setEnabled(false);
         btAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAtualizarActionPerformed(evt);
@@ -211,42 +217,42 @@ public class FromAtuEditora extends javax.swing.JFrame {
             JOptionPane.INFORMATION_MESSAGE
         );
         FromConEditora.gerFromAtuEditora().listaEditora();
+        FromPrincipal.gerarFromPrincipal().listarLivros();
         clear();
         return;
     }
     
     public void getEditora(){
         String cnpj = cxCnpj.getText();
-        boolean findBusca = true;
         
-        
-        for(Editora editora : armazen.getBdEditoras()) {
-            if(editora.getCnpj().equals(cnpj)) {
-                cxNome.setText(editora.getNome());
-                ckBloqueado.setSelected(editora.getBloqueado());
-                findBusca = false;
-                break;                
-            }
-            System.gc();
-        }
-        
-        if(findBusca) {
+        editora = armazen.getEditoraByCnpj(cnpj);
+
+        if(editora == null){
             JOptionPane.showMessageDialog(
                 null,
                 "CNPJ não encontrado",
                 "Atualizar editora",
                 JOptionPane.ERROR_MESSAGE
             );
-        }else{
-            cxCnpj.setEnabled(false);
+            return;
         }
+
+        cxCnpj.setEnabled(false);
+        cxNome.setEnabled(true);
+        ckBloqueado.setEnabled(true);
+        btAtualizar.setEnabled(true);
         
-        
+        cxNome.setText(editora.getNome());
+        ckBloqueado.setSelected(editora.getBloqueado());        
     }
     
     public void clear(){
         cxCnpj.setText("");
         cxNome.setText("");
+        cxCnpj.setEnabled(true);
+        cxNome.setEnabled(false);
+        ckBloqueado.setEnabled(false);
+        btAtualizar.setEnabled(false);
         ckBloqueado.setSelected(false);
         cxCnpj.setEnabled(true);
         cxCnpj.requestFocus();

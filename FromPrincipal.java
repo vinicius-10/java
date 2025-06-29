@@ -12,12 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import java.util.ArrayList;
 import java.text.Normalizer;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
-
-
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -205,7 +199,7 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        btCadastro.setText("Cadastrar data de teste");
+        btCadastro.setText("Cadastrar autores, editores e livros para teste");
         btCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCadastroActionPerformed(evt);
@@ -300,7 +294,7 @@ public class FromPrincipal extends javax.swing.JFrame {
                     .addComponent(pnBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btCadastro)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -312,9 +306,9 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(pnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(btCadastro)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
 
         pack();
@@ -378,7 +372,7 @@ public class FromPrincipal extends javax.swing.JFrame {
         List<Didatico> bdDidatico = new ArrayList<Didatico>();
         List<Colecionavel> bdColecionavel = new ArrayList<Colecionavel>();
         
-        String nome = cxBusca.getText().trim();
+        String nome = cxBusca.getText();
         if(nome.length() == 0){
             buscaDetalhada = false;
             listarLivros();
@@ -459,7 +453,7 @@ public class FromPrincipal extends javax.swing.JFrame {
     }
 
     public String limpaString(String text){
-        return Normalizer.normalize(text.toLowerCase(), Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        return Normalizer.normalize(text.trim().toLowerCase().replaceAll("\\s+", " "), Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
     }
     
     public void descreverlivro(){

@@ -80,7 +80,10 @@ public class FromAtuAutor extends javax.swing.JFrame {
         rtDisponivel.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rtDisponivel.setText("Disponivel:");
 
+        cxNome.setEnabled(false);
+
         ckBloqueado.setText("Bloqueado");
+        ckBloqueado.setEnabled(false);
 
         btBuscar.setText("Buscar");
         btBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +93,7 @@ public class FromAtuAutor extends javax.swing.JFrame {
         });
 
         btAtualizar.setText("Atualizar");
+        btAtualizar.setEnabled(false);
         btAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAtualizarActionPerformed(evt);
@@ -211,6 +215,7 @@ public class FromAtuAutor extends javax.swing.JFrame {
             JOptionPane.INFORMATION_MESSAGE
         );
         FromConAutor.gerFromAtuAutor().listaAutor();
+        FromPrincipal.gerarFromPrincipal().listarLivros();
         clear();
         return;
     }
@@ -229,15 +234,23 @@ public class FromAtuAutor extends javax.swing.JFrame {
             );
             return;
         }
+
+        cxCpf.setEnabled(false);
+        cxNome.setEnabled(true);
+        ckBloqueado.setEnabled(true);
+        btAtualizar.setEnabled(true);
       
         cxNome.setText(autor.getNome());
         ckBloqueado.setSelected(autor.getBloqueado());
-        cxCpf.setEnabled(false);
     }
     
     public void clear(){
         cxCpf.setText("");
         cxNome.setText("");
+        cxCpf.setEnabled(true);
+        cxNome.setEnabled(false);
+        ckBloqueado.setEnabled(false);
+        btAtualizar.setEnabled(false);
         ckBloqueado.setSelected(false);
         cxCpf.setEnabled(true);
         cxCpf.requestFocus();
