@@ -3,6 +3,9 @@
 
 
 
+import java.awt.event.ActionEvent;
+
+import javax.print.DocFlavor.STRING;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,34 +20,35 @@ import javax.swing.JTextField;
  *
  * @author valuc
  */
-public class FromCadLivro extends javax.swing.JFrame implements Menus{
+public class FromAtuLivro extends javax.swing.JFrame{
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromCadLivro.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromAtuLivro.class.getName());
 
     private Autor editora;
     private Armazenamento armazen;
     private Colecionavel colecionavel;
     private Didatico didatico;
     private Infantil infantil;
+    boolean cleaning = false;
     
-    private static FromCadLivro fromCadLivroUnic;
+    private static FromAtuLivro fromAtuLivroUnic;
           
     
-    private FromCadLivro() {
+    private FromAtuLivro() {
         initComponents();
         armazen = Armazenamento.geraArmazen();
     }
 
     //singleton
-    public static FromCadLivro gerarFromCadLivro(){
-        if(fromCadLivroUnic == null){
-            fromCadLivroUnic = new FromCadLivro();
+    public static FromAtuLivro gerarFromAtuLivro(){
+        if(fromAtuLivroUnic == null){
+            fromAtuLivroUnic = new FromAtuLivro();
         }
 
-        return fromCadLivroUnic;
+        return fromAtuLivroUnic;
     }
 
-    //campos para colecioanvel 
+    //campos para Colecionavel 
 
     JLabel rtEspeEdit;
     JTextField cxEspeEdit;
@@ -84,11 +88,14 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rtTesteDidatico1 = new javax.swing.JButton();
         rtTituloPagina = new javax.swing.JLabel();
         rtNome = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         rtID = new javax.swing.JLabel();
         cxId = new javax.swing.JTextField();
+        rtTipo = new javax.swing.JLabel();
+        slTipo = new javax.swing.JComboBox<>();
         rtTirulo = new javax.swing.JLabel();
         cxTitulo = new javax.swing.JTextField();
         rtAutor = new javax.swing.JLabel();
@@ -101,21 +108,30 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         cxPrateleira = new javax.swing.JTextField();
         rtLinha = new javax.swing.JLabel();
         cxLinha = new javax.swing.JTextField();
-        rtTipo = new javax.swing.JLabel();
-        slTipo = new javax.swing.JComboBox<>();
+        rtbloqueado = new javax.swing.JLabel();
+        ckBloqueado = new javax.swing.JCheckBox();
         pnCampos = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btLimpar = new javax.swing.JButton();
-        btCadastar = new javax.swing.JButton();
+        Buscar = new javax.swing.JButton();
+        btAtualizar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        rtTesteDidatico1.setText("Inserir dados de teste didatico");
+        rtTesteDidatico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rtTesteDidatico1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         rtTituloPagina.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        rtTituloPagina.setText("Cadastrar Livro");
+        rtTituloPagina.setText("Atualiza Livro");
 
         rtNome.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
-        jPanel1.setLayout(new java.awt.GridLayout(8, 2, 50, 10));
+        jPanel1.setLayout(new java.awt.GridLayout(9, 2, 50, 10));
 
         rtID.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rtID.setText("ID");
@@ -129,11 +145,25 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         });
         jPanel1.add(cxId);
 
+        rtTipo.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rtTipo.setText("Tipo");
+        jPanel1.add(rtTipo);
+
+        slTipo.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        slTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Colecionavel", "Didatico", "Infantil" }));
+        slTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                slTipoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(slTipo);
+
         rtTirulo.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rtTirulo.setText("Titulo");
         jPanel1.add(rtTirulo);
 
         cxTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        cxTitulo.setEnabled(false);
         jPanel1.add(cxTitulo);
 
         rtAutor.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
@@ -141,6 +171,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         jPanel1.add(rtAutor);
 
         cxAutor.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        cxAutor.setEnabled(false);
         jPanel1.add(cxAutor);
 
         rtEditora.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
@@ -148,6 +179,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         jPanel1.add(rtEditora);
 
         cxEditora.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        cxEditora.setEnabled(false);
         jPanel1.add(cxEditora);
 
         rtSecao.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
@@ -155,6 +187,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         jPanel1.add(rtSecao);
 
         cxSecao.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        cxSecao.setEnabled(false);
         jPanel1.add(cxSecao);
 
         rtPrateleira.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
@@ -162,6 +195,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         jPanel1.add(rtPrateleira);
 
         cxPrateleira.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        cxPrateleira.setEnabled(false);
         jPanel1.add(cxPrateleira);
 
         rtLinha.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
@@ -169,20 +203,15 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         jPanel1.add(rtLinha);
 
         cxLinha.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        cxLinha.setEnabled(false);
         jPanel1.add(cxLinha);
 
-        rtTipo.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        rtTipo.setText("Tipo");
-        jPanel1.add(rtTipo);
+        rtbloqueado.setText("Bloqueado");
+        jPanel1.add(rtbloqueado);
 
-        slTipo.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        slTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Colecioanvel", "Didatico", "Infantil" }));
-        slTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                slTipoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(slTipo);
+        ckBloqueado.setText("Bloqueado");
+        ckBloqueado.setEnabled(false);
+        jPanel1.add(ckBloqueado);
 
         pnCampos.setLayout(new java.awt.GridLayout(3, 2, 50, 10));
 
@@ -193,10 +222,17 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             }
         });
 
-        btCadastar.setText("Cadastrar");
-        btCadastar.addActionListener(new java.awt.event.ActionListener() {
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastarActionPerformed(evt);
+                BuscarActionPerformed(evt);
+            }
+        });
+
+        btAtualizar.setText("Atualizar");
+        btAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizarActionPerformed(evt);
             }
         });
 
@@ -207,8 +243,10 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(btCadastar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(Buscar)
+                .addGap(30, 30, 30)
+                .addComponent(btAtualizar)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -217,9 +255,12 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btLimpar)
-                    .addComponent(btCadastar))
+                    .addComponent(Buscar)
+                    .addComponent(btAtualizar))
                 .addGap(30, 30, 30))
         );
+
+        jLabel1.setText("Digite e selecione um tipo id para buscar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,6 +276,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addComponent(rtTituloPagina)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -249,22 +291,24 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(rtTituloPagina)
-                        .addGap(30, 30, 30)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(29, 29, 29)
                 .addComponent(pnCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCadastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastarActionPerformed
-        cadastrar();
+    private void btAtuastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtuastarActionPerformed
+        atualizar();
         FromPrincipal.gerarFromPrincipal().listarLivros();
-    }//GEN-LAST:event_btCadastarActionPerformed
+    }//GEN-LAST:event_btAtuastarActionPerformed
 
     private void cxIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxIdActionPerformed
         // TODO add your handling code here:
@@ -275,9 +319,173 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void slTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_slTipoActionPerformed
-        toggle();
+        if(!cleaning)buscar();
+        
     }//GEN-LAST:event_slTipoActionPerformed
 
+    private void rtTesteDidatico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rtTesteDidatico1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rtTesteDidatico1ActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        buscar();
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
+        atualizar();
+    }//GEN-LAST:event_btAtualizarActionPerformed
+    
+    
+    public void buscar(){
+        int intTempo = getInt(cxId.getText(),rtID.getText());
+        if(intTempo == -1) return;
+
+        String tipo = (String)slTipo.getSelectedItem();
+        
+        if(tipo.equalsIgnoreCase("Selecione...")){
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Selecione um tipo",
+                    "Atualizar Livro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        
+        if (tipo.equalsIgnoreCase("colecionavel")){
+            colecionavel = armazen.getColecionavelById(intTempo);
+
+            if(colecionavel != null){
+                toggle();
+        
+                cxId.setEnabled(false);
+                slTipo.setEnabled(false);
+                
+                cxTitulo.setText(colecionavel.getTitulo());
+                cxTitulo.setEnabled(true);
+                
+                //reflexibilidade
+                cxAutor.setText(colecionavel.getAutor().getCpf());
+                cxAutor.setEnabled(true);
+
+                //reflexibilidade
+                cxEditora.setText(colecionavel.getEditora().getCnpj());
+                cxEditora.setEnabled(true);
+
+                //reflexibilidade
+                cxSecao.setText(colecionavel.getLocalizacao().getSecao());
+                cxSecao.setEnabled(true);
+
+                //reflexibilidade
+                cxPrateleira.setText(Integer.toString(colecionavel.getLocalizacao().getPrateleira()));
+                cxPrateleira.setEnabled(true);
+                
+                //reflexibilidade
+                cxLinha.setText(Integer.toString(colecionavel.getLocalizacao().getLinha()));
+                cxLinha.setEnabled(true);
+
+                ckBloqueado.setSelected(colecionavel.getBloqueado());
+                ckBloqueado.setEnabled(true);
+
+                cxEspeEdit.setText(colecionavel.getEdicaoEspecial());
+                cxAdicional.setText(colecionavel.getAdicional());
+                ckNumerado.setSelected(colecionavel.isNumerado());
+
+                return;
+            }
+        }else if(tipo.equalsIgnoreCase("didatico")){
+            Didatico didatico = armazen.getDidaticoById(intTempo);
+
+            if(didatico != null){
+                toggle();
+
+                cxId.setEnabled(false);
+                slTipo.setEnabled(false);
+
+                cxTitulo.setText(didatico.getTitulo());
+                cxTitulo.setEnabled(true);
+
+                //reflexibilidade
+                cxAutor.setText(didatico.getAutor().getCpf());
+                cxAutor.setEnabled(true);
+
+                //reflexibilidade
+                cxEditora.setText(didatico.getEditora().getCnpj());
+                cxEditora.setEnabled(true);
+
+                //reflexibilidade
+                cxSecao.setText(didatico.getLocalizacao().getSecao());
+                cxSecao.setEnabled(true);
+
+                //reflexibilidade
+                cxPrateleira.setText(Integer.toString(didatico.getLocalizacao().getPrateleira()));
+                cxPrateleira.setEnabled(true);
+
+                //reflexibilidade
+                cxLinha.setText(Integer.toString(didatico.getLocalizacao().getLinha()));
+                cxLinha.setEnabled(true);
+
+                ckBloqueado.setSelected(didatico.getBloqueado());
+                ckBloqueado.setEnabled(true);
+
+                cxNivel.setText(didatico.getNivel());
+                cxMateria.setText(didatico.getMateria());
+                cxComplexidade.setText(didatico.getComplexidade());
+
+            return;
+            }
+        }else if(tipo.equalsIgnoreCase("infantil")){
+           
+            Infantil infantil = armazen.getInfantilById(intTempo);
+            if(infantil != null){
+                toggle();
+
+                cxId.setEnabled(false);
+                slTipo.setEnabled(false);
+
+                cxTitulo.setText(infantil.getTitulo());
+                cxTitulo.setEnabled(true);
+
+                //reflexibilidade
+                cxAutor.setText(infantil.getAutor().getCpf());
+                cxAutor.setEnabled(true);
+
+                //reflexibilidade
+                cxEditora.setText(infantil.getEditora().getCnpj());
+                cxEditora.setEnabled(true);
+
+                //reflexibilidade
+                cxSecao.setText(infantil.getLocalizacao().getSecao());
+                cxSecao.setEnabled(true);
+
+                //reflexibilidade
+                cxPrateleira.setText(Integer.toString(infantil.getLocalizacao().getPrateleira()));
+                cxPrateleira.setEnabled(true);
+
+                //reflexibilidade
+                cxLinha.setText(Integer.toString(infantil.getLocalizacao().getLinha()));
+                cxLinha.setEnabled(true);
+
+                ckBloqueado.setSelected(infantil.getBloqueado());
+                ckBloqueado.setEnabled(true);
+
+                // campos específicos
+                cxFaixaEtaria.setText(Integer.toString(infantil.getFaixaEtaria()));
+                cxMaterial.setText(infantil.getMaterial());
+                ckInterativo.setSelected(infantil.isInterativo());
+
+                return;  
+            }
+        }
+        
+        JOptionPane.showMessageDialog(
+                null,
+                "Id não encontrada.",
+                "Atualizar Livro",
+                JOptionPane.ERROR_MESSAGE
+        );
+        
+    }
     
     public void toggle(){
         pnCampos.removeAll();
@@ -285,7 +493,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         String tipo = (String) slTipo.getSelectedItem();
         
         switch (tipo) {
-        case "Colecioanvel":
+        case "Colecionavel":
             colecionavel();
             
             break;
@@ -365,78 +573,85 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     }
     
     public void clear(){
+        cleaning = true; //para ele não tentar buscar Livro durante a limpeza do formulario
         slTipo.setSelectedIndex(0);
+        slTipo.setEnabled(true);
+
         cxId.setText("");
+        cxId.setEnabled(true);
+
         cxTitulo.setText("");
+        cxTitulo.setEnabled(false);
+
         cxAutor.setText("");
+        cxAutor.setEnabled(false);
+
         cxEditora.setText("");
+        cxEditora.setEnabled(false);
+
         cxLinha.setText("");
+        cxLinha.setEnabled(false);
+
         cxPrateleira.setText("");
+        cxPrateleira.setEnabled(false);
+
         cxSecao.setText("");
+        cxSecao.setEnabled(false);
+
+        ckBloqueado.setSelected(false);
+        ckBloqueado.setEnabled(false);
         
+        toggle();
+        cleaning = false;
     }
     
-    //polimorfismo por sobrescrita
-    @Override
-    public void cadastrar(){
+    public void atualizar(){
         
         String tipo = (String) slTipo.getSelectedItem();
-        boolean cadastado;
+        boolean atualizado;
 
         switch (tipo) {
-        case "Colecioanvel":
-            cadastado = cadColecionavel();
+        case "Colecionavel":
+            atualizado = atuColecionavel();
             
             break;
         case "Didatico":
-            cadastado = caDdidatico();
+            atualizado = atuDidatico();
             
             break;
         case "Infantil":
-            cadastado = cadInfantil();
+            atualizado = atuInfantil();
             
             break;
         default:
             JOptionPane.showMessageDialog(
                 null,
                 "Selecione um tipo de livro.",
-                "Cadastro de livro",
+                "Atualizar livro",
                 JOptionPane.ERROR_MESSAGE
             );
             return;
         }
 
-        if(cadastado){
+        if(atualizado){
+            
             clear();
             JOptionPane.showMessageDialog(
                 null,
-                "Cadastro realizado com sucesso!",
-                "Cadastro de livro",
+                "Atualizado com sucesso!",
+                "Atualizar de livro",
                 JOptionPane.INFORMATION_MESSAGE
             );
+            FromConAutor.gerFromAtuAutor().listaAutor();
         }
     }
     
-    public Livro cadLivro(){
-        //polimorfismo por coesão 
+    public Livro atuLivro(String tipo){
+        //polimorfismo por coerção 
         Livro livro = new Colecionavel();  
         int intTempo = -1;
         
-        intTempo = getInt(cxId.getText(),rtID.getText());
-        if(intTempo == -1) return null;
-        livro.setId(intTempo);
-
-        for(Colecionavel temp : armazen.getBdColecionavel()) {
-            if(temp.getId() == livro.getId()) {
-                JOptionPane.showMessageDialog(
-                    null,
-                    "ID já cadastrado, tente novamente.",
-                    "Cadastro de livro",
-                    JOptionPane.ERROR_MESSAGE
-                );
-                return null;
-            }
-        }
+        livro.setId(getInt(cxId.getText(),rtID.getText()));
         
         try{
             livro.setTitulo(cxTitulo.getText());            
@@ -463,13 +678,12 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         //reflexividade
         livro.getLocalizacao().setLinha(intTempo);
 
-
         Autor autor = armazen.getAutorByCpf(cxAutor.getText());
         if(autor == null) {
             JOptionPane.showMessageDialog(
                 null,
                 "Autor não encontrado.",
-                "Cadastro de livro",
+                "Atualizar livro",
                 JOptionPane.ERROR_MESSAGE
             );
             return null;
@@ -479,7 +693,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             JOptionPane.showMessageDialog(
                 null,
                 "Autor bloqueado.",
-                "Cadastro de livro",
+                "Atualizar livro",
                 JOptionPane.ERROR_MESSAGE
             );
             return null;
@@ -491,7 +705,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             JOptionPane.showMessageDialog(
                 null,
                 "Editora não encontrado.",
-                "Cadastro de livro",
+                "Atualizar livro",
                 JOptionPane.ERROR_MESSAGE
             );
             return null;
@@ -501,20 +715,22 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
             JOptionPane.showMessageDialog(
                 null,
                 "Editora bloqueada.",
-                "Cadastro de livro",
+                "Atualizar livro",
                 JOptionPane.ERROR_MESSAGE
             );
         }
         livro.setEditora(editora);
+        
+        livro.setBloqueado(ckBloqueado.isSelected());
         return livro;
     } 
 
 
-    public boolean cadColecionavel(){
+    public boolean atuColecionavel(){
         colecionavel = new Colecionavel();
 
-        //polimorfismo por coesãao
-        Livro livro = cadLivro();
+        //polimorfismo por coerção
+        Livro livro = atuLivro("colecionavel");
         if(livro == null) return false;
         colecionavel.setLivroGenerico(livro);
 
@@ -522,15 +738,35 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         colecionavel.setAdicional(cxAdicional.getText());
         colecionavel.setEdicaoEspecial(cxEspeEdit.getText());
 
-        armazen.getBdColecionavel().add(colecionavel);  
+        Colecionavel original = armazen.getColecionavelById(colecionavel.getId());
+        if(original != null){
+            try{
+                original.setTitulo(colecionavel.getTitulo());
+            }catch(LivroExecption e){} //nunca vai ocorer
+            original.setAutor(colecionavel.getAutor());
+            original.setEditora(colecionavel.getEditora());
+            original.setLocalizacao(colecionavel.getLocalizacao());
+
+            original.setEdicaoEspecial(colecionavel.getEdicaoEspecial());
+            original.setAdicional(colecionavel.getAdicional());
+            original.setNumerado(colecionavel.isNumerado());
+        }else{
+            JOptionPane.showMessageDialog(
+                null,
+                "Erro no cadastro",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
         return true;
     }
 
-    public boolean caDdidatico(){
+    public boolean atuDidatico(){
         didatico = new Didatico();
 
-        //polimorfismo por coesão
-        Livro livro = cadLivro();
+        //polimorfismo por coerção
+        Livro livro = atuLivro("didatico");
         if(livro == null) return false;
         didatico.setLivroGenerico(livro);
 
@@ -538,15 +774,35 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         didatico.setMateria(cxMateria.getText());
         didatico.setComplexidade(cxComplexidade.getText());
 
-        armazen.getBdDidatico().add(didatico);
+        Didatico original = armazen.getDidaticoById(didatico.getId());
+        if(original != null){
+            try{
+                original.setTitulo(colecionavel.getTitulo());
+            }catch(LivroExecption e){} //nunca vai ocorer
+            original.setAutor(didatico.getAutor());
+            original.setEditora(didatico.getEditora());
+            original.setLocalizacao(didatico.getLocalizacao());
+
+            original.setNivel(didatico.getNivel());
+            original.setMateria(didatico.getMateria());
+            original.setComplexidade(didatico.getComplexidade());
+        }else{
+            JOptionPane.showMessageDialog(
+                null,
+                "Erro no cadastro",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
         return true;
     }
 
-    public boolean cadInfantil(){
+    public boolean atuInfantil(){
         infantil = new Infantil();
 
-        //polimorfismo por coesão
-        Livro livro = cadLivro();
+        //polimorfismo por coerção
+        Livro livro = atuLivro("infantil");
         if(livro == null) return false;
         infantil.setLivroGenerico(livro);
 
@@ -556,7 +812,27 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         infantil.setMaterial(cxMateria.getText());
         infantil.setInterativo(ckInterativo.isSelected());
 
-        armazen.getBdInfantil().add(infantil);
+        Infantil original = armazen.getInfantilById(infantil.getId());
+        if(original != null){
+            try{
+                original.setTitulo(colecionavel.getTitulo());
+            }catch(LivroExecption e){} //nunca vai ocorer
+            original.setAutor(infantil.getAutor());
+            original.setEditora(infantil.getEditora());
+            original.setLocalizacao(infantil.getLocalizacao());
+
+            original.setFaixaEtaria(infantil.getFaixaEtaria());
+            original.setMaterial(infantil.getMaterial());
+            original.setInterativo(infantil.isInterativo());
+        }else{
+            JOptionPane.showMessageDialog(
+                null,
+                "Erro no cadastro",
+                "Atualizar livro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
         return true;
     }
 
@@ -608,15 +884,17 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FromCadLivro().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FromAtuLivro().setVisible(true));
     }
 
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCadastar;
+    private javax.swing.JButton Buscar;
+    private javax.swing.JButton btAtualizar;
     private javax.swing.JButton btLimpar;
+    private javax.swing.JCheckBox ckBloqueado;
     private javax.swing.JTextField cxAutor;
     private javax.swing.JTextField cxEditora;
     private javax.swing.JTextField cxId;
@@ -624,6 +902,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     private javax.swing.JTextField cxPrateleira;
     private javax.swing.JTextField cxSecao;
     private javax.swing.JTextField cxTitulo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pnCampos;
@@ -634,9 +913,11 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     private javax.swing.JLabel rtNome;
     private javax.swing.JLabel rtPrateleira;
     private javax.swing.JLabel rtSecao;
+    private javax.swing.JButton rtTesteDidatico1;
     private javax.swing.JLabel rtTipo;
     private javax.swing.JLabel rtTirulo;
     private javax.swing.JLabel rtTituloPagina;
+    private javax.swing.JLabel rtbloqueado;
     private javax.swing.JComboBox<String> slTipo;
     // End of variables declaration//GEN-END:variables
 }

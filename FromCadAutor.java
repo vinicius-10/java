@@ -120,7 +120,7 @@ public class FromCadAutor extends javax.swing.JFrame implements Menus {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btLimpar)
                     .addComponent(btCadastar))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,6 +138,8 @@ public class FromCadAutor extends javax.swing.JFrame implements Menus {
         cadastrar();
     }//GEN-LAST:event_btCadastarActionPerformed
 
+    
+    
     //polimorfismo por sobrescrita
     @Override
     public void cadastrar(){

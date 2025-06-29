@@ -7,6 +7,7 @@
 
 import javax.swing.JOptionPane;
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -184,34 +185,34 @@ public class FromAtuEditora extends javax.swing.JFrame {
             editora = e.corTinyCnpjExecption(editora);
         }
         
-        for(Editora temp : armazen.getBdEditoras()) {
-            if(temp.getCnpj().equals(editora.getCnpj())) {
-                try{
-                    temp.setNome(cxNome.getText());
-                }catch(EditoraExecption e) {
-         
-                    temp = e.corTinyNameExecption(editora);
-                }
-                
-                temp.setBloqueado(ckBloqueado.isSelected());
-                JOptionPane.showMessageDialog(
-                    null,
-                    "Editora atualizada",
-                    "Atualizar editora",
-                    JOptionPane.INFORMATION_MESSAGE
-                );
-                FromConEditora.gerFromAtuEditora().listaEditora();
-                clear();
-                return;
-            }
-        }   
-        
+        editora = armazen.getEditoraByCnpj(editora.getCnpj());
+
+        if(editora == null){
+             JOptionPane.showMessageDialog(
+                null,
+                "CNPJ não encontrado",
+                "Atualizar editora",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        try{
+            editora.setNome(cxNome.getText());
+        }catch(EditoraExecption e) {
+            editora = e.corTinyNameExecption(editora);
+        }
+
+        editora.setBloqueado(ckBloqueado.isSelected());
+
         JOptionPane.showMessageDialog(
             null,
-            "CNPJ não encontrado",
+            "Editora atualizada",
             "Atualizar editora",
-            JOptionPane.ERROR_MESSAGE
+            JOptionPane.INFORMATION_MESSAGE
         );
+        FromConEditora.gerFromAtuEditora().listaEditora();
+        clear();
+        return;
     }
     
     public void getEditora(){

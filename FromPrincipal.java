@@ -1,17 +1,20 @@
-
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
-
-
-
 //netbeans IDe 26
 //Vinicius Souza dias 2564599
 
 
 
-
-
+import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import java.util.ArrayList;
+import java.text.Normalizer;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 
 
@@ -30,6 +33,7 @@ public class FromPrincipal extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FromPrincipal.class.getName());
     
     public Armazenamento armazen;
+    public boolean buscaDetalhada = false;
     
     /**
      * Creates new form Principal
@@ -66,11 +70,12 @@ public class FromPrincipal extends javax.swing.JFrame {
         rtNome = new javax.swing.JLabel();
         rtBusca = new javax.swing.JLabel();
         rtMeioBusca = new javax.swing.JLabel();
+        btBuscr = new javax.swing.JButton();
         pnBusca = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbLivros = new javax.swing.JTable();
         rtDetalhes = new javax.swing.JLabel();
-        btTeste = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         barMnPrincipal = new javax.swing.JMenuBar();
         mnLivro = new javax.swing.JMenu();
         itCadLivro = new javax.swing.JMenuItem();
@@ -122,6 +127,13 @@ public class FromPrincipal extends javax.swing.JFrame {
         rtMeioBusca.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         rtMeioBusca.setText("Digite o titulo, Autor ou Editora");
 
+        btBuscr.setText("Buscar");
+        btBuscr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscrActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
@@ -131,7 +143,10 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rtMeioBusca)
                     .addComponent(rtBusca)
-                    .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnPrincipalLayout.createSequentialGroup()
+                        .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(btBuscr))
                     .addComponent(rtNome)
                     .addComponent(rtTitulo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -146,7 +161,9 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(rtBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBuscr))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rtMeioBusca)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -154,15 +171,20 @@ public class FromPrincipal extends javax.swing.JFrame {
 
         tbLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Tipo", "Autor", "Editora"
+                "ID", "Nome", "Tipo", "Autor", "Editora"
             }
         ));
+        tbLivros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbLivrosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbLivros);
 
         rtDetalhes.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -191,10 +213,10 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        btTeste.setText("Inserir dados para teste");
-        btTeste.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTesteActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -209,6 +231,11 @@ public class FromPrincipal extends javax.swing.JFrame {
         mnLivro.add(itCadLivro);
 
         itAtuLivro.setText("Atualizar...");
+        itAtuLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itAtuLivroActionPerformed(evt);
+            }
+        });
         mnLivro.add(itAtuLivro);
 
         barMnPrincipal.add(mnLivro);
@@ -282,8 +309,8 @@ public class FromPrincipal extends javax.swing.JFrame {
                     .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(266, 266, 266)
-                .addComponent(btTeste)
+                .addGap(274, 274, 274)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -293,9 +320,9 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(btTeste)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -334,12 +361,204 @@ public class FromPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itCadLivroActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        listarLivros();
+        if(!buscaDetalhada) listarLivros();
     }//GEN-LAST:event_formWindowActivated
 
-    private void btTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTesteActionPerformed
-        cadTestes();
-    }//GEN-LAST:event_btTesteActionPerformed
+    private void itAtuLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itAtuLivroActionPerformed
+       FromAtuLivro.gerarFromAtuLivro().setVisible(true);
+    }//GEN-LAST:event_itAtuLivroActionPerformed
+
+    private void tbLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLivrosMouseClicked
+        descreverlivro();
+    }//GEN-LAST:event_tbLivrosMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cadTeste();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btBuscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscrActionPerformed
+        buscar();
+    }//GEN-LAST:event_btBuscrActionPerformed
+
+    public void buscar(){
+        List<Infantil> bdInfantil = new ArrayList<Infantil>();
+        List<Didatico> bdDidatico = new ArrayList<Didatico>();
+        List<Colecionavel> bdColecionavel = new ArrayList<Colecionavel>();
+        
+        String nome = cxBusca.getText().trim();
+        if(nome.length() == 0){
+            buscaDetalhada = false;
+            listarLivros();
+            return;
+        }
+        buscaDetalhada = true;
+
+        nome = limpaString(nome);
+        buscaColecionavel(bdColecionavel,nome);
+        buscaDidatico(bdDidatico, nome);
+        buscainfantil(bdInfantil, nome);
+
+        DefaultTableModel modTab = (DefaultTableModel)tbLivros.getModel();
+        int posLin = 0;
+        modTab.setRowCount(posLin);
+
+        for(Colecionavel colecionavel : bdColecionavel){//reflexividade para autor e editora
+            modTab.insertRow(posLin, new Object[]{colecionavel.getId(),colecionavel.getTitulo(),"Colecionavel",colecionavel.getAutor().getNome(),colecionavel.getEditora().getNome()});
+            posLin++;
+        }
+
+        for(Didatico didatico : bdDidatico){//reflexividade para autor e editora
+            modTab.insertRow(posLin, new Object[]{didatico.getId(),didatico.getTitulo(),"Didatico",didatico.getAutor().getNome(),didatico.getEditora().getNome()});
+            posLin++;
+        }
+
+        for(Infantil infantil : bdInfantil){//reflexividade para autor e editora
+            modTab.insertRow(posLin, new Object[]{infantil.getId(),infantil.getTitulo(),"infantil",infantil.getAutor().getNome(),infantil.getEditora().getNome()});
+            posLin++;
+        }
+    }
+    
+    public void buscaColecionavel(List<Colecionavel> list ,String texto){
+        for(Colecionavel livro : armazen.getBdColecionavel()){
+            
+            if(limpaString(livro.getTitulo()).contains(texto)){
+                list.add(livro);
+                //reflexibibilidade
+
+            }else if(limpaString(livro.getAutor().getNome()).contains(texto)){
+                list.add(livro);
+            }
+            System.gc();
+        }
+    }
+
+    public void buscaDidatico(List<Didatico> list ,String texto){
+        for(Didatico livro : armazen.getBdDidatico()){
+            if(limpaString(livro.getTitulo()).contains(texto)){
+                list.add(livro);
+                //reflexibibilidade
+            }else if(limpaString(livro.getAutor().getNome()).contains(texto)){
+                list.add(livro);
+            }
+            System.gc();
+        }
+    }
+
+    public void buscainfantil(List<Infantil> list ,String texto){
+        for(Infantil livro : armazen.getBdInfantil()){
+            if(limpaString(livro.getTitulo()).contains(texto)){
+                list.add(livro);
+                //reflexibibilidade
+            }else if(limpaString(livro.getAutor().getNome()).contains(texto)){
+                list.add(livro);
+            }
+            System.gc();
+        }
+    }
+
+    public String limpaString(String text){
+        return Normalizer.normalize(text.toLowerCase(), Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+    }
+    
+    public void descreverlivro(){
+        int livroId;
+        String tipo = "";
+        StringBuilder sb = new StringBuilder(); 
+
+        int posLin = tbLivros.getSelectedRow();
+        
+        livroId = (int) tbLivros.getModel().getValueAt(posLin,0);
+        tipo = tbLivros.getModel().getValueAt(posLin,2).toString();
+        
+        if(tipo.equalsIgnoreCase("Colecionavel")){
+            getDataColecionavel(livroId, sb);
+        }else if(tipo.equalsIgnoreCase("Didatico")){
+            getDataDidatico(livroId, sb);
+        }else if(tipo.equalsIgnoreCase("Infantil")){
+            getDataInfantil(livroId, sb);
+        }
+        
+        JTextArea area = new JTextArea(sb.toString());
+        area.setEditable(false);
+        area.setFont(new Font("monospaced", Font.PLAIN, 12)); 
+
+        JScrollPane scroll = new JScrollPane(area);
+        scroll.setPreferredSize(new Dimension(400, 250)); 
+
+        JOptionPane.showMessageDialog(null, scroll, "Detalhes do Colecionável", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    public void getDataColecionavel(int id,StringBuilder sb){
+        Colecionavel colecionavel = armazen.getColecionavelById(id);
+        if(colecionavel != null){
+
+            sb.append("ID: ").append(colecionavel.getId()).append("\n");
+            sb.append("Título: ").append(colecionavel.getTitulo()).append("\n");
+            //reflexibxibilidade
+            sb.append("Autor CPF: ").append(colecionavel.getAutor().getCpf()).append("\n");
+            sb.append("Autor: ").append(colecionavel.getAutor().getNome()).append("\n");
+            sb.append("Editora CNPJ: ").append(colecionavel.getEditora().getCnpj()).append("\n");
+            sb.append("Editora: ").append(colecionavel.getEditora().getNome()).append("\n");
+
+            // refelexibilidades
+            sb.append("Localização:\n");
+            sb.append("  - Seção: ").append(colecionavel.getLocalizacao().getSecao()).append("\n");
+            sb.append("  - Prateleira: ").append(colecionavel.getLocalizacao().getPrateleira()).append("\n");
+            sb.append("  - Linha: ").append(colecionavel.getLocalizacao().getLinha()).append("\n");
+
+            sb.append("Edição Especial: ").append(colecionavel.getEdicaoEspecial()).append("\n");
+            sb.append("Adicional: ").append(colecionavel.getAdicional()).append("\n");
+            sb.append("Numerado: ").append(colecionavel.isNumerado() ? "Sim" : "Não").append("\n");
+        }
+    }
+
+    public void getDataDidatico(int id, StringBuilder sb) {
+        Didatico didatico = armazen.getDidaticoById(id);
+        if (didatico != null) {
+
+            sb.append("ID: ").append(didatico.getId()).append("\n");
+            sb.append("Título: ").append(didatico.getTitulo()).append("\n");
+
+            // Reflexividade
+            sb.append("Autor: ").append(didatico.getAutor().getNome()).append("\n");
+            sb.append("Editora: ").append(didatico.getEditora().getNome()).append("\n");
+
+            // Reflexividade
+            sb.append("Localização:\n");
+            sb.append("  - Seção: ").append(didatico.getLocalizacao().getSecao()).append("\n");
+            sb.append("  - Prateleira: ").append(didatico.getLocalizacao().getPrateleira()).append("\n");
+            sb.append("  - Linha: ").append(didatico.getLocalizacao().getLinha()).append("\n");
+
+            sb.append("Nível: ").append(didatico.getNivel()).append("\n");
+            sb.append("Matéria: ").append(didatico.getMateria()).append("\n");
+            sb.append("Complexidade: ").append(didatico.getComplexidade()).append("\n");
+        }
+    }
+
+    public void getDataInfantil(int id, StringBuilder sb) {
+        Infantil infantil = armazen.getInfantilById(id);
+        if (infantil != null) {
+
+            sb.append("ID: ").append(infantil.getId()).append("\n");
+            sb.append("Título: ").append(infantil.getTitulo()).append("\n");
+
+            // Reflexividade
+            sb.append("Autor: ").append(infantil.getAutor().getNome()).append("\n");
+            sb.append("Editora: ").append(infantil.getEditora().getNome()).append("\n");
+
+            // Reflexividade
+            sb.append("Localização:\n");
+            sb.append("  - Seção: ").append(infantil.getLocalizacao().getSecao()).append("\n");
+            sb.append("  - Prateleira: ").append(infantil.getLocalizacao().getPrateleira()).append("\n");
+            sb.append("  - Linha: ").append(infantil.getLocalizacao().getLinha()).append("\n");
+
+            sb.append("Faixa Etária: ").append(infantil.getFaixaEtaria()).append("\n");
+            sb.append("Material: ").append(infantil.getMaterial()).append("\n");
+            sb.append("Interativo: ").append(infantil.isInterativo() ? "Sim" : "Não").append("\n");
+        }
+    }
+
 
     public void listarLivros(){
         DefaultTableModel modTab = (DefaultTableModel)tbLivros.getModel();
@@ -347,37 +566,67 @@ public class FromPrincipal extends javax.swing.JFrame {
         modTab.setRowCount(posLin);
         
         for(Colecionavel colecionavel : armazen.getBdColecionavel()){//reflexividade para autor e editora
-            modTab.insertRow(posLin, new Object[]{colecionavel.getTitulo(),"Colecionavel",colecionavel.getAutor().getNome(),colecionavel.getEditora().getNome()});
+            modTab.insertRow(posLin, new Object[]{colecionavel.getId(),colecionavel.getTitulo(),"Colecionavel",colecionavel.getAutor().getNome(),colecionavel.getEditora().getNome()});
             posLin++;
         }
 
         for(Didatico didatico : armazen.getBdDidatico()){//reflexividade para autor e editora
-            modTab.insertRow(posLin, new Object[]{didatico.getTitulo(),"Didatico",didatico.getAutor().getNome(),didatico.getEditora().getNome()});
+            modTab.insertRow(posLin, new Object[]{didatico.getId(),didatico.getTitulo(),"Didatico",didatico.getAutor().getNome(),didatico.getEditora().getNome()});
             posLin++;
         }
 
         for(Infantil infantil : armazen.getBdInfantil()){//reflexividade para autor e editora
-            modTab.insertRow(posLin, new Object[]{infantil.getTitulo(),"infantil",infantil.getAutor().getNome(),infantil.getEditora().getNome()});
+            modTab.insertRow(posLin, new Object[]{infantil.getId(),infantil.getTitulo(),"infantil",infantil.getAutor().getNome(),infantil.getEditora().getNome()});
             posLin++;
         }
     }
-    public void cadTestes(){
-        // Autores
+
+    public void cadTeste(){
+        String camiho = "dataTeste.txt";
+        try (BufferedReader br =new BufferedReader(new FileReader(caminho))){
+            String linha;
+
+            while ((linha = br.readLine()) != null) {
+                String[] data = linha.split(";");
+
+                if (data[0].equalsIgnoreCase("editora")){
+
+                }
+            }
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(
+                null,
+                e.getMessage(),
+                "Falha no cadastro"
+            );
+        }
+
+        
+    }
+    public int getMaxCnpjEditora(){
+        int max = 1;
+        for(Editora edit : armazen.getBdEditoras()){
+            try{
+                if(max < Integer.parseInt(edit.getCnpj())){
+                    max = Integer.parseInt(edit.getCnpj());
+                }
+            } catch (NumberFormatException e) {}
+        }
+    } 
+
+    public void cadTesteAntingo(){
         armazen.getBdAutores().add(new Autor(false, "Machado de Assis", "12345"));
         armazen.getBdAutores().add(new Autor(false, "Clarice Lispector", "23456"));
         armazen.getBdAutores().add(new Autor(false, "Carlos Drummond", "34567"));
         armazen.getBdAutores().add(new Autor(false, "Monteiro Lobato", "45678"));
         armazen.getBdAutores().add(new Autor(false, "Cecília Meireles", "56789"));
 
-        // Editoras
         armazen.getBdEditoras().add(new Editora(false, "Companhia das Letras", "11111"));
         armazen.getBdEditoras().add(new Editora(false, "Globo", "22222"));
         armazen.getBdEditoras().add(new Editora(false, "Record", "33333"));
         armazen.getBdEditoras().add(new Editora(false, "Ática", "44444"));
         armazen.getBdEditoras().add(new Editora(false, "Saraiva", "55555"));
 
-        /* 
-        // Livros - Didático
         armazen.getBdDidatico().add(new Didatico(1, "Matemática I", armazen.getBdAutores().get(0),
                 new Localizacao("A", 1, 1), armazen.getBdEditoras().get(0), false,
                 "Matemática", "Fundamental", "Baixa"));
@@ -398,6 +647,7 @@ public class FromPrincipal extends javax.swing.JFrame {
                 new Localizacao("E", 5, 5), armazen.getBdEditoras().get(4), false,
                 "Geografia", "Fundamental", "Baixa"));
         
+
         // Colecionáveis
         armazen.getBdColecionavel().add(new Colecionavel(6, "Coleção Rara A", armazen.getBdAutores().get(0),
                 new Localizacao("F", 1, 2), armazen.getBdEditoras().get(0), false,
@@ -418,6 +668,7 @@ public class FromPrincipal extends javax.swing.JFrame {
         armazen.getBdColecionavel().add(new Colecionavel(10, "Coleção Rara E", armazen.getBdAutores().get(4),
                 new Localizacao("F", 5, 2), armazen.getBdEditoras().get(4), false,
                 "Comemorativa", false, "Numerada"));
+    
 
         // Infantis
         armazen.getBdInfantil().add(new Infantil(11, "Livro Infantil A", armazen.getBdAutores().get(0),
@@ -439,12 +690,8 @@ public class FromPrincipal extends javax.swing.JFrame {
         armazen.getBdInfantil().add(new Infantil(15, "Livro Infantil E", armazen.getBdAutores().get(4),
                 new Localizacao("G", 5, 3), armazen.getBdEditoras().get(4), false,
                 3, "Tecido", true));
-        
-        
-        */ 
-        listarLivros();
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -472,7 +719,7 @@ public class FromPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMnPrincipal;
-    private javax.swing.JButton btTeste;
+    private javax.swing.JButton btBuscr;
     private javax.swing.JTextField cxBusca;
     private javax.swing.JMenuItem itAtuLivro;
     private javax.swing.JMenuItem itCadLivro;
@@ -482,6 +729,7 @@ public class FromPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itMnCadEditora;
     private javax.swing.JMenuItem itMnConsultar;
     private javax.swing.JMenuItem itMnConsultar1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

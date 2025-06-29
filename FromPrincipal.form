@@ -42,6 +42,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itAtuLivroActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -145,8 +148,8 @@
               <EmptySpace pref="55" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="266" max="-2" attributes="0"/>
-              <Component id="btTeste" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -158,9 +161,9 @@
               <Component id="pnPrincipal" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="pnBusca" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
-              <Component id="btTeste" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -176,7 +179,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="rtMeioBusca" min="-2" max="-2" attributes="0"/>
                       <Component id="rtBusca" min="-2" max="-2" attributes="0"/>
-                      <Component id="cxBusca" min="-2" pref="257" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="cxBusca" min="-2" pref="257" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="btBuscr" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Component id="rtNome" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rtTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -194,7 +201,10 @@
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="rtBusca" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cxBusca" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cxBusca" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btBuscr" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="rtMeioBusca" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="43" max="32767" attributes="0"/>
@@ -240,6 +250,14 @@
             <Property name="text" type="java.lang.String" value="Digite o titulo, Autor ou Editora"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="btBuscr">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscrActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pnBusca">
@@ -283,7 +301,8 @@
             <Component class="javax.swing.JTable" name="tbLivros">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
+                  <Table columnCount="5" rowCount="4">
+                    <Column editable="true" title="ID" type="java.lang.Object"/>
                     <Column editable="true" title="Nome" type="java.lang.Object"/>
                     <Column editable="true" title="Tipo" type="java.lang.Object"/>
                     <Column editable="true" title="Autor" type="java.lang.Object"/>
@@ -312,12 +331,20 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                   </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbLivrosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -331,12 +358,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btTeste">
+    <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Inserir dados para teste"/>
+        <Property name="text" type="java.lang.String" value="jButton1"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTesteActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

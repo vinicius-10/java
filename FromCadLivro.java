@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -44,7 +45,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         return fromCadLivroUnic;
     }
 
-    //campos para colecioanvel 
+    //campos para Colecionavel 
 
     JLabel rtEspeEdit;
     JTextField cxEspeEdit;
@@ -84,6 +85,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rtTesteDidatico1 = new javax.swing.JButton();
         rtTituloPagina = new javax.swing.JLabel();
         rtNome = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -107,6 +109,13 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         jPanel2 = new javax.swing.JPanel();
         btLimpar = new javax.swing.JButton();
         btCadastar = new javax.swing.JButton();
+
+        rtTesteDidatico1.setText("Inserir dados de teste didatico");
+        rtTesteDidatico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rtTesteDidatico1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -176,7 +185,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         jPanel1.add(rtTipo);
 
         slTipo.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        slTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Colecioanvel", "Didatico", "Infantil" }));
+        slTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Colecionavel", "Didatico", "Infantil" }));
         slTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 slTipoActionPerformed(evt);
@@ -255,7 +264,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
                 .addComponent(pnCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
@@ -263,7 +272,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
 
     private void btCadastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastarActionPerformed
         cadastrar();
-        FromPrincipal.gerarFromPrincipal().listarLivros();
+        
     }//GEN-LAST:event_btCadastarActionPerformed
 
     private void cxIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxIdActionPerformed
@@ -278,6 +287,9 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         toggle();
     }//GEN-LAST:event_slTipoActionPerformed
 
+    private void rtTesteDidatico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rtTesteDidatico1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rtTesteDidatico1ActionPerformed
     
     public void toggle(){
         pnCampos.removeAll();
@@ -285,7 +297,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         String tipo = (String) slTipo.getSelectedItem();
         
         switch (tipo) {
-        case "Colecioanvel":
+        case "Colecionavel":
             colecionavel();
             
             break;
@@ -384,7 +396,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         boolean cadastado;
 
         switch (tipo) {
-        case "Colecioanvel":
+        case "Colecionavel":
             cadastado = cadColecionavel();
             
             break;
@@ -407,6 +419,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         }
 
         if(cadastado){
+            
             clear();
             JOptionPane.showMessageDialog(
                 null,
@@ -414,11 +427,12 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
                 "Cadastro de livro",
                 JOptionPane.INFORMATION_MESSAGE
             );
+            FromPrincipal.gerarFromPrincipal().listarLivros();
         }
     }
     
-    public Livro cadLivro(){
-        //polimorfismo por coesão 
+    public Livro cadLivro(String tipo){
+        //polimorfismo por coerção 
         Livro livro = new Colecionavel();  
         int intTempo = -1;
         
@@ -426,15 +440,35 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         if(intTempo == -1) return null;
         livro.setId(intTempo);
 
-        for(Colecionavel temp : armazen.getBdColecionavel()) {
-            if(temp.getId() == livro.getId()) {
+        if (tipo.equalsIgnoreCase("colecionavel")){
+            if(armazen.getColecionavelById(intTempo) != null){
                 JOptionPane.showMessageDialog(
                     null,
                     "ID já cadastrado, tente novamente.",
-                    "Cadastro de livro",
+                    "Atualizar de livro",
                     JOptionPane.ERROR_MESSAGE
                 );
                 return null;
+            }
+        }else if(tipo.equalsIgnoreCase("didatico")){
+            if(armazen.getDidaticoById(intTempo) != null){
+                JOptionPane.showMessageDialog(
+                    null,
+                    "ID já cadastrado, tente novamente.",
+                    "Atualizar de livro",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                return null;
+            }
+        }else{
+            if(armazen.getInfantilById(intTempo) != null){
+               JOptionPane.showMessageDialog(
+                    null,
+                    "ID já cadastrado, tente novamente.",
+                    "Atualizar de livro",
+                    JOptionPane.ERROR_MESSAGE
+                ); 
+               return null;
             }
         }
         
@@ -514,7 +548,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
         colecionavel = new Colecionavel();
 
         //polimorfismo por coesãao
-        Livro livro = cadLivro();
+        Livro livro = cadLivro("colecionavel");
         if(livro == null) return false;
         colecionavel.setLivroGenerico(livro);
 
@@ -529,8 +563,8 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     public boolean caDdidatico(){
         didatico = new Didatico();
 
-        //polimorfismo por coesão
-        Livro livro = cadLivro();
+        //polimorfismo por coerção
+        Livro livro = cadLivro("didatico");
         if(livro == null) return false;
         didatico.setLivroGenerico(livro);
 
@@ -545,8 +579,8 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     public boolean cadInfantil(){
         infantil = new Infantil();
 
-        //polimorfismo por coesão
-        Livro livro = cadLivro();
+        //polimorfismo por coerção
+        Livro livro = cadLivro("infantil");
         if(livro == null) return false;
         infantil.setLivroGenerico(livro);
 
@@ -634,6 +668,7 @@ public class FromCadLivro extends javax.swing.JFrame implements Menus{
     private javax.swing.JLabel rtNome;
     private javax.swing.JLabel rtPrateleira;
     private javax.swing.JLabel rtSecao;
+    private javax.swing.JButton rtTesteDidatico1;
     private javax.swing.JLabel rtTipo;
     private javax.swing.JLabel rtTirulo;
     private javax.swing.JLabel rtTituloPagina;

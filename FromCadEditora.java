@@ -138,6 +138,8 @@ public class FromCadEditora extends javax.swing.JFrame implements Menus {
         cadastrar();
     }//GEN-LAST:event_btCadastarActionPerformed
 
+    
+    
     //polimorfismo por sobrescrita
     @Override
     public void cadastrar(){
