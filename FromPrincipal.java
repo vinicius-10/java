@@ -70,12 +70,11 @@ public class FromPrincipal extends javax.swing.JFrame {
         rtNome = new javax.swing.JLabel();
         rtBusca = new javax.swing.JLabel();
         rtMeioBusca = new javax.swing.JLabel();
-        btBuscr = new javax.swing.JButton();
         pnBusca = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbLivros = new javax.swing.JTable();
         rtDetalhes = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btCadastro = new javax.swing.JButton();
         barMnPrincipal = new javax.swing.JMenuBar();
         mnLivro = new javax.swing.JMenu();
         itCadLivro = new javax.swing.JMenuItem();
@@ -117,6 +116,11 @@ public class FromPrincipal extends javax.swing.JFrame {
                 cxBuscaActionPerformed(evt);
             }
         });
+        cxBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cxBuscaKeyReleased(evt);
+            }
+        });
 
         rtNome.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         rtNome.setText("A Delkv");
@@ -127,29 +131,19 @@ public class FromPrincipal extends javax.swing.JFrame {
         rtMeioBusca.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         rtMeioBusca.setText("Digite o titulo, Autor ou Editora");
 
-        btBuscr.setText("Buscar");
-        btBuscr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBuscrActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rtMeioBusca)
                     .addComponent(rtBusca)
-                    .addGroup(pnPrincipalLayout.createSequentialGroup()
-                        .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(btBuscr))
                     .addComponent(rtNome)
-                    .addComponent(rtTitulo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(rtTitulo)
+                    .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,12 +155,10 @@ public class FromPrincipal extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(rtBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btBuscr))
+                .addComponent(cxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rtMeioBusca)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         tbLivros.setModel(new javax.swing.table.DefaultTableModel(
@@ -206,17 +198,17 @@ public class FromPrincipal extends javax.swing.JFrame {
         pnBuscaLayout.setVerticalGroup(
             pnBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBuscaLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rtDetalhes)
                 .addGap(12, 12, 12))
         );
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btCadastro.setText("Cadastrar data de teste");
+        btCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btCadastroActionPerformed(evt);
             }
         });
 
@@ -309,8 +301,8 @@ public class FromPrincipal extends javax.swing.JFrame {
                     .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(274, 274, 274)
-                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btCadastro)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -318,10 +310,10 @@ public class FromPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
                 .addComponent(pnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btCadastro)
                 .addGap(18, 18, 18))
         );
 
@@ -362,6 +354,7 @@ public class FromPrincipal extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if(!buscaDetalhada) listarLivros();
+        else buscar();
     }//GEN-LAST:event_formWindowActivated
 
     private void itAtuLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itAtuLivroActionPerformed
@@ -372,13 +365,13 @@ public class FromPrincipal extends javax.swing.JFrame {
         descreverlivro();
     }//GEN-LAST:event_tbLivrosMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
         cadTeste();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btCadastroActionPerformed
 
-    private void btBuscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscrActionPerformed
+    private void cxBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxBuscaKeyReleased
         buscar();
-    }//GEN-LAST:event_btBuscrActionPerformed
+    }//GEN-LAST:event_cxBuscaKeyReleased
 
     public void buscar(){
         List<Infantil> bdInfantil = new ArrayList<Infantil>();
@@ -427,6 +420,9 @@ public class FromPrincipal extends javax.swing.JFrame {
 
             }else if(limpaString(livro.getAutor().getNome()).contains(texto)){
                 list.add(livro);
+                //reflexibibilidade
+            }else if(limpaString(livro.getEditora().getNome()).contains(texto)){
+                list.add(livro);
             }
             System.gc();
         }
@@ -439,6 +435,9 @@ public class FromPrincipal extends javax.swing.JFrame {
                 //reflexibibilidade
             }else if(limpaString(livro.getAutor().getNome()).contains(texto)){
                 list.add(livro);
+                //reflexibibilidade
+            }else if(limpaString(livro.getEditora().getNome()).contains(texto)){
+                list.add(livro);
             }
             System.gc();
         }
@@ -450,6 +449,9 @@ public class FromPrincipal extends javax.swing.JFrame {
                 list.add(livro);
                 //reflexibibilidade
             }else if(limpaString(livro.getAutor().getNome()).contains(texto)){
+                list.add(livro);
+                //reflexibibilidade
+            }else if(limpaString(livro.getEditora().getNome()).contains(texto)){
                 list.add(livro);
             }
             System.gc();
@@ -485,7 +487,7 @@ public class FromPrincipal extends javax.swing.JFrame {
         JScrollPane scroll = new JScrollPane(area);
         scroll.setPreferredSize(new Dimension(400, 250)); 
 
-        JOptionPane.showMessageDialog(null, scroll, "Detalhes do Colecionável", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, scroll, "Detalhes do Livro", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
@@ -582,39 +584,14 @@ public class FromPrincipal extends javax.swing.JFrame {
     }
 
     public void cadTeste(){
-        String camiho = "dataTeste.txt";
-        try (BufferedReader br =new BufferedReader(new FileReader(caminho))){
-            String linha;
+        // Este cadastro é apenas para teste, por isso utilizo construtores sobrecarregados  
+        // para evitar o tratamento de exceções neste caso. No entanto, o tratamento está  
+        // implementado corretamente no cadastro principal de cada item.  
 
-            while ((linha = br.readLine()) != null) {
-                String[] data = linha.split(";");
-
-                if (data[0].equalsIgnoreCase("editora")){
-
-                }
-            }
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(
-                null,
-                e.getMessage(),
-                "Falha no cadastro"
-            );
-        }
-
+        // Como este cadastro é apenas para testes, ele pode duplicar IDs caso seja executado  
+        // múltiplas vezes. Como isso não gera problemas críticos, mantive desta forma para  
+        // facilitar a visualização e teste das ferramentas de busca.  
         
-    }
-    public int getMaxCnpjEditora(){
-        int max = 1;
-        for(Editora edit : armazen.getBdEditoras()){
-            try{
-                if(max < Integer.parseInt(edit.getCnpj())){
-                    max = Integer.parseInt(edit.getCnpj());
-                }
-            } catch (NumberFormatException e) {}
-        }
-    } 
-
-    public void cadTesteAntingo(){
         armazen.getBdAutores().add(new Autor(false, "Machado de Assis", "12345"));
         armazen.getBdAutores().add(new Autor(false, "Clarice Lispector", "23456"));
         armazen.getBdAutores().add(new Autor(false, "Carlos Drummond", "34567"));
@@ -627,69 +604,72 @@ public class FromPrincipal extends javax.swing.JFrame {
         armazen.getBdEditoras().add(new Editora(false, "Ática", "44444"));
         armazen.getBdEditoras().add(new Editora(false, "Saraiva", "55555"));
 
-        armazen.getBdDidatico().add(new Didatico(1, "Matemática I", armazen.getBdAutores().get(0),
-                new Localizacao("A", 1, 1), armazen.getBdEditoras().get(0), false,
-                "Matemática", "Fundamental", "Baixa"));
+        armazen.getBdInfantil().add(new Infantil(11, "O Pequeno Príncipe", armazen.getBdAutores().get(0),
+        new Localizacao("INF", 1, 1), armazen.getBdEditoras().get(0), false,
+        8, "Papel couché brilhante", true));
 
-        armazen.getBdDidatico().add(new Didatico(2, "Português II", armazen.getBdAutores().get(1),
-                new Localizacao("B", 2, 2), armazen.getBdEditoras().get(1), false,
-                "Português", "Médio", "Média"));
+        armazen.getBdInfantil().add(new Infantil(12, "Marcelo, Marmelo, Martelo", armazen.getBdAutores().get(1),
+                new Localizacao("INF", 1, 2), armazen.getBdEditoras().get(1), false,
+                6, "Papel reciclado", false));
 
-        armazen.getBdDidatico().add(new Didatico(3, "História III", armazen.getBdAutores().get(2),
-                new Localizacao("C", 3, 3), armazen.getBdEditoras().get(2), false,
-                "História", "Fundamental", "Alta"));
+        armazen.getBdInfantil().add(new Infantil(13, "O Menino Maluquinho", armazen.getBdAutores().get(2),
+                new Localizacao("INF", 1, 3), armazen.getBdEditoras().get(2), false,
+                7, "Cartonado", true));
 
-        armazen.getBdDidatico().add(new Didatico(4, "Ciências IV", armazen.getBdAutores().get(3),
-                new Localizacao("D", 4, 4), armazen.getBdEditoras().get(3), false,
-                "Ciências", "Médio", "Alta"));
+        armazen.getBdInfantil().add(new Infantil(14, "A Bolsa Amarela", armazen.getBdAutores().get(3),
+                new Localizacao("INF", 1, 4), armazen.getBdEditoras().get(3), false,
+                9, "Papel offset", false));
 
-        armazen.getBdDidatico().add(new Didatico(5, "Geografia V", armazen.getBdAutores().get(4),
-                new Localizacao("E", 5, 5), armazen.getBdEditoras().get(4), false,
-                "Geografia", "Fundamental", "Baixa"));
-        
+        armazen.getBdInfantil().add(new Infantil(15, "A Arca de Noé", armazen.getBdAutores().get(4),
+                new Localizacao("INF", 1, 5), armazen.getBdEditoras().get(4), false,
+                5, "Papel resistente", true));
 
-        // Colecionáveis
-        armazen.getBdColecionavel().add(new Colecionavel(6, "Coleção Rara A", armazen.getBdAutores().get(0),
-                new Localizacao("F", 1, 2), armazen.getBdEditoras().get(0), false,
-                "Primeira edição", true, "Capa dura"));
+        armazen.getBdColecionavel().add(new Colecionavel(6, "Dom Casmurro - Edição Comemorativa", armazen.getBdAutores().get(0),
+                new Localizacao("RAR", 1, 1), armazen.getBdEditoras().get(0), false,
+                "Edição de 120 anos", true, "Capa dura com sobrecapa"));
 
-        armazen.getBdColecionavel().add(new Colecionavel(7, "Coleção Rara B", armazen.getBdAutores().get(1),
-                new Localizacao("F", 2, 2), armazen.getBdEditoras().get(1), false,
-                "Edição de luxo", false, "Com encarte"));
+        armazen.getBdColecionavel().add(new Colecionavel(7, "A Hora da Estrela - Edição de Luxo", armazen.getBdAutores().get(1),
+                new Localizacao("RAR", 1, 2), armazen.getBdEditoras().get(1), false,
+                "Edição limitada com manuscritos", true, "Encadernação em couro"));
 
-        armazen.getBdColecionavel().add(new Colecionavel(8, "Coleção Rara C", armazen.getBdAutores().get(2),
-                new Localizacao("F", 3, 2), armazen.getBdEditoras().get(2), false,
-                "Edição especial", true, "Numerada"));
+        armazen.getBdColecionavel().add(new Colecionavel(8, "Claro Enigma - Edição Crítica", armazen.getBdAutores().get(2),
+                new Localizacao("RAR", 1, 3), armazen.getBdEditoras().get(2), false,
+                "Com comentários do autor", false, "Capa dura"));
 
-        armazen.getBdColecionavel().add(new Colecionavel(9, "Coleção Rara D", armazen.getBdAutores().get(3),
-                new Localizacao("F", 4, 2), armazen.getBdEditoras().get(3), false,
-                "Limitada", true, "Com pôster"));
+        armazen.getBdColecionavel().add(new Colecionavel(9, "Reinações de Narizinho - Edição Histórica", armazen.getBdAutores().get(3),
+                new Localizacao("RAR", 1, 4), armazen.getBdEditoras().get(3), false,
+                "Fac-símile da primeira edição", true, "Com ilustrações originais"));
 
-        armazen.getBdColecionavel().add(new Colecionavel(10, "Coleção Rara E", armazen.getBdAutores().get(4),
-                new Localizacao("F", 5, 2), armazen.getBdEditoras().get(4), false,
-                "Comemorativa", false, "Numerada"));
-    
+        armazen.getBdColecionavel().add(new Colecionavel(10, "Ou Isto ou Aquilo - Edição Especial", armazen.getBdAutores().get(4),
+                new Localizacao("RAR", 1, 5), armazen.getBdEditoras().get(4), false,
+                "Com desenhos da autora", false, "Capa em tecido"));
 
-        // Infantis
-        armazen.getBdInfantil().add(new Infantil(11, "Livro Infantil A", armazen.getBdAutores().get(0),
-                new Localizacao("G", 1, 3), armazen.getBdEditoras().get(0), false,
-                5, "Papel reciclado", true));
+        armazen.getBdColecionavel().add(new Colecionavel(6, "Dom Casmurro - Edição Comemorativa", armazen.getBdAutores().get(0),
+                new Localizacao("RAR", 1, 1), armazen.getBdEditoras().get(0), false,
+                "Edição de 120 anos", true, "Capa dura com sobrecapa"));
 
-        armazen.getBdInfantil().add(new Infantil(12, "Livro Infantil B", armazen.getBdAutores().get(1),
-                new Localizacao("G", 2, 3), armazen.getBdEditoras().get(1), false,
-                6, "Papel couchê", false));
+        armazen.getBdColecionavel().add(new Colecionavel(7, "A Hora da Estrela - Edição de Luxo", armazen.getBdAutores().get(1),
+                new Localizacao("RAR", 1, 2), armazen.getBdEditoras().get(1), false,
+                "Edição limitada com manuscritos", true, "Encadernação em couro"));
 
-        armazen.getBdInfantil().add(new Infantil(13, "Livro Infantil C", armazen.getBdAutores().get(2),
-                new Localizacao("G", 3, 3), armazen.getBdEditoras().get(2), false,
-                4, "Cartonado", true));
+        armazen.getBdColecionavel().add(new Colecionavel(8, "Claro Enigma - Edição Crítica", armazen.getBdAutores().get(2),
+                new Localizacao("RAR", 1, 3), armazen.getBdEditoras().get(2), false,
+                "Com comentários do autor", false, "Capa dura"));
 
-        armazen.getBdInfantil().add(new Infantil(14, "Livro Infantil D", armazen.getBdAutores().get(3),
-                new Localizacao("G", 4, 3), armazen.getBdEditoras().get(3), false,
-                7, "EVA", false));
+        armazen.getBdColecionavel().add(new Colecionavel(9, "Reinações de Narizinho - Edição Histórica", armazen.getBdAutores().get(3),
+                new Localizacao("RAR", 1, 4), armazen.getBdEditoras().get(3), false,
+                "Fac-símile da primeira edição", true, "Com ilustrações originais"));
 
-        armazen.getBdInfantil().add(new Infantil(15, "Livro Infantil E", armazen.getBdAutores().get(4),
-                new Localizacao("G", 5, 3), armazen.getBdEditoras().get(4), false,
-                3, "Tecido", true));
+        armazen.getBdColecionavel().add(new Colecionavel(10, "Ou Isto ou Aquilo - Edição Especial", armazen.getBdAutores().get(4),
+                new Localizacao("RAR", 1, 5), armazen.getBdEditoras().get(4), false,
+                "Com desenhos da autora", false, "Capa em tecido"));
+                
+        JOptionPane.showMessageDialog(
+            null,
+            "Cadastro realizado",
+            "cadastro teste",
+            JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     /**
@@ -719,7 +699,7 @@ public class FromPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMnPrincipal;
-    private javax.swing.JButton btBuscr;
+    private javax.swing.JButton btCadastro;
     private javax.swing.JTextField cxBusca;
     private javax.swing.JMenuItem itAtuLivro;
     private javax.swing.JMenuItem itCadLivro;
@@ -729,7 +709,6 @@ public class FromPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itMnCadEditora;
     private javax.swing.JMenuItem itMnConsultar;
     private javax.swing.JMenuItem itMnConsultar1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
