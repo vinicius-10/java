@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -651,7 +652,7 @@ public class FormAtuLivro extends javax.swing.JFrame{
         }
     }
     
-    public Livro atuLivro(String tipo){
+    public Livro atuLivro(String tipo, Autor autorAntigo, Editora editoraAntiga){
         //polimorfismo por coerção 
         Livro livro = new Colecionavel();  
         int intTempo = -1;
@@ -694,14 +695,16 @@ public class FormAtuLivro extends javax.swing.JFrame{
             return null;
         }
 
-        if(autor.getBloqueado()) {
-            JOptionPane.showMessageDialog(
-                null,
-                "Autor bloqueado.",
-                "Atualizar livro",
-                JOptionPane.ERROR_MESSAGE
-            );
-            return null;
+        if(!autor.getCpf().equalsIgnoreCase(autorAntigo.getCpf())){
+            if(autor.getBloqueado()) {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Autor bloqueado.",
+                    "Atualizar livro",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                return null;
+            }
         }
         livro.setAutor(autor);
 
@@ -715,14 +718,17 @@ public class FormAtuLivro extends javax.swing.JFrame{
             );
             return null;
         }
-    
-        if(editora.getBloqueado()){
-            JOptionPane.showMessageDialog(
-                null,
-                "Editora bloqueada.",
-                "Atualizar livro",
-                JOptionPane.ERROR_MESSAGE
-            );
+        
+        if(!editora.getCnpj().equalsIgnoreCase(editoraAntiga.getCnpj())){
+            if(editora.getBloqueado()){
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Editora bloqueada.",
+                    "Atualizar livro",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                return null;
+            }
         }
         livro.setEditora(editora);
         
@@ -734,9 +740,11 @@ public class FormAtuLivro extends javax.swing.JFrame{
     public boolean atuColecionavel(){
         colecionavel = new Colecionavel();
         String temp;
+        colecionavel.setId(getInt(cxId.getText(),rtID.getText()));
+        Colecionavel original = armazen.getColecionavelById(colecionavel.getId());
 
         //polimorfismo por coerção
-        Livro livro = atuLivro("colecionavel");
+        Livro livro = atuLivro("colecionavel",original.getAutor(),original.getEditora());
         if(livro == null) return false;
         colecionavel.setLivroGenerico(livro);
 
@@ -766,7 +774,7 @@ public class FormAtuLivro extends javax.swing.JFrame{
         }
         colecionavel.setEdicaoEspecial(temp);
 
-        Colecionavel original = armazen.getColecionavelById(colecionavel.getId());
+        
         if(original != null){
             try{
                 original.setTitulo(colecionavel.getTitulo());
@@ -794,8 +802,11 @@ public class FormAtuLivro extends javax.swing.JFrame{
     public boolean atuDidatico(){
         didatico = new Didatico();
         String temp;
+        didatico.setId(getInt(cxId.getText(),rtID.getText()));
+        Didatico original = armazen.getDidaticoById(didatico.getId());
+
         //polimorfismo por coerção
-        Livro livro = atuLivro("didatico");
+        Livro livro = atuLivro("didatico",original.getAutor(),original.getEditora());
         if(livro == null) return false;
         didatico.setLivroGenerico(livro);
 
@@ -836,7 +847,7 @@ public class FormAtuLivro extends javax.swing.JFrame{
         }
         didatico.setComplexidade(temp);
 
-        Didatico original = armazen.getDidaticoById(didatico.getId());
+        
         if(original != null){
             try{
                 original.setTitulo(colecionavel.getTitulo());
@@ -863,8 +874,11 @@ public class FormAtuLivro extends javax.swing.JFrame{
     public boolean atuInfantil(){
         infantil = new Infantil();
         String temp;
+        infantil.setId(getInt(cxId.getText(),rtID.getText()));
+        Infantil original = armazen.getInfantilById(infantil.getId());
+
         //polimorfismo por coerção
-        Livro livro = atuLivro("infantil");
+        Livro livro = atuLivro("infantil",original.getAutor(),original.getEditora());
         if(livro == null) return false;
         infantil.setLivroGenerico(livro);
 
@@ -885,7 +899,7 @@ public class FormAtuLivro extends javax.swing.JFrame{
         infantil.setMaterial(temp);
         infantil.setInterativo(ckInterativo.isSelected());
 
-        Infantil original = armazen.getInfantilById(infantil.getId());
+        
         if(original != null){
             try{
                 original.setTitulo(colecionavel.getTitulo());
